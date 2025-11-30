@@ -8,7 +8,7 @@ uniform float u_angle;
 in vec2 v_uv;
 out vec4 fragColor;
 
-// Helper function for HSL to RGB conversion (must be declared first)
+// Helper function for HSL to RGB conversion
 float hue2rgb(float p, float q, float t) {
     if (t < 0.0) t += 1.0;
     if (t > 1.0) t -= 1.0;
