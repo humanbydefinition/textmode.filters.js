@@ -1,11 +1,32 @@
-# textmode.filters.js (WIP)
+<div align="center">
+
+# 🎨 textmode.filters.js
+
+**GPU-accelerated image filters plugin for [textmode.js](https://code.textmode.art/)**
+
+[![npm version](https://img.shields.io/npm/v/textmode.filters.js.svg?style=flat-square)](https://www.npmjs.com/package/textmode.filters.js)
+[![license](https://img.shields.io/npm/l/textmode.filters.js.svg?style=flat-square)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/LICENSE)
+[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/CONTRIBUTING.md)
+
+[Installation](#installation) •
+[Usage](#usage) •
+[Filters](#available-filters) •
+[Contributing](#contributing) •
+[Filter Contributors](#filter-contributors)
+
+</div>
+
+---
 
 > [!NOTE]
-> work-in-progress, the necessary textmode.js version is not yet released.
+> 🚧 **Work in Progress** - The required textmode.js version (0.7.0-beta.2+) is not yet publicly released.
 
-Layers filters plugin for [`textmode.js`](https://code.textmode.art/).
+## ✨ Features
 
-This add-on provides GPU-accelerated filters that can be applied to layers.
+- 🚀 **GPU-accelerated** - All filters run on the GPU via WebGL2 fragment shaders
+- 🎛️ **Customizable parameters** - Fine-tune each filter to your needs
+- 📦 **Lightweight** - Minimal footprint, no external dependencies
+- 🤝 **Open to contributions** - Easy to add your own custom filters!
 
 ## Installation
 
@@ -13,11 +34,25 @@ This add-on provides GPU-accelerated filters that can be applied to layers.
 npm install textmode.filters.js
 ```
 
-Make sure `textmode.js` is also installed in your project. The add-on declares it as a peer dependency.
+> **Note:** Make sure `textmode.js` is also installed in your project. This add-on declares it as a peer dependency.
+
+You can also use it via CDN:
+
+```html
+<!-- ESM -->
+<script type="module" src="https://unpkg.com/textmode.js/dist/textmode.esm.js"></script>
+<script type="module" src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.esm.js"></script>
+
+<!-- UMD -->
+<script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script> 
+<script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
+```
 
 ## Usage
 
-```ts
+### ESM
+
+```javascript
 import { textmode } from 'textmode.js';
 import { createFiltersPlugin } from 'textmode.filters.js';
 
@@ -28,6 +63,7 @@ const t = textmode.create({
 });
 
 t.draw(() => {
+  // Apply filters to layers
   t.layers.base.filter('brightness', 1.2);
   t.layers.base.filter('contrast', { amount: 1.5 });
 
@@ -36,9 +72,101 @@ t.draw(() => {
 });
 ```
 
-## Available Filters
+### UMD
 
-| Filter | Parameter | Default | Description |
-|--------|-----------|---------|-------------|
-| `brightness` | `amount` | `1.0` | Adjust image brightness (1.0 = normal, >1 = brighter, <1 = darker) |
-| `contrast` | `amount` | `1.0` | Adjust image contrast (1.0 = normal, >1 = more contrast, <1 = less) |
+```html
+<script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script>
+<script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
+<script>
+  const t = textmode.create({
+    plugins: [createFiltersPlugin()],
+  });
+
+  t.draw(() => {
+    t.layers.base.filter('brightness', 1.3);
+  });
+</script>
+```
+
+## Available filters
+
+| Filter | Parameter | Default | Range | Description |
+|--------|-----------|---------|-------|-------------|
+| `brightness` | `amount` | `1.0` | `0.0` - `∞` | Adjust image brightness (1.0 = normal, >1 = brighter, <1 = darker) |
+| `contrast` | `amount` | `1.0` | `0.0` - `∞` | Adjust image contrast (1.0 = normal, >1 = more contrast, <1 = less) |
+
+### Usage examples
+
+```javascript
+// Using a single value (shorthand)
+t.layers.base.filter('brightness', 1.5);
+
+// Using an options object
+t.layers.base.filter('contrast', { amount: 0.8 });
+
+// Chaining multiple filters in sequence
+t.layers.base.filter('brightness', 1.2);
+t.layers.base.filter('contrast', 1.3);
+```
+
+## Adding custom filters
+
+Want to create your own filter? Check out the [Contributing Guide](CONTRIBUTING.md) for detailed instructions on how to add new filters to this library!
+
+The basic structure of a filter shader:
+
+```glsl
+#version 300 es
+precision highp float;
+
+uniform sampler2D u_texture;    // Input texture
+uniform vec2 u_resolution;      // Canvas resolution
+uniform float u_yourParam;      // Your custom parameter
+
+in vec2 v_uv;
+out vec4 fragColor;
+
+void main() {
+    vec4 color = texture(u_texture, v_uv);
+    
+    // Your filter logic here
+    vec3 result = color.rgb; // Modify this!
+    
+    fragColor = vec4(result, color.a);
+}
+```
+
+## Contributing
+
+Contributions are welcome and greatly appreciated! 🎉
+
+Whether you want to:
+- 🐛 Report a bug
+- 💡 Suggest a new filter
+- 🔧 Submit a pull request
+- 📖 Improve documentation
+
+Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
+
+## Filter contributors
+
+Thanks to all the wonderful people who have contributed to this project! ✨
+
+| Filter | Author | Description |
+|--------|--------|-------------|
+| `brightness` | [@humanbydefinition](https://github.com/humanbydefinition) | Brightness adjustment filter |
+| `contrast` | [@humanbydefinition](https://github.com/humanbydefinition) | Contrast adjustment filter |
+
+## Related projects
+
+- **[textmode.js](https://github.com/humanbydefinition/textmode.js)** - The main textmode.js library
+- **[code.textmode.art](https://code.textmode.art/)** - Documentation & examples
+- **[editor.textmode.art](https://editor.textmode.art/)** - Online textmode.js editor
+
+---
+
+<div align="center">
+
+**[⬆ Back to Top](#)**
+
+</div>
