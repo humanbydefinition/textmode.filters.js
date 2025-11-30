@@ -113,18 +113,45 @@ Adjust image contrast *(1.0 = normal, >1 = more contrast, <1 = less)*
 
 ---
 
+### `hueRotate`
+
+Shift colors around the color wheel
+
+**Parameters:**
+- `angle` - Rotation angle in degrees  
+  Default: `0.0` | Range: `0.0` - `360.0`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
+### `glitch`
+
+Digital glitch effect with RGB channel separation, scanlines, and noise
+
+**Parameters:**
+- `amount` - Glitch intensity  
+  Default: `0.0` | Range: `0.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
 // Using a single value (shorthand)
 t.layers.base.filter('brightness', 1.5);
+t.layers.base.filter('hueRotate', 180);
 
 // Using an options object
 t.layers.base.filter('contrast', { amount: 0.8 });
+t.layers.base.filter('glitch', { amount: 2.0 });
 
 // Chaining multiple filters in sequence
 t.layers.base.filter('brightness', 1.2);
 t.layers.base.filter('contrast', 1.3);
+t.layers.base.filter('hueRotate', 90);
 ```
 
 ## Adding custom filters
