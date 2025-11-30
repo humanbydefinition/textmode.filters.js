@@ -10,9 +10,8 @@
 
 [Installation](#installation) •
 [Usage](#usage) •
-[Filters](#available-filters) •
-[Contributing](#contributing) •
-[Filter Contributors](#filter-contributors)
+[Filters](#filters) •
+[Contributing](#contributing)
 
 </div>
 
@@ -88,12 +87,31 @@ t.draw(() => {
 </script>
 ```
 
-## Available filters
+## Filters
 
-| Filter | Parameter | Default | Range | Description |
-|--------|-----------|---------|-------|-------------|
-| `brightness` | `amount` | `1.0` | `0.0` - `∞` | Adjust image brightness (1.0 = normal, >1 = brighter, <1 = darker) |
-| `contrast` | `amount` | `1.0` | `0.0` - `∞` | Adjust image contrast (1.0 = normal, >1 = more contrast, <1 = less) |
+### `brightness`
+
+Adjust image brightness *(1.0 = normal, >1 = brighter, <1 = darker)*
+
+**Parameters:**
+- `amount` - Brightness multiplier  
+  Default: `1.0` | Range: `0.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
+### `contrast`
+
+Adjust image contrast *(1.0 = normal, >1 = more contrast, <1 = less)*
+
+**Parameters:**
+- `amount` - Contrast multiplier  
+  Default: `1.0` | Range: `0.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
 
 ### Usage examples
 
@@ -148,15 +166,6 @@ Whether you want to:
 
 Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 
-## Filter contributors
-
-Thanks to all the wonderful people who have contributed to this project! ✨
-
-| Filter | Author | Description |
-|--------|--------|-------------|
-| `brightness` | [@humanbydefinition](https://github.com/humanbydefinition) | Brightness adjustment filter |
-| `contrast` | [@humanbydefinition](https://github.com/humanbydefinition) | Contrast adjustment filter |
-
 ## Related projects
 
 - **[textmode.js](https://github.com/humanbydefinition/textmode.js)** - The main textmode.js library
@@ -166,6 +175,8 @@ Thanks to all the wonderful people who have contributed to this project! ✨
 ---
 
 <div align="center">
+
+<br />
 
 **[↑ Back to Top](#-textmodefiltersjs)**
 
