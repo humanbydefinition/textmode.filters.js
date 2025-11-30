@@ -4,22 +4,22 @@ First off, thank you for considering contributing to `textmode.filters.js`! 🎉
 
 This project thrives on community contributions, and we're excited to have you here. Whether you're fixing a bug, adding a new filter, or improving documentation, your help is greatly appreciated.
 
-## Table of Contents
+## Table of contents
 
-- [Code of Conduct](#code-of-conduct)
-- [Getting Started](#getting-started)
-- [Development Setup](#development-setup)
-- [Adding a New Filter](#adding-a-new-filter)
-- [Pull Request Process](#pull-request-process)
-- [Style Guidelines](#style-guidelines)
-- [Reporting Bugs](#reporting-bugs)
-- [Suggesting Features](#suggesting-features)
+- [Code of conduct](#code-of-conduct)
+- [Getting started](#getting-started)
+- [Development setup](#development-setup)
+- [Adding a new filter](#adding-a-new-filter)
+- [Pull request process](#pull-request-process)
+- [Style guidelines](#style-guidelines)
+- [Reporting bugs](#reporting-bugs)
+- [Suggesting features](#suggesting-features)
 
-## Code of Conduct
+## Code of conduct
 
 This project and everyone participating in it is governed by our commitment to providing a welcoming and inclusive environment. Please be respectful and constructive in all interactions.
 
-## Getting Started
+## Getting started
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
@@ -32,11 +32,11 @@ This project and everyone participating in it is governed by our commitment to p
    git remote add upstream https://github.com/humanbydefinition/textmode.filters.js.git
    ```
 
-## Development Setup
+## Development setup
 
 ### Prerequisites
 
-- Node.js (v18 or higher recommended)
+- Node.js *(v18 or higher recommended)*
 - npm
 
 ### Installation
@@ -52,7 +52,7 @@ npm run dev
 npm run build
 ```
 
-### Project Structure
+### Project structure
 
 ```
 textmode.filters.js/
@@ -71,11 +71,11 @@ textmode.filters.js/
 └── vite.config.ts
 ```
 
-## Adding a New Filter
+## Adding a new filter
 
 Adding a new filter is straightforward! Here's a step-by-step guide:
 
-### Step 1: Create the Shader
+### Step 1: Create the shader
 
 Create a new fragment shader file in `src/shaders/`:
 
@@ -110,7 +110,7 @@ void main() {
 }
 ```
 
-### Step 2: Register the Filter
+### Step 2: Register the filter
 
 Update `src/index.ts` to import and register your filter:
 
@@ -149,20 +149,31 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 });
 ```
 
-### Step 3: Document Your Filter
+### Step 3: Document your filter
 
-Update the [README.md](README.md) to include your filter:
+Add your filter to the [Filters](README.md#filters) section in `README.md`:
 
-1. Add your filter to the [Available filters](README.md#available-filters) table
-2. Add yourself to the [Filter contributors](README.md#filter-contributors) section
+```markdown
+### `yourfilter`
 
-### Step 4: Test Your Filter
+Brief description of what your filter does
+
+**Parameters:**
+- `amount` — Description of parameter  
+  Default: `1.0` | Range: `0.0` - `∞`
+
+**Author:** [@yourusername](https://github.com/yourusername)
+
+---
+```
+
+### Step 4: Test your filter
 
 1. Add an example in `examples/esm/sketch.js` or `examples/umd/sketch.js`
 2. Run `npm run dev` to test locally
 3. Make sure the filter works as expected
 
-### Uniform Parameter Mapping
+### Uniform parameter mapping
 
 The third parameter to `register()` maps GLSL uniforms to user-facing parameters:
 
@@ -186,7 +197,7 @@ t.layers.base.filter('yourfilter', 0.5);
 t.layers.base.filter('yourfilter', { amount: 0.5 });
 ```
 
-## Pull Request Process
+## Pull request process
 
 1. **Create a feature branch**:
    ```bash
@@ -221,7 +232,7 @@ t.layers.base.filter('yourfilter', { amount: 0.5 });
 
 6. **Wait for review** - We'll review your PR and may suggest changes
 
-## Style Guidelines
+## Style guidelines
 
 ### TypeScript
 
@@ -229,7 +240,7 @@ t.layers.base.filter('yourfilter', { amount: 0.5 });
 - Prefer `const` over `let` when possible
 - Use meaningful variable names
 
-### GLSL Shaders
+### GLSL shaders
 
 - Use GLSL ES 3.0 (`#version 300 es`)
 - Always specify `precision highp float;`
@@ -243,7 +254,7 @@ t.layers.base.filter('yourfilter', { amount: 0.5 });
 - Add comments for complex logic
 - Follow existing code patterns
 
-## Reporting Bugs
+## Reporting bugs
 
 Found a bug? Please open an issue with:
 
@@ -253,7 +264,7 @@ Found a bug? Please open an issue with:
 4. **Environment info** (browser, OS, textmode.js version)
 5. **Code sample** or minimal reproduction if possible
 
-## Suggesting Features
+## Suggesting features
 
 Have an idea for a new filter or feature? We'd love to hear it!
 
@@ -266,7 +277,7 @@ Have an idea for a new filter or feature? We'd love to hear it!
 
 ---
 
-## Filter Ideas Looking for Contributors
+## Filter ideas looking for contributors
 
 Here are some filters we'd love to see contributed:
 
