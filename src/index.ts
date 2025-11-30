@@ -2,6 +2,8 @@ import type { TextmodePlugin } from 'textmode.js';
 
 import brightnessFragmentShader from './shaders/brightness.frag?raw';
 import contrastFragmentShader from './shaders/contrast.frag?raw';
+import hueRotateFragmentShader from './shaders/hueRotate.frag?raw';
+import glitchFragmentShader from './shaders/glitch.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -9,6 +11,8 @@ import contrastFragmentShader from './shaders/contrast.frag?raw';
  * Included filters:
  * - `brightness` - Adjust image brightness (amount: 1.0 = normal, >1 = brighter, <1 = darker)
  * - `contrast` - Adjust image contrast (amount: 1.0 = normal, >1 = more contrast, <1 = less)
+ * - `hueRotate` - Rotate colors around the hue wheel (angle: 0-360 degrees)
+ * - `glitch` - Digital glitch effect (amount: 0.0 = none, higher values = more intense)
  * 
  * @example
  * ```javascript
@@ -37,11 +41,15 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
     async install(textmodifier) {
         textmodifier.layers.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0]})
         textmodifier.layers.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0]});
+        textmodifier.layers.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0]});
+        textmodifier.layers.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
     },
 
     async uninstall(textmodifier) {
         textmodifier.layers.filters.unregister('brightness');
         textmodifier.layers.filters.unregister('contrast');
+        textmodifier.layers.filters.unregister('hueRotate');
+        textmodifier.layers.filters.unregister('glitch');
     },
 });
 
