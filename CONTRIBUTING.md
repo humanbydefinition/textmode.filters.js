@@ -284,15 +284,10 @@ Here are some filters we'd love to see contributed:
 - [ ] **Blur** - Gaussian or box blur
 - [ ] **Sharpen** - Edge enhancement
 - [ ] **Saturation** - Color saturation adjustment
-- [ ] **Hue Rotate** - Shift colors around the color wheel
-- [ ] **Invert** - Color inversion
-- [ ] **Grayscale** - Convert to grayscale
-- [ ] **Sepia** - Vintage sepia tone
 - [ ] **Vignette** - Darkened edges effect
 - [ ] **Pixelate** - Pixelation effect
 - [ ] **Noise** - Add film grain/noise
-- [ ] **Chromatic Aberration** - RGB channel separation
-- [ ] **Glitch** - Digital glitch effects
+- [ ] **Chromatic aberration** - RGB channel separation
 
 Pick one and start contributing! 🚀
 
