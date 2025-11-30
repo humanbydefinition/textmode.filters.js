@@ -1,0 +1,39 @@
+{
+  "name": "textmode.filters.js",
+  "version": "1.0.0",
+  "description": "Image filters plugin for textmode.js",
+  "type": "module",
+  "main": "./dist/textmode.filters.umd.js",
+  "module": "./dist/textmode.filters.esm.js",
+  "types": "./dist/index.d.ts",
+  "exports": {
+    ".": {
+      "types": "./dist/index.d.ts",
+      "import": "./dist/textmode.filters.esm.js",
+      "require": "./dist/textmode.filters.umd.js"
+    }
+  },
+  "files": [
+    "dist"
+  ],
+  "scripts": {
+    "build": "vite build && tsc -p tsconfig.json",
+    "dev": "vite --port 5179 --host"
+  },
+  "peerDependencies": {
+    "textmode.js": "^0.7.0-beta.2"
+  },
+  "devDependencies": {
+    "@rollup/plugin-terser": "^0.4.4",
+    "@types/node": "^24.10.1",
+    "tslib": "^2.8.1",
+    "typescript": "^5.9.2",
+    "vite": "^6.3.4"
+  },
+  "license": "MIT",
+  "author": "humanbydefinition",
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/humanbydefinition/textmode.filters.js"
+  }
+}
