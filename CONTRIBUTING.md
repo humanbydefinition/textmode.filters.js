@@ -285,9 +285,8 @@ Here are some filters we'd love to see contributed:
 - [ ] **Sharpen** - Edge enhancement
 - [ ] **Saturation** - Color saturation adjustment
 - [ ] **Vignette** - Darkened edges effect
-- [ ] **Pixelate** - Pixelation effect
 - [ ] **Noise** - Add film grain/noise
-- [ ] **Chromatic aberration** - RGB channel separation
+- [ ] **Posterize** - Reduce color depth
 
 Pick one and start contributing! 🚀
 

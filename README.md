@@ -137,6 +137,32 @@ Digital glitch effect with RGB channel separation, scanlines, and noise
 
 ---
 
+### `chromaticAberration`
+
+RGB color channel separation effect that simulates lens distortion
+
+**Parameters:**
+- `amount` - Offset amount in pixels  
+  Default: `5.0` | Range: `0.0` - `∞`
+- `direction` - Direction of the color separation as `[x, y]`  
+  Default: `[1.0, 0.0]` (horizontal)
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
+### `pixelate`
+
+Reduce image resolution to create a mosaic/pixelated effect
+
+**Parameters:**
+- `pixelSize` - Size of each pixel block in pixels  
+  Default: `4.0` | Range: `1.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
@@ -152,6 +178,12 @@ t.layers.base.filter('glitch', { amount: 2.0 });
 t.layers.base.filter('brightness', 1.2);
 t.layers.base.filter('contrast', 1.3);
 t.layers.base.filter('hueRotate', 90);
+
+// Chromatic aberration with custom direction
+t.layers.base.filter('chromaticAberration', { amount: 10, direction: [1, 1] });
+
+// Pixelate effect
+t.layers.base.filter('pixelate', 8);
 ```
 
 ## Adding custom filters

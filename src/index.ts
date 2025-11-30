@@ -4,6 +4,8 @@ import brightnessFragmentShader from './shaders/brightness.frag?raw';
 import contrastFragmentShader from './shaders/contrast.frag?raw';
 import hueRotateFragmentShader from './shaders/hueRotate.frag?raw';
 import glitchFragmentShader from './shaders/glitch.frag?raw';
+import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag?raw';
+import pixelateFragmentShader from './shaders/pixelate.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -13,6 +15,8 @@ import glitchFragmentShader from './shaders/glitch.frag?raw';
  * - `contrast` - Adjust image contrast (amount: 1.0 = normal, >1 = more contrast, <1 = less)
  * - `hueRotate` - Rotate colors around the hue wheel (angle: 0-360 degrees)
  * - `glitch` - Digital glitch effect (amount: 0.0 = none, higher values = more intense)
+ * - `chromaticAberration` - RGB channel separation effect (amount: offset in pixels, direction: vec2 for offset direction)
+ * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
  * 
  * @example
  * ```javascript
@@ -43,6 +47,8 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.layers.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0]});
         textmodifier.layers.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0]});
         textmodifier.layers.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
+        textmodifier.layers.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]]});
+        textmodifier.layers.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0]});
     },
 
     async uninstall(textmodifier) {
@@ -50,6 +56,8 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.layers.filters.unregister('contrast');
         textmodifier.layers.filters.unregister('hueRotate');
         textmodifier.layers.filters.unregister('glitch');
+        textmodifier.layers.filters.unregister('chromaticAberration');
+        textmodifier.layers.filters.unregister('pixelate');
     },
 });
 
