@@ -229,7 +229,7 @@ Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 - **[textmode.js](https://github.com/humanbydefinition/textmode.js)** - The main textmode.js library
 - **[code.textmode.art](https://code.textmode.art/)** - Documentation & examples
-- **[editor.textmode.art](https://editor.textmode.art/)** - Online textmode.js editor
+- **[editor.textmode.art](https://editor.textmode.art/)** - textmode.js web editor
 
 ---
 
