@@ -8,9 +8,9 @@ export default defineConfig(() => {
       alias: {
         'textmode.filters.js': path.resolve(__dirname, 'src/index.ts'),
       },
-      server: {
-        open: '/examples/index.html',
-      },
+    },
+    server: {
+      open: '/examples/index.html',
     },
     build: {
       minify: 'esbuild',
