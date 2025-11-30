@@ -1,5 +1,4 @@
 <div align="center">
-
 # 🎨 textmode.filters.js
 
 **GPU-accelerated image filters plugin for [textmode.js](https://code.textmode.art/)**
@@ -167,6 +166,6 @@ Thanks to all the wonderful people who have contributed to this project! ✨
 
 <div align="center">
 
-**[⬆ Back to Top](#)**
+**[↑ Back to Top](#-textmodefiltersjs)**
 
 </div>
