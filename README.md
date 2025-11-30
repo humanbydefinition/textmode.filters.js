@@ -1,4 +1,5 @@
 <div align="center">
+
 # 🎨 textmode.filters.js
 
 **GPU-accelerated image filters plugin for [textmode.js](https://code.textmode.art/)**
