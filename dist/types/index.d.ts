@@ -31,4 +31,3 @@ import type { TextmodePlugin } from 'textmode.js';
  * @returns A textmode.js plugin instance.
  */
 export declare const createFiltersPlugin: () => TextmodePlugin;
-export type { TextmodeFilterStrategy } from 'textmode.js';

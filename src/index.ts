@@ -65,5 +65,3 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 if (typeof window !== 'undefined') {
     (window as any).createFiltersPlugin = createFiltersPlugin;
 }
-
-export type { TextmodeFilterStrategy } from 'textmode.js';
