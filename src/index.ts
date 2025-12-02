@@ -43,21 +43,21 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
     version: '1.0.0',
 
     async install(textmodifier) {
-        textmodifier.layers.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0]})
-        textmodifier.layers.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0]});
-        textmodifier.layers.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0]});
-        textmodifier.layers.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
-        textmodifier.layers.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]]});
-        textmodifier.layers.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0]});
+        textmodifier.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0]})
+        textmodifier.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0]});
+        textmodifier.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0]});
+        textmodifier.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
+        textmodifier.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]]});
+        textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0]});
     },
 
     async uninstall(textmodifier) {
-        textmodifier.layers.filters.unregister('brightness');
-        textmodifier.layers.filters.unregister('contrast');
-        textmodifier.layers.filters.unregister('hueRotate');
-        textmodifier.layers.filters.unregister('glitch');
-        textmodifier.layers.filters.unregister('chromaticAberration');
-        textmodifier.layers.filters.unregister('pixelate');
+        textmodifier.filters.unregister('brightness');
+        textmodifier.filters.unregister('contrast');
+        textmodifier.filters.unregister('hueRotate');
+        textmodifier.filters.unregister('glitch');
+        textmodifier.filters.unregister('chromaticAberration');
+        textmodifier.filters.unregister('pixelate');
     },
 });
 
