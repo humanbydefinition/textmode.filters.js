@@ -17,9 +17,6 @@
 
 ---
 
-> [!NOTE]
-> 🚧 **Work in Progress** - The required textmode.js version (0.7.0-beta.2+) is not yet publicly released.
-
 ## ✨ Features
 
 - 🚀 **GPU-accelerated** - All filters run on the GPU via WebGL2 fragment shaders
