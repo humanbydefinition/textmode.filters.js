@@ -21,7 +21,7 @@
     "dev": "vite --port 5179 --host"
   },
   "peerDependencies": {
-    "textmode.js": "^0.7.0-beta.3"
+    "textmode.js": "^0.7.0"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
