@@ -5,10 +5,10 @@
   "type": "module",
   "main": "./dist/textmode.filters.umd.js",
   "module": "./dist/textmode.filters.esm.js",
-  "types": "./dist/index.d.ts",
+  "types": "./dist/types/index.d.ts",
   "exports": {
     ".": {
-      "types": "./dist/index.d.ts",
+      "types": "./dist/types/index.d.ts",
       "import": "./dist/textmode.filters.esm.js",
       "require": "./dist/textmode.filters.umd.js"
     }
