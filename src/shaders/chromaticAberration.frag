@@ -15,9 +15,10 @@ void main() {
     
     // Sample each color channel with different offsets
     float r = texture(u_texture, v_uv + offset).r;
-    float g = texture(u_texture, v_uv).g;
+    vec4 ga = texture(u_texture, v_uv);
+    float g = ga.g;
     float b = texture(u_texture, v_uv - offset).b;
-    float a = texture(u_texture, v_uv).a;
+    float a = ga.a;
     
     fragColor = vec4(r, g, b, a);
 }
