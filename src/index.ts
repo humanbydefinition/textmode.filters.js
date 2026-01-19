@@ -6,6 +6,7 @@ import hueRotateFragmentShader from './shaders/hueRotate.frag?raw';
 import glitchFragmentShader from './shaders/glitch.frag?raw';
 import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag?raw';
 import pixelateFragmentShader from './shaders/pixelate.frag?raw';
+import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -17,6 +18,7 @@ import pixelateFragmentShader from './shaders/pixelate.frag?raw';
  * - `glitch` - Digital glitch effect (amount: 0.0 = none, higher values = more intense)
  * - `chromaticAberration` - RGB channel separation effect (amount: offset in pixels, direction: vec2 for offset direction)
  * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
+ * - `scanlines` - CRT scanline effect (count: number of lines, opacity: line darkness, vertical: 0 or 1 for orientation)
  * 
  * @example
  * ```javascript
@@ -49,6 +51,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
         textmodifier.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]]});
         textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0]});
+        textmodifier.filters.register('scanlines', scanlinesFragmentShader, { u_count: ['count', 50.0], u_opacity: ['opacity', 0.5], u_vertical: ['vertical', 0.0] });
     },
 
     async uninstall(textmodifier) {
@@ -58,6 +61,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('glitch');
         textmodifier.filters.unregister('chromaticAberration');
         textmodifier.filters.unregister('pixelate');
+        textmodifier.filters.unregister('scanlines');
     },
 });
 

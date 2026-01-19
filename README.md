@@ -160,6 +160,22 @@ Reduce image resolution to create a mosaic/pixelated effect
 
 ---
 
+### `scanlines`
+
+CRT scanline effect
+
+**Parameters:**
+- `count` - Number of scanlines
+  Default: `50.0` | Range: `0.0` - `∞`
+- `opacity` - Darkness of the lines
+  Default: `0.5` | Range: `0.0` - `1.0`
+- `vertical` - Orientation (0.0 = horizontal, 1.0 = vertical)
+  Default: `0.0` | Range: `0.0` - `1.0`
+
+**Author:** Jules
+
+---
+
 ### Usage examples
 
 ```javascript
@@ -181,6 +197,9 @@ t.layers.base.filter('chromaticAberration', { amount: 10, direction: [1, 1] });
 
 // Pixelate effect
 t.layers.base.filter('pixelate', 8);
+
+// Scanlines effect
+t.layers.base.filter('scanlines', { count: 100, opacity: 0.3 });
 ```
 
 ## Adding custom filters

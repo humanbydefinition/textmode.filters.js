@@ -1,0 +1,31 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>textmode.js - Scanlines Filter</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<canvas id="textmode-canvas" width="800px" height="600px"></canvas>
+	<div class="controls">
+		<div>
+			<label for="count">Count:</label>
+			<input type="range" id="count" min="1" max="200" step="1" value="50">
+			<span id="count-value">50</span>
+		</div>
+		<div>
+			<label for="opacity">Opacity:</label>
+			<input type="range" id="opacity" min="0" max="1" step="0.01" value="0.5">
+			<span id="opacity-value">0.5</span>
+		</div>
+		<div>
+			<label for="vertical">Vertical:</label>
+			<input type="checkbox" id="vertical">
+		</div>
+	</div>
+	<script type="module" src="./sketch.js"></script>
+</body>
+
+</html>
