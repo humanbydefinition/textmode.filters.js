@@ -126,25 +126,25 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
     version: '1.0.0',
 
     async install(textmodifier) {
-        textmodifier.layers.filters.register('brightness', brightnessFragmentShader, { 
+        textmodifier.filters.register('brightness', brightnessFragmentShader, {
             u_amount: ['amount', 1.0]
         });
-        textmodifier.layers.filters.register('contrast', contrastFragmentShader, { 
+        textmodifier.filters.register('contrast', contrastFragmentShader, {
             u_amount: ['amount', 1.0]
         });
         
         // Register your filter
         // Format: register(name, shader, { uniform_name: [param_name, default_value] })
-        textmodifier.layers.filters.register('yourfilter', yourFilterFragmentShader, { 
+        textmodifier.filters.register('yourfilter', yourFilterFragmentShader, {
             u_amount: ['amount', 1.0],
             // Add more parameters as needed
         });
     },
 
     async uninstall(textmodifier) {
-        textmodifier.layers.filters.unregister('brightness');
-        textmodifier.layers.filters.unregister('contrast');
-        textmodifier.layers.filters.unregister('yourfilter'); // Add this
+        textmodifier.filters.unregister('brightness');
+        textmodifier.filters.unregister('contrast');
+        textmodifier.filters.unregister('yourfilter'); // Add this
     },
 });
 ```
