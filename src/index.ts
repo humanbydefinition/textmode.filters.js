@@ -6,6 +6,7 @@ import hueRotateFragmentShader from './shaders/hueRotate.frag?raw';
 import glitchFragmentShader from './shaders/glitch.frag?raw';
 import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag?raw';
 import pixelateFragmentShader from './shaders/pixelate.frag?raw';
+import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -17,6 +18,7 @@ import pixelateFragmentShader from './shaders/pixelate.frag?raw';
  * - `glitch` - Digital glitch effect (amount: 0.0 = none, higher values = more intense)
  * - `chromaticAberration` - RGB channel separation effect (amount: offset in pixels, direction: vec2 for offset direction)
  * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
+ * - `gridDistortion` - Distort a monospaced grid with custom patterns (widthFactors/heightFactors: arrays of values 0-1)
  * 
  * @example
  * ```javascript
@@ -27,12 +29,29 @@ import pixelateFragmentShader from './shaders/pixelate.frag?raw';
  *     plugins: [createFiltersPlugin()]
  * });
  * 
+ * let frame = 0;
  * t.draw(() => {
  *     t.layers.base.filter('brightness', 1.2);
- *     t.layers.base.filter('contrast', { amount: 1.5 });
+ * 
+ *     // Grid distortion with custom sine wave pattern
+ *     const widthFactors = [];
+ *     const heightFactors = [];
+ *     for (let i = 0; i < 80; i++) {
+ *         widthFactors.push((Math.sin(i * 0.1 + frame * 0.05) + 1) / 2);
+ *     }
+ *     for (let j = 0; j < 40; j++) {
+ *         heightFactors.push((Math.sin(j * 0.15 + frame * 0.03) + 1) / 2);
+ *     }
+ *     t.layers.base.filter('gridDistortion', {
+ *       gridSize: [80, 40],
+ *       widthFactors,
+ *       heightFactors,
+ *       widthVariationScale: 0.5,
+ *       heightVariationScale: 0.5
+ *     });
  * 
  *     t.background(0);
- *     // ... draw something ...
+ *     frame++;
  * });
  * ```
  * 
@@ -49,6 +68,16 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
         textmodifier.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]]});
         textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0]});
+        
+        // Grid distortion with default empty arrays (128 elements)
+        const defaultFactors = new Array(128).fill(0.5);
+        textmodifier.filters.register('gridDistortion', gridDistortionFragmentShader, {
+            u_gridSize: ['gridSize', [80.0, 40.0]],
+            u_widthFactors: ['widthFactors', defaultFactors],
+            u_heightFactors: ['heightFactors', defaultFactors],
+            u_widthVariationScale: ['widthVariationScale', 0.5],
+            u_heightVariationScale: ['heightVariationScale', 0.5]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -58,6 +87,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('glitch');
         textmodifier.filters.unregister('chromaticAberration');
         textmodifier.filters.unregister('pixelate');
+        textmodifier.filters.unregister('gridDistortion');
     },
 });
 

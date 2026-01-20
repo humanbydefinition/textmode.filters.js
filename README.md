@@ -160,6 +160,26 @@ Reduce image resolution to create a mosaic/pixelated effect
 
 ---
 
+### `gridDistortion`
+
+Distort a monospaced character grid by varying the width and height of individual cells. Create wave effects, perspective distortions, or other grid warping effects by providing custom factor arrays.
+
+**Parameters:**
+- `gridSize` - Grid dimensions as `[columns, rows]`  
+  Default: `[80, 40]` | Maximum: `[128, 128]`
+- `widthFactors` - Array of distortion values (0-1) for each column  
+  Must contain at least as many elements as columns (max 128)
+- `heightFactors` - Array of distortion values (0-1) for each row  
+  Must contain at least as many elements as rows (max 128)
+- `widthVariationScale` - Intensity multiplier for width distortion  
+  Default: `0.5` | Range: `0.0` - `∞`
+- `heightVariationScale` - Intensity multiplier for height distortion  
+  Default: `0.5` | Range: `0.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
