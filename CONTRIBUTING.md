@@ -62,9 +62,10 @@ textmode.filters.js/
 │   └── shaders/           # GLSL fragment shaders
 │       ├── brightness.frag
 │       └── contrast.frag
-├── examples/
-│   ├── esm/               # ES Module example
-│   └── umd/               # UMD/Browser example
+├── examples/              # Usage examples
+│   ├── brightness/        # Filter-specific examples
+│   ├── contrast/
+│   └── index.html         # Examples index page
 ├── dist/                  # Built output (generated)
 ├── package.json
 ├── tsconfig.json
@@ -169,9 +170,10 @@ Brief description of what your filter does
 
 ### Step 4: Test your filter
 
-1. Add an example in `examples/esm/sketch.js` or `examples/umd/sketch.js`
-2. Run `npm run dev` to test locally
-3. Make sure the filter works as expected
+1. Create a new directory in `examples/` for your filter (e.g., `examples/yourfilter/`)
+2. Add an `index.html` and `sketch.js` (copy from `examples/brightness/` as a template)
+3. Run `npm run dev` to test locally
+4. Make sure the filter works as expected
 
 ### Uniform parameter mapping
 
