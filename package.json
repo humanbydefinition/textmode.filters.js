@@ -20,8 +20,8 @@
     "build": "vite build && tsc -p tsconfig.json",
     "dev": "vite --port 5179 --host"
   },
-  "peerDependencies": {
-    "textmode.js": "^0.8.1"
+  "dependencies": {
+    "textmode.js": "^0.8.5"
   },
   "devDependencies": {
     "@rollup/plugin-terser": "^0.4.4",
