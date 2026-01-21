@@ -43,7 +43,9 @@ import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
  *         heightFactors.push((Math.sin(j * 0.15 + frame * 0.03) + 1) / 2);
  *     }
  *     t.layers.base.filter('gridDistortion', {
- *       gridSize: [80, 40],
+ *       gridCellDimensions: [80, 40],
+ *       gridPixelDimensions: [t.grid.cols * t.grid.cellWidth, t.grid.rows * t.grid.cellHeight],
+ *       gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
  *       widthFactors,
  *       heightFactors,
  *       widthVariationScale: 0.5,
@@ -62,17 +64,19 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
     version: '1.0.0',
 
     async install(textmodifier) {
-        textmodifier.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0]})
-        textmodifier.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0]});
-        textmodifier.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0]});
-        textmodifier.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0]});
-        textmodifier.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]]});
-        textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0]});
-        
+        textmodifier.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0] })
+        textmodifier.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0] });
+        textmodifier.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0] });
+        textmodifier.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0] });
+        textmodifier.filters.register('chromaticAberration', chromaticAberrationFragmentShader, { u_amount: ['amount', 5.0], u_direction: ['direction', [1.0, 0.0]] });
+        textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0] });
+
         // Grid distortion with default empty arrays (128 elements)
         const defaultFactors = new Array(128).fill(0.5);
         textmodifier.filters.register('gridDistortion', gridDistortionFragmentShader, {
-            u_gridSize: ['gridSize', [80.0, 40.0]],
+            u_gridCellDimensions: ['gridCellDimensions', [80.0, 40.0]],
+            u_gridPixelDimensions: ['gridPixelDimensions', [640.0, 320.0]],
+            u_gridOffsetDimensions: ['gridOffsetDimensions', [0.0, 0.0]],
             u_widthFactors: ['widthFactors', defaultFactors],
             u_heightFactors: ['heightFactors', defaultFactors],
             u_widthVariationScale: ['widthVariationScale', 0.5],

@@ -10,8 +10,13 @@ out vec4 fragColor;
 // Input texture
 uniform sampler2D u_texture;
 
+// Resolution for coordinate calculations
+uniform vec2 u_resolution;
+
 // Grid dimensions
-uniform vec2 u_gridSize; // [columns, rows]
+uniform vec2 u_gridCellDimensions; // [columns, rows]
+uniform vec2 u_gridPixelDimensions; // [width, height] in pixels
+uniform vec2 u_gridOffsetDimensions; // [offsetX, offsetY] in pixels
 
 // Distortion parameters
 uniform float u_widthFactors[128];
@@ -19,15 +24,30 @@ uniform float u_heightFactors[128];
 uniform float u_widthVariationScale;
 uniform float u_heightVariationScale;
 
+// Maximum iterations for loops
+const int MAX_COLUMNS = 128;
+const int MAX_ROWS = 128;
+
 void main() {
-    vec2 adjustedCoord = v_uv;
+    // Convert UV to logical pixel coordinates
+    vec2 logicalFragCoord = v_uv * u_resolution;
+    
+    // Adjust to grid-relative coordinates (0-1 within the grid)
+    vec2 adjustedCoord = (logicalFragCoord - u_gridOffsetDimensions) / u_gridPixelDimensions;
+    
+    // Early discard for out-of-bounds fragments
+    if(adjustedCoord.x < 0.0 || adjustedCoord.x > 1.0 || 
+       adjustedCoord.y < 0.0 || adjustedCoord.y > 1.0) {
+        fragColor = vec4(0.0);
+        return;
+    }
     
     // Calculate total effective width and height
-    int numCols = int(u_gridSize.x);
-    int numRows = int(u_gridSize.y);
+    int numCols = int(u_gridCellDimensions.x);
+    int numRows = int(u_gridCellDimensions.y);
     
     float totalWidth = 0.0;
-    for (int i = 0; i < 128; i++) {
+    for (int i = 0; i < MAX_COLUMNS; i++) {
         if(i < numCols) {
             float colAdj = u_widthFactors[i];
             totalWidth += 0.1 + colAdj * u_widthVariationScale;
@@ -35,7 +55,7 @@ void main() {
     }
     
     float totalHeight = 0.0;
-    for (int j = 0; j < 128; j++) {
+    for (int j = 0; j < MAX_ROWS; j++) {
         if(j < numRows) {
             float rowAdj = u_heightFactors[j];
             totalHeight += 0.1 + rowAdj * u_heightVariationScale;
@@ -53,7 +73,7 @@ void main() {
     float accumX = 0.0;
     float normalizedX = distortedX * totalWidth;
     
-    for (int i = 0; i < 128; i++) {
+    for (int i = 0; i < MAX_COLUMNS; i++) {
         if(i < numCols) {
             float colAdj = u_widthFactors[i];
             float cellWidth = 0.1 + colAdj * u_widthVariationScale;
@@ -72,7 +92,7 @@ void main() {
     float accumY = 0.0;
     float normalizedY = distortedY * totalHeight;
     
-    for (int j = 0; j < 128; j++) {
+    for (int j = 0; j < MAX_ROWS; j++) {
         if(j < numRows) {
             float rowAdj = u_heightFactors[j];
             float cellHeight = 0.1 + rowAdj * u_heightVariationScale;

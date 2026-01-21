@@ -77,7 +77,10 @@ t.draw(() => {
 
 	// Apply grid distortion filter
 	t.layers.base.filter('gridDistortion', {
-		gridSize: [cols, rows],
+		gridCellDimensions: [cols, rows],
+		gridPixelDimensions: [t.grid.width, t.grid.height],
+		gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
+		gridCellPixelDimensions: [t.grid.cellWidth, t.grid.cellHeight],
 		widthFactors: widthFactors,
 		heightFactors: heightFactors,
 		widthVariationScale: widthVariation,
