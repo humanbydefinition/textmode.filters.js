@@ -180,6 +180,23 @@ Distort a monospaced character grid by varying the width and height of individua
 
 ---
 
+### `crtMattias`
+
+CRT monitor emulation effect with screen curvature, animated scanlines, blur, vignette, and film grain noise.
+
+**Parameters:**
+- `curvature` - Amount of screen curvature/barrel distortion  
+  Default: `0.5` | Range: `0.0` - `1.0`
+- `scanSpeed` - Speed of the scrolling scanline effect  
+  Default: `1.0` | Range: `0.0` - `10.0`
+- `time` - Animation time
+  Default: `0.0`
+
+**Author:** [@mattiasgustavsson](https://github.com/mattiasgustavsson)  
+**Source:** https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl
+
+---
+
 ### Usage examples
 
 ```javascript

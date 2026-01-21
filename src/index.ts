@@ -7,6 +7,7 @@ import glitchFragmentShader from './shaders/glitch.frag?raw';
 import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag?raw';
 import pixelateFragmentShader from './shaders/pixelate.frag?raw';
 import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
+import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -19,6 +20,7 @@ import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
  * - `chromaticAberration` - RGB channel separation effect (amount: offset in pixels, direction: vec2 for offset direction)
  * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
  * - `gridDistortion` - Distort a monospaced grid with custom patterns (widthFactors/heightFactors: arrays of values 0-1)
+ * - `crtMattias` - CRT monitor emulation with curvature, scanlines, blur, and noise (by Mattias)
  * 
  * @example
  * ```javascript
@@ -82,6 +84,13 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
             u_widthVariationScale: ['widthVariationScale', 0.5],
             u_heightVariationScale: ['heightVariationScale', 0.5]
         });
+
+        // CRT Mattias filter
+        textmodifier.filters.register('crtMattias', crtMattiasFragmentShader, {
+            u_curvature: ['curvature', 0.5],
+            u_scanSpeed: ['scanSpeed', 1.0],
+            u_time: ['time', 0.0]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -92,6 +101,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('chromaticAberration');
         textmodifier.filters.unregister('pixelate');
         textmodifier.filters.unregister('gridDistortion');
+        textmodifier.filters.unregister('crtMattias');
     },
 });
 
