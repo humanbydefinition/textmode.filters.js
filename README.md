@@ -216,6 +216,22 @@ A standalone scanline effect that adds horizontal lines to the image to simulate
 
 ---
 
+### `vignette`
+
+Darkens the edges and corners of the image, drawing focus to the center. Useful for creating a cinematic look or highlighting central content.
+
+**Parameters:**
+- `amount` - Intensity of the darkening effect  
+  Default: `0.5` | Range: `0.0` - `1.0`
+- `softness` - Falloff gradient softness (0 = hard edge, 1 = very soft)  
+  Default: `0.5` | Range: `0.0` - `1.0`
+- `roundness` - Shape of the vignette (0 = rectangular, 1 = circular)  
+  Default: `0.5` | Range: `0.0` - `1.0`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
@@ -237,6 +253,9 @@ t.layers.base.filter('chromaticAberration', { amount: 10, direction: [1, 1] });
 
 // Pixelate effect
 t.layers.base.filter('pixelate', 8);
+
+// Vignette with custom shape
+t.layers.base.filter('vignette', { amount: 0.7, softness: 0.4, roundness: 1.0 });
 ```
 
 ## Adding custom filters

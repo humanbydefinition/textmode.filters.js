@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+	<meta charset="utf-8">
+	<title>textmode.js - Vignette Filter</title>
+	<link rel="stylesheet" href="../style.css">
+</head>
+
+<body>
+	<canvas id="textmode-canvas" width="800px" height="600px"></canvas>
+	<div class="controls">
+		<label for="amount">Amount:</label>
+		<input type="range" id="amount" min="0" max="1" step="0.05" value="0.5">
+		<span id="amount-value">0.5</span>
+	</div>
+	<div class="controls">
+		<label for="softness">Softness:</label>
+		<input type="range" id="softness" min="0" max="1" step="0.05" value="0.5">
+		<span id="softness-value">0.5</span>
+	</div>
+	<div class="controls">
+		<label for="roundness">Roundness:</label>
+		<input type="range" id="roundness" min="0" max="1" step="0.05" value="0.5">
+		<span id="roundness-value">0.5</span>
+	</div>
+	<script type="module" src="./sketch.js"></script>
+</body>
+
+</html>

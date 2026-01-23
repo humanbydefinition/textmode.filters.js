@@ -3,7 +3,7 @@ import { createFiltersPlugin } from 'textmode.filters.js';
 
 const t = textmode.create({
     canvas: document.getElementById('textmode-canvas'),
-    fontSize: 24,
+    fontSize: 16,
     plugins: [createFiltersPlugin()],
 });
 

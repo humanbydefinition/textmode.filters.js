@@ -9,6 +9,7 @@ import pixelateFragmentShader from './shaders/pixelate.frag?raw';
 import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
 import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
 import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
+import vignetteFragmentShader from './shaders/vignette.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -23,6 +24,7 @@ import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
  * - `gridDistortion` - Distort a monospaced grid with custom patterns (widthFactors/heightFactors: arrays of values 0-1)
  * - `crtMattias` - CRT monitor emulation with curvature, scanlines, blur, and noise (by Mattias)
  * - `scanlines` - Customizable scanlines effect (count, lineWidth, intensity, speed)
+ * - `vignette` - Darkened edges/corners effect (amount, softness, roundness)
  * 
  * @example
  * ```javascript
@@ -102,6 +104,13 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
             u_speed: ['speed', 1.0],
             u_time: ['time', 0.0]
         });
+
+        // Vignette filter
+        textmodifier.filters.register('vignette', vignetteFragmentShader, {
+            u_amount: ['amount', 0.5],
+            u_softness: ['softness', 0.5],
+            u_roundness: ['roundness', 0.5]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -114,6 +123,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('gridDistortion');
         textmodifier.filters.unregister('crtMattias');
         textmodifier.filters.unregister('scanlines');
+        textmodifier.filters.unregister('vignette');
     },
 });
 
