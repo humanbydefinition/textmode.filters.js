@@ -1,19 +1,19 @@
 import type { TextmodePlugin } from 'textmode.js/plugins';
 
-import brightnessFragmentShader from './shaders/brightness.frag?raw';
-import contrastFragmentShader from './shaders/contrast.frag?raw';
-import hueRotateFragmentShader from './shaders/hueRotate.frag?raw';
-import glitchFragmentShader from './shaders/glitch.frag?raw';
-import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag?raw';
-import pixelateFragmentShader from './shaders/pixelate.frag?raw';
-import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
-import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
-import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
-import vignetteFragmentShader from './shaders/vignette.frag?raw';
-import bloomFragmentShader from './shaders/bloom.frag?raw';
-import filmGrainFragmentShader from './shaders/filmGrain.frag?raw';
-import saturationFragmentShader from './shaders/saturation.frag?raw';
-import posterizeFragmentShader from './shaders/posterize.frag?raw';
+import brightnessFragmentShader from './shaders/brightness.frag';
+import contrastFragmentShader from './shaders/contrast.frag';
+import hueRotateFragmentShader from './shaders/hueRotate.frag';
+import glitchFragmentShader from './shaders/glitch.frag';
+import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag';
+import pixelateFragmentShader from './shaders/pixelate.frag';
+import gridDistortionFragmentShader from './shaders/gridDistortion.frag';
+import crtMattiasFragmentShader from './shaders/crtMattias.frag';
+import scanlinesFragmentShader from './shaders/scanlines.frag';
+import vignetteFragmentShader from './shaders/vignette.frag';
+import bloomFragmentShader from './shaders/bloom.frag';
+import filmGrainFragmentShader from './shaders/filmGrain.frag';
+import saturationFragmentShader from './shaders/saturation.frag';
+import posterizeFragmentShader from './shaders/posterize.frag';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
