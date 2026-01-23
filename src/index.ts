@@ -13,6 +13,7 @@ import vignetteFragmentShader from './shaders/vignette.frag?raw';
 import bloomFragmentShader from './shaders/bloom.frag?raw';
 import filmGrainFragmentShader from './shaders/filmGrain.frag?raw';
 import saturationFragmentShader from './shaders/saturation.frag?raw';
+import posterizeFragmentShader from './shaders/posterize.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -31,6 +32,7 @@ import saturationFragmentShader from './shaders/saturation.frag?raw';
  * - `bloom` - Glow effect around bright areas (threshold, intensity, radius)
  * - `filmGrain` - Animated film grain/noise overlay (intensity, size, speed)
  * - `saturation` - Adjust color intensity (amount: 0 = grayscale, 1 = normal, >1 = vivid)
+ * - `posterize` - Reduce color levels (levels: number of color bands, default 4.0)
  * 
  * @example
  * ```javascript
@@ -137,6 +139,11 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.register('saturation', saturationFragmentShader, {
             u_amount: ['amount', 1.0]
         });
+
+        // Posterize filter
+        textmodifier.filters.register('posterize', posterizeFragmentShader, {
+            u_levels: ['levels', 4.0]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -153,6 +160,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('bloom');
         textmodifier.filters.unregister('filmGrain');
         textmodifier.filters.unregister('saturation');
+        textmodifier.filters.unregister('posterize');
     },
 });
 

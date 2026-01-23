@@ -277,6 +277,17 @@ Adjust color intensity without affecting luminance. Perfect for creating vivid, 
 **Author:** [@humanbydefinition](https://github.com/humanbydefinition)
 
 ---
+### `posterize`
+
+Reduces the color palette to a limited number of bands, creating a retro quantized look.
+
+**Parameters:**
+- `levels` - Number of color levels per channel
+  Default: `4.0` | Range: `1.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
 
 ### Usage examples
 
@@ -316,6 +327,9 @@ t.draw(() => {
 // Saturation adjustments
 t.layers.base.filter('saturation', 0);    // Grayscale
 t.layers.base.filter('saturation', 1.5);  // Vivid colors
+
+// Posterize effect (quantize colors)
+t.layers.base.filter('posterize', { levels: 4 });
 ```
 
 ## Adding custom filters
