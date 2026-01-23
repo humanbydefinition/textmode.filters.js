@@ -1,4 +1,4 @@
-import type { TextmodePlugin } from 'textmode.js';
+import type { TextmodePlugin } from 'textmode.js/plugins';
 
 import brightnessFragmentShader from './shaders/brightness.frag?raw';
 import contrastFragmentShader from './shaders/contrast.frag?raw';
