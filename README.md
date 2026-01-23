@@ -1,23 +1,23 @@
+# textmode.filters.js 
+
 <div align="center">
 
-# 🎨 textmode.filters.js
+<!-- Add your banner image here when ready -->
+<!-- <img alt="textmode_filters_banner" src="YOUR_BANNER_IMAGE_URL" /> -->
 
-**GPU-accelerated image filters plugin for [textmode.js](https://code.textmode.art/)**
+| [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![WebGL](https://img.shields.io/badge/WebGL2-990000?logo=webgl&logoColor=white)](https://www.khronos.org/webgl/) [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/) | [![npm version](https://img.shields.io/npm/v/textmode.filters.js.svg)](https://www.npmjs.com/package/textmode.filters.js) [![license](https://img.shields.io/npm/l/textmode.filters.js.svg)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/LICENSE) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) [![Github-sponsors](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/humanbydefinition) |
+|:-------------|:-------------|:-------------|
 
-[![npm version](https://img.shields.io/npm/v/textmode.filters.js.svg?style=flat-square)](https://www.npmjs.com/package/textmode.filters.js)
-[![license](https://img.shields.io/npm/l/textmode.filters.js.svg?style=flat-square)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/LICENSE)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg?style=flat-square)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/CONTRIBUTING.md)
+</div>
+
+textmode.filters.js is a GPU-accelerated image filters plugin for [textmode.js](https://code.textmode.art/). Built with [`WebGL2`](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext) fragment shaders, it provides a collection of customizable visual effects that run entirely on the GPU for maximum performance.
 
 [Installation](#installation) •
 [Usage](#usage) •
 [Filters](#filters) •
 [Contributing](#contributing)
 
-</div>
-
----
-
-## ✨ Features
+## Features
 
 - 🚀 **GPU-accelerated** - All filters run on the GPU via WebGL2 fragment shaders
 - 🎛️ **Customizable parameters** - Fine-tune each filter to your needs
