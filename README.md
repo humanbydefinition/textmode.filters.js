@@ -381,6 +381,6 @@ Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 <br />
 
-**[↑ Back to Top](#-textmodefiltersjs)**
+**[↑ back to top](#-textmodefiltersjs)**
 
 </div>
