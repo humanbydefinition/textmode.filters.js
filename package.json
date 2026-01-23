@@ -18,7 +18,9 @@
   ],
   "scripts": {
     "build": "vite build && tsc -p tsconfig.json",
-    "dev": "vite --port 5179 --host"
+    "dev": "vite --port 5179 --host",
+    "format": "prettier --write \"src/**/*.{ts,js}\"",
+    "format:check": "prettier --check \"src/**/*.{ts,js}\""
   },
   "dependencies": {
     "textmode.js": "^0.8.5"
@@ -27,6 +29,7 @@
     "@mapwhit/glsl-minify": "^1.0.0",
     "@rollup/plugin-terser": "^0.4.4",
     "@types/node": "^24.10.1",
+    "prettier": "^3.8.1",
     "tslib": "^2.8.1",
     "typescript": "^5.9.2",
     "vite": "^6.3.4"
