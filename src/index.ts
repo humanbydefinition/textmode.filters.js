@@ -10,6 +10,7 @@ import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
 import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
 import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
 import vignetteFragmentShader from './shaders/vignette.frag?raw';
+import bloomFragmentShader from './shaders/bloom.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -25,6 +26,7 @@ import vignetteFragmentShader from './shaders/vignette.frag?raw';
  * - `crtMattias` - CRT monitor emulation with curvature, scanlines, blur, and noise (by Mattias)
  * - `scanlines` - Customizable scanlines effect (count, lineWidth, intensity, speed)
  * - `vignette` - Darkened edges/corners effect (amount, softness, roundness)
+ * - `bloom` - Glow effect around bright areas (threshold, intensity, radius)
  * 
  * @example
  * ```javascript
@@ -111,6 +113,13 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
             u_softness: ['softness', 0.5],
             u_roundness: ['roundness', 0.5]
         });
+
+        // Bloom filter
+        textmodifier.filters.register('bloom', bloomFragmentShader, {
+            u_threshold: ['threshold', 0.5],
+            u_intensity: ['intensity', 1.0],
+            u_radius: ['radius', 4.0]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -124,6 +133,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('crtMattias');
         textmodifier.filters.unregister('scanlines');
         textmodifier.filters.unregister('vignette');
+        textmodifier.filters.unregister('bloom');
     },
 });
 

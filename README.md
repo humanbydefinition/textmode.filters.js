@@ -232,6 +232,22 @@ Darkens the edges and corners of the image, drawing focus to the center. Useful 
 
 ---
 
+### `bloom`
+
+Creates a glow effect around bright areas of the image. Pixels above the brightness threshold emit a soft glow that spreads outward, perfect for creating neon, glowing text, or dreamy effects.
+
+**Parameters:**
+- `threshold` - Brightness level above which pixels will glow  
+  Default: `0.5` | Range: `0.0` - `1.0`
+- `intensity` - Strength of the glow effect  
+  Default: `1.0` | Range: `0.0` - `∞`
+- `radius` - Size of the glow spread in pixels  
+  Default: `4.0` | Range: `1.0` - `∞`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
@@ -256,6 +272,9 @@ t.layers.base.filter('pixelate', 8);
 
 // Vignette with custom shape
 t.layers.base.filter('vignette', { amount: 0.7, softness: 0.4, roundness: 1.0 });
+
+// Bloom for glowing bright areas
+t.layers.base.filter('bloom', { threshold: 0.6, intensity: 1.5, radius: 8 });
 ```
 
 ## Adding custom filters
