@@ -1,0 +1,8 @@
+# Build outputs
+dist/
+node_modules/
+
+# Shader files (special syntax)
+**/*.frag
+**/*.vert
+**/*.glsl

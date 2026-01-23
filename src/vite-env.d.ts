@@ -1,17 +1,17 @@
 /// <reference types="vite/client" />
 
 // Declare module for raw shader imports
-declare module '*.frag?raw' {
+declare module '*.frag' {
 	const content: string;
 	export default content;
 }
 
-declare module '*.vert?raw' {
+declare module '*.vert' {
 	const content: string;
 	export default content;
 }
 
-declare module '*.glsl?raw' {
+declare module '*.glsl' {
 	const content: string;
 	export default content;
 }

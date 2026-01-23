@@ -1,6 +1,7 @@
 import { defineConfig } from 'vite';
 import path from 'path';
 import terser from '@rollup/plugin-terser';
+import { createGLSLPlugin } from './vite-plugins/glsl-minify';
 
 export default defineConfig(() => {
   return {
@@ -12,6 +13,10 @@ export default defineConfig(() => {
     server: {
       open: '/examples/index.html',
     },
+    plugins: [
+      // GLSL shader minification plugin - reduces bundle size significantly
+      createGLSLPlugin(),
+    ],
     build: {
       minify: 'esbuild',
       emptyOutDir: true,
