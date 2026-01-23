@@ -8,6 +8,7 @@ import chromaticAberrationFragmentShader from './shaders/chromaticAberration.fra
 import pixelateFragmentShader from './shaders/pixelate.frag?raw';
 import gridDistortionFragmentShader from './shaders/gridDistortion.frag?raw';
 import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
+import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -21,6 +22,7 @@ import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
  * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
  * - `gridDistortion` - Distort a monospaced grid with custom patterns (widthFactors/heightFactors: arrays of values 0-1)
  * - `crtMattias` - CRT monitor emulation with curvature, scanlines, blur, and noise (by Mattias)
+ * - `scanlines` - Customizable scanlines effect (count, lineWidth, intensity, speed)
  * 
  * @example
  * ```javascript
@@ -91,6 +93,15 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
             u_scanSpeed: ['scanSpeed', 1.0],
             u_time: ['time', 0.0]
         });
+
+        // Scanlines filter
+        textmodifier.filters.register('scanlines', scanlinesFragmentShader, {
+            u_count: ['count', 300.0],
+            u_lineWidth: ['lineWidth', 0.5],
+            u_intensity: ['intensity', 0.75],
+            u_speed: ['speed', 1.0],
+            u_time: ['time', 0.0]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -102,6 +113,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('pixelate');
         textmodifier.filters.unregister('gridDistortion');
         textmodifier.filters.unregister('crtMattias');
+        textmodifier.filters.unregister('scanlines');
     },
 });
 

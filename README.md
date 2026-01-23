@@ -196,6 +196,25 @@ CRT monitor emulation effect with screen curvature, animated scanlines, blur, vi
 **Source:** https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl
 
 ---
+### `scanlines`
+
+A standalone scanline effect that adds horizontal lines to the image to simulate a CRT display or old monitor. Adjustable density, thickness, and movement speed.
+
+**Parameters:**
+- `count` - Number of scanlines
+  Default: `300.0` | Range: `10.0` - `∞`
+- `lineWidth` - Width of the lines relative to the spacing
+  Default: `0.5` | Range: `0.0` - `1.0`
+- `intensity` - Opacity of the scanlines
+  Default: `0.75` | Range: `0.0` - `1.0`
+- `speed` - Scrolling speed of the lines
+  Default: `1.0` | Range: `0.0` - `∞`
+- `time` - Animation time
+  Default: `0.0`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
 
 ### Usage examples
 
