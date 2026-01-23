@@ -23,7 +23,7 @@
     "format:check": "prettier --check \"src/**/*.{ts,js}\""
   },
   "dependencies": {
-    "textmode.js": "^0.7.0"
+    "textmode.js": ">=0.7.0"
   },
   "devDependencies": {
     "@mapwhit/glsl-minify": "^1.0.0",
