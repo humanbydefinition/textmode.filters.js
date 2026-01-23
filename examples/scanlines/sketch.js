@@ -9,14 +9,11 @@ const t = textmode.create({
 
 let video;
 let count = 300;
-let lineWidth = 0.5;
 let intensity = 0.5;
 let speed = 1.0;
 
 const countSlider = document.getElementById('count');
 const countValue = document.getElementById('count-value');
-const lineWidthSlider = document.getElementById('lineWidth');
-const lineWidthValue = document.getElementById('lineWidth-value');
 const intensitySlider = document.getElementById('intensity');
 const intensityValue = document.getElementById('intensity-value');
 const speedSlider = document.getElementById('speed');
@@ -25,11 +22,6 @@ const speedValue = document.getElementById('speed-value');
 countSlider.addEventListener('input', (e) => {
     count = parseFloat(e.target.value);
     countValue.textContent = count;
-});
-
-lineWidthSlider.addEventListener('input', (e) => {
-    lineWidth = parseFloat(e.target.value);
-    lineWidthValue.textContent = lineWidth.toFixed(2);
 });
 
 intensitySlider.addEventListener('input', (e) => {
@@ -52,7 +44,6 @@ t.setup(async () => {
 t.draw(() => {
     t.layers.base.filter('scanlines', {
         count: count,
-        lineWidth: lineWidth,
         intensity: intensity,
         speed: speed,
         time: t.secs
