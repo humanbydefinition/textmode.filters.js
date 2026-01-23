@@ -12,6 +12,7 @@ import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
 import vignetteFragmentShader from './shaders/vignette.frag?raw';
 import bloomFragmentShader from './shaders/bloom.frag?raw';
 import filmGrainFragmentShader from './shaders/filmGrain.frag?raw';
+import saturationFragmentShader from './shaders/saturation.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -29,6 +30,7 @@ import filmGrainFragmentShader from './shaders/filmGrain.frag?raw';
  * - `vignette` - Darkened edges/corners effect (amount, softness, roundness)
  * - `bloom` - Glow effect around bright areas (threshold, intensity, radius)
  * - `filmGrain` - Animated film grain/noise overlay (intensity, size, speed)
+ * - `saturation` - Adjust color intensity (amount: 0 = grayscale, 1 = normal, >1 = vivid)
  * 
  * @example
  * ```javascript
@@ -130,6 +132,11 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
             u_speed: ['speed', 1.0],
             u_time: ['time', 0.0]
         });
+
+        // Saturation filter
+        textmodifier.filters.register('saturation', saturationFragmentShader, {
+            u_amount: ['amount', 1.0]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -145,6 +152,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('vignette');
         textmodifier.filters.unregister('bloom');
         textmodifier.filters.unregister('filmGrain');
+        textmodifier.filters.unregister('saturation');
     },
 });
 

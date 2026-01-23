@@ -266,6 +266,18 @@ Adds an animated film grain/noise texture overlay to simulate vintage film stock
 
 ---
 
+### `saturation`
+
+Adjust color intensity without affecting luminance. Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
+
+**Parameters:**
+- `amount` - Saturation multiplier  
+  Default: `1.0` | Range: `0.0` (grayscale) - `∞` (vivid)
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
@@ -300,6 +312,10 @@ t.draw(() => {
   t.layers.base.filter('filmGrain', { intensity: 0.3, size: 2, speed: 1.0, time: time });
   time += 0.016;
 });
+
+// Saturation adjustments
+t.layers.base.filter('saturation', 0);    // Grayscale
+t.layers.base.filter('saturation', 1.5);  // Vivid colors
 ```
 
 ## Adding custom filters
