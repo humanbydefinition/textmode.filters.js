@@ -30,8 +30,6 @@
 npm install textmode.filters.js
 ```
 
-> **Note:** Make sure `textmode.js` is also installed in your project. This add-on declares it as a peer dependency.
-
 You can also use it via CDN:
 
 ```html
