@@ -17,7 +17,7 @@
     "dist"
   ],
   "scripts": {
-    "build": "vite build && tsc -p tsconfig.json",
+    "build": "tsc -p tsconfig.json && vite build",
     "dev": "vite --port 5179 --host",
     "format": "prettier --write \"src/**/*.{ts,js}\"",
     "format:check": "prettier --check \"src/**/*.{ts,js}\""
