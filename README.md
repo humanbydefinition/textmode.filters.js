@@ -248,6 +248,24 @@ Creates a glow effect around bright areas of the image. Pixels above the brightn
 
 ---
 
+### `filmGrain`
+
+Adds an animated film grain/noise texture overlay to simulate vintage film stock or analog video. The multi-layered noise creates an organic, moving grain pattern that's less visible in darker areas, mimicking real film characteristics.
+
+**Parameters:**
+- `intensity` - Strength of the grain effect  
+  Default: `0.2` | Range: `0.0` - `1.0`
+- `size` - Size of grain particles  
+  Default: `2.0` | Range: `1.0` - `10.0`
+- `speed` - Animation speed of the grain  
+  Default: `1.0` | Range: `0.0` - `∞`
+- `time` - Animation time parameter  
+  Default: `0.0`
+
+**Author:** [@humanbydefinition](https://github.com/humanbydefinition)
+
+---
+
 ### Usage examples
 
 ```javascript
@@ -275,6 +293,13 @@ t.layers.base.filter('vignette', { amount: 0.7, softness: 0.4, roundness: 1.0 })
 
 // Bloom for glowing bright areas
 t.layers.base.filter('bloom', { threshold: 0.6, intensity: 1.5, radius: 8 });
+
+// Film grain with animation
+let time = 0;
+t.draw(() => {
+  t.layers.base.filter('filmGrain', { intensity: 0.3, size: 2, speed: 1.0, time: time });
+  time += 0.016;
+});
 ```
 
 ## Adding custom filters

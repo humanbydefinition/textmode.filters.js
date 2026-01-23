@@ -11,6 +11,7 @@ import crtMattiasFragmentShader from './shaders/crtMattias.frag?raw';
 import scanlinesFragmentShader from './shaders/scanlines.frag?raw';
 import vignetteFragmentShader from './shaders/vignette.frag?raw';
 import bloomFragmentShader from './shaders/bloom.frag?raw';
+import filmGrainFragmentShader from './shaders/filmGrain.frag?raw';
 
 /**
  * Creates the `textmode.filters.js` plugin for textmode.js.
@@ -27,6 +28,7 @@ import bloomFragmentShader from './shaders/bloom.frag?raw';
  * - `scanlines` - Customizable scanlines effect (count, lineWidth, intensity, speed)
  * - `vignette` - Darkened edges/corners effect (amount, softness, roundness)
  * - `bloom` - Glow effect around bright areas (threshold, intensity, radius)
+ * - `filmGrain` - Animated film grain/noise overlay (intensity, size, speed)
  * 
  * @example
  * ```javascript
@@ -120,6 +122,14 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
             u_intensity: ['intensity', 1.0],
             u_radius: ['radius', 4.0]
         });
+
+        // Film grain filter
+        textmodifier.filters.register('filmGrain', filmGrainFragmentShader, {
+            u_intensity: ['intensity', 0.2],
+            u_size: ['size', 2.0],
+            u_speed: ['speed', 1.0],
+            u_time: ['time', 0.0]
+        });
     },
 
     async uninstall(textmodifier) {
@@ -134,6 +144,7 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
         textmodifier.filters.unregister('scanlines');
         textmodifier.filters.unregister('vignette');
         textmodifier.filters.unregister('bloom');
+        textmodifier.filters.unregister('filmGrain');
     },
 });
 
