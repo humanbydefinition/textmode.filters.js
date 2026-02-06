@@ -1,4 +1,80 @@
+/**
+ * @packageDocumentation
+ * 
+ * GPU-accelerated image filters plugin for textmode.js.
+ * 
+ * This plugin provides 14 customizable visual effects that run entirely on the GPU
+ * via WebGL2 fragment shaders for maximum performance.
+ * 
+ * ## Installation
+ * 
+ * ```bash
+ * npm install textmode.filters.js
+ * ```
+ * 
+ * ## Quick Start
+ * 
+ * ```javascript
+ * import { textmode } from 'textmode.js';
+ * import { createFiltersPlugin } from 'textmode.filters.js';
+ * 
+ * const t = textmode.create({
+ *   plugins: [createFiltersPlugin()]
+ * });
+ * 
+ * t.draw(() => {
+ *   t.layers.base.filter('brightness', 1.2);
+ *   t.layers.base.filter('bloom', { threshold: 0.5, intensity: 1.5, radius: 8 });
+ * });
+ * ```
+ * 
+ * ## Available Filters
+ * 
+ * ### Color Adjustment
+ * - {@link BrightnessOptions | brightness} - Adjust image brightness
+ * - {@link ContrastOptions | contrast} - Adjust image contrast  
+ * - {@link SaturationOptions | saturation} - Adjust color intensity
+ * - {@link HueRotateOptions | hueRotate} - Rotate colors around the color wheel
+ * - {@link PosterizeOptions | posterize} - Reduce color levels
+ * 
+ * ### Distortion
+ * - {@link ChromaticAberrationOptions | chromaticAberration} - RGB channel separation
+ * - {@link PixelateOptions | pixelate} - Pixelation/mosaic effect
+ * - {@link GridDistortionOptions | gridDistortion} - Custom grid warping
+ * 
+ * ### Stylization  
+ * - {@link GlitchOptions | glitch} - Digital glitch effect
+ * - {@link CrtMattiasOptions | crtMattias} - CRT monitor emulation
+ * - {@link ScanlinesOptions | scanlines} - Customizable scanlines
+ * - {@link VignetteOptions | vignette} - Darkened edges effect
+ * - {@link BloomOptions | bloom} - Glow around bright areas
+ * - {@link FilmGrainOptions | filmGrain} - Animated film grain overlay
+ * 
+ * @module textmode.filters.js
+ */
+
 import type { TextmodePlugin } from 'textmode.js/plugins';
+
+// Re-export all filter option types for consumers
+export type {
+	BrightnessOptions,
+	ContrastOptions,
+	SaturationOptions,
+	HueRotateOptions,
+	PosterizeOptions,
+	ChromaticAberrationOptions,
+	PixelateOptions,
+	GridDistortionOptions,
+	GlitchOptions,
+	CrtMattiasOptions,
+	ScanlinesOptions,
+	VignetteOptions,
+	BloomOptions,
+	FilmGrainOptions,
+	FilterOptions,
+	FilterOptionsMap,
+	FilterName,
+} from './types';
 
 import brightnessFragmentShader from './shaders/brightness.frag';
 import contrastFragmentShader from './shaders/contrast.frag';
