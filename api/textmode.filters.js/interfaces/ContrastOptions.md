@@ -1,6 +1,6 @@
 ---
 title: ContrastOptions
-description: Configuration options for the **contrast** filter.
+description: Configuration options for the 'contrast' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: ContrastOptions
 
-Configuration options for the **contrast** filter.
+Configuration options for the `'contrast'` filter.
 
 Adjusts image contrast by scaling pixel values around mid-gray.
 

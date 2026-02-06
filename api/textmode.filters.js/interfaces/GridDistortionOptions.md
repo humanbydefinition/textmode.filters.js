@@ -1,6 +1,6 @@
 ---
 title: GridDistortionOptions
-description: Configuration options for the **gridDistortion** filter.
+description: Configuration options for the 'gridDistortion' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: GridDistortionOptions
 
-Configuration options for the **gridDistortion** filter.
+Configuration options for the `'gridDistortion'` filter.
 
 Distorts a monospaced character grid by varying the width and height
 of individual cells. Create wave effects, perspective distortions,

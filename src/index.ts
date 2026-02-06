@@ -3,34 +3,12 @@
  * 
  * GPU-accelerated image filters plugin for textmode.js.
  * 
- * This plugin provides 14 customizable visual effects that run entirely on the GPU
+ * This plugin provides customizable visual effects that run entirely on the GPU
  * via WebGL2 fragment shaders for maximum performance.
  * 
- * ## Installation
+ * ## Available filters
  * 
- * ```bash
- * npm install textmode.filters.js
- * ```
- * 
- * ## Quick Start
- * 
- * ```javascript
- * import { textmode } from 'textmode.js';
- * import { FiltersPlugin } from 'textmode.filters.js';
- * 
- * const t = textmode.create({
- *   plugins: [FiltersPlugin]
- * });
- * 
- * t.draw(() => {
- *   t.layers.base.filter('brightness', 1.2);
- *   t.layers.base.filter('bloom', { threshold: 0.5, intensity: 1.5, radius: 8 });
- * });
- * ```
- * 
- * ## Available Filters
- * 
- * ### Color Adjustment
+ * ### Color adjustment
  * - {@link BrightnessOptions | brightness} - Adjust image brightness
  * - {@link ContrastOptions | contrast} - Adjust image contrast  
  * - {@link SaturationOptions | saturation} - Adjust color intensity
@@ -71,9 +49,6 @@ export type {
 	VignetteOptions,
 	BloomOptions,
 	FilmGrainOptions,
-	FilterOptions,
-	FilterOptionsMap,
-	FilterName,
 } from './types';
 
 import brightnessFragmentShader from './shaders/brightness.frag';
@@ -97,30 +72,8 @@ const defaultFactors = new Array(128).fill(0.5);
 /**
  * GPU-accelerated image filters plugin for textmode.js.
  *
- * Add this plugin to your textmode.js instance to enable 14 customizable
+ * Add this plugin to your textmode.js instance to enable additional customizable
  * visual effects that run entirely on the GPU via WebGL2 fragment shaders.
- *
- * ## Included Filters
- *
- * **Color Adjustment:**
- * - `brightness` - Adjust image brightness (amount: 1.0 = normal, >1 = brighter, <1 = darker)
- * - `contrast` - Adjust image contrast (amount: 1.0 = normal, >1 = more contrast, <1 = less)
- * - `saturation` - Adjust color intensity (amount: 0 = grayscale, 1 = normal, >1 = vivid)
- * - `hueRotate` - Rotate colors around the hue wheel (angle: 0-360 degrees)
- * - `posterize` - Reduce color levels (levels: number of color bands, default 4.0)
- *
- * **Distortion:**
- * - `chromaticAberration` - RGB channel separation effect (amount: offset in pixels)
- * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
- * - `gridDistortion` - Distort a monospaced grid with custom patterns
- *
- * **Stylization:**
- * - `glitch` - Digital glitch effect (amount: 0.0 = none, higher = more intense)
- * - `crtMattias` - CRT monitor emulation with curvature, scanlines, blur, and noise
- * - `scanlines` - Customizable scanlines effect (count, lineWidth, intensity, speed)
- * - `vignette` - Darkened edges/corners effect (amount, softness, roundness)
- * - `bloom` - Glow effect around bright areas (threshold, intensity, radius)
- * - `filmGrain` - Animated film grain/noise overlay (intensity, size, speed)
  *
  * @example
  * ```javascript
@@ -153,10 +106,6 @@ const defaultFactors = new Array(128).fill(0.5);
  *     frame++;
  * });
  * ```
- *
- * @see {@link BrightnessOptions} for brightness filter parameters
- * @see {@link BloomOptions} for bloom filter parameters
- * @see {@link GridDistortionOptions} for grid distortion parameters
  */
 export const FiltersPlugin: TextmodePlugin = {
 	name: 'textmode.filters',

@@ -1,6 +1,6 @@
 ---
 title: PosterizeOptions
-description: Configuration options for the **posterize** filter.
+description: Configuration options for the 'posterize' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: PosterizeOptions
 
-Configuration options for the **posterize** filter.
+Configuration options for the `'posterize'` filter.
 
 Reduces the color palette to a limited number of bands per channel,
 creating a retro quantized/poster-like look.

@@ -1,6 +1,6 @@
 ---
 title: FilmGrainOptions
-description: Configuration options for the **filmGrain** filter.
+description: Configuration options for the 'filmGrain' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: FilmGrainOptions
 
-Configuration options for the **filmGrain** filter.
+Configuration options for the `'filmGrain'` filter.
 
 Adds an animated film grain/noise texture overlay to simulate vintage
 film stock or analog video. The multi-layered noise creates an organic,

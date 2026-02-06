@@ -1,6 +1,6 @@
 ---
 title: CrtMattiasOptions
-description: Configuration options for the **crtMattias** filter.
+description: Configuration options for the 'crtMattias' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: CrtMattiasOptions
 
-Configuration options for the **crtMattias** filter.
+Configuration options for the `'crtMattias'` filter.
 
 CRT monitor emulation effect with screen curvature, animated scanlines,
 blur, vignette, and film grain noise. Based on Mattias Gustavsson's

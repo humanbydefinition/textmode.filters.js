@@ -1,6 +1,6 @@
 ---
 title: ScanlinesOptions
-description: Configuration options for the **scanlines** filter.
+description: Configuration options for the 'scanlines' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: ScanlinesOptions
 
-Configuration options for the **scanlines** filter.
+Configuration options for the `'scanlines'` filter.
 
 A standalone scanline effect that adds horizontal lines to the image
 to simulate a CRT display or old monitor. More customizable than

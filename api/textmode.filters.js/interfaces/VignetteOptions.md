@@ -1,6 +1,6 @@
 ---
 title: VignetteOptions
-description: Configuration options for the **vignette** filter.
+description: Configuration options for the 'vignette' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: VignetteOptions
 
-Configuration options for the **vignette** filter.
+Configuration options for the `'vignette'` filter.
 
 Darkens the edges and corners of the image, drawing focus to the center.
 Useful for creating a cinematic look or highlighting central content.

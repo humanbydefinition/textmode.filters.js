@@ -1,6 +1,6 @@
 ---
 title: BrightnessOptions
-description: Configuration options for the **brightness** filter.
+description: Configuration options for the 'brightness' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: BrightnessOptions
 
-Configuration options for the **brightness** filter.
+Configuration options for the `'brightness'` filter.
 
 Adjusts image brightness by multiplying pixel values.
 

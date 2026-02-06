@@ -1,6 +1,6 @@
 ---
 title: SaturationOptions
-description: Configuration options for the **saturation** filter.
+description: Configuration options for the 'saturation' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: SaturationOptions
 
-Configuration options for the **saturation** filter.
+Configuration options for the `'saturation'` filter.
 
 Adjusts color intensity without affecting luminance.
 Perfect for creating vivid, oversaturated looks or desaturating to grayscale.

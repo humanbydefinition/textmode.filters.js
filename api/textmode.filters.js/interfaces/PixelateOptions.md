@@ -1,6 +1,6 @@
 ---
 title: PixelateOptions
-description: Configuration options for the **pixelate** filter.
+description: Configuration options for the 'pixelate' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: PixelateOptions
 
-Configuration options for the **pixelate** filter.
+Configuration options for the `'pixelate'` filter.
 
 Reduces image resolution to create a mosaic/pixelated effect
 reminiscent of retro video games or censored content.

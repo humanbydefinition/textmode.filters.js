@@ -35,9 +35,9 @@
     "cleanOutputDir": true,
     "categorizeByGroup": true,
     "categoryOrder": [
-        "Color Adjustment Filters",
-        "Distortion Filters",
-        "Stylization Filters",
+        "Color adjustment filters",
+        "Distortion filters",
+        "Stylization filters",
         "Types",
         "*"
     ],

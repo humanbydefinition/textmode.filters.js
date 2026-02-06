@@ -1,6 +1,6 @@
 ---
 title: HueRotateOptions
-description: Configuration options for the **hueRotate** filter.
+description: Configuration options for the 'hueRotate' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: HueRotateOptions
 
-Configuration options for the **hueRotate** filter.
+Configuration options for the `'hueRotate'` filter.
 
 Shifts all colors around the color wheel by a specified angle.
 Useful for color grading or creating surreal color effects.

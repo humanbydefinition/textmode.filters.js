@@ -11,34 +11,12 @@ lastModified: 2026-02-06
 
 GPU-accelerated image filters plugin for textmode.js.
 
-This plugin provides 14 customizable visual effects that run entirely on the GPU
+This plugin provides customizable visual effects that run entirely on the GPU
 via WebGL2 fragment shaders for maximum performance.
 
-## Installation
+## Available filters
 
-```bash
-npm install textmode.filters.js
-```
-
-## Quick Start
-
-```javascript
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
-
-const t = textmode.create({
-  plugins: [FiltersPlugin]
-});
-
-t.draw(() => {
-  t.layers.base.filter('brightness', 1.2);
-  t.layers.base.filter('bloom', { threshold: 0.5, intensity: 1.5, radius: 8 });
-});
-```
-
-## Available Filters
-
-### Color Adjustment
+### Color adjustment
 - [brightness](interfaces/BrightnessOptions.md) - Adjust image brightness
 - [contrast](interfaces/ContrastOptions.md) - Adjust image contrast  
 - [saturation](interfaces/SaturationOptions.md) - Adjust color intensity
@@ -66,49 +44,34 @@ t.draw(() => {
 
 ## Interfaces
 
-### Color Adjustment Filters
+### Color adjustment filters
 
 | Interface | Description |
 | ------ | ------ |
-| [BrightnessOptions](interfaces/BrightnessOptions.md) | Configuration options for the **brightness** filter. |
-| [ContrastOptions](interfaces/ContrastOptions.md) | Configuration options for the **contrast** filter. |
-| [SaturationOptions](interfaces/SaturationOptions.md) | Configuration options for the **saturation** filter. |
-| [HueRotateOptions](interfaces/HueRotateOptions.md) | Configuration options for the **hueRotate** filter. |
-| [PosterizeOptions](interfaces/PosterizeOptions.md) | Configuration options for the **posterize** filter. |
+| [BrightnessOptions](interfaces/BrightnessOptions.md) | Configuration options for the `'brightness'` filter. |
+| [ContrastOptions](interfaces/ContrastOptions.md) | Configuration options for the `'contrast'` filter. |
+| [SaturationOptions](interfaces/SaturationOptions.md) | Configuration options for the `'saturation'` filter. |
+| [HueRotateOptions](interfaces/HueRotateOptions.md) | Configuration options for the `'hueRotate'` filter. |
+| [PosterizeOptions](interfaces/PosterizeOptions.md) | Configuration options for the `'posterize'` filter. |
 
-### Distortion Filters
-
-| Interface | Description |
-| ------ | ------ |
-| [ChromaticAberrationOptions](interfaces/ChromaticAberrationOptions.md) | Configuration options for the **chromaticAberration** filter. |
-| [PixelateOptions](interfaces/PixelateOptions.md) | Configuration options for the **pixelate** filter. |
-| [GridDistortionOptions](interfaces/GridDistortionOptions.md) | Configuration options for the **gridDistortion** filter. |
-
-### Stylization Filters
+### Distortion filters
 
 | Interface | Description |
 | ------ | ------ |
-| [GlitchOptions](interfaces/GlitchOptions.md) | Configuration options for the **glitch** filter. |
-| [CrtMattiasOptions](interfaces/CrtMattiasOptions.md) | Configuration options for the **crtMattias** filter. |
-| [ScanlinesOptions](interfaces/ScanlinesOptions.md) | Configuration options for the **scanlines** filter. |
-| [VignetteOptions](interfaces/VignetteOptions.md) | Configuration options for the **vignette** filter. |
-| [BloomOptions](interfaces/BloomOptions.md) | Configuration options for the **bloom** filter. |
-| [FilmGrainOptions](interfaces/FilmGrainOptions.md) | Configuration options for the **filmGrain** filter. |
+| [ChromaticAberrationOptions](interfaces/ChromaticAberrationOptions.md) | Configuration options for the `'chromaticAberration'` filter. |
+| [PixelateOptions](interfaces/PixelateOptions.md) | Configuration options for the `'pixelate'` filter. |
+| [GridDistortionOptions](interfaces/GridDistortionOptions.md) | Configuration options for the `'gridDistortion'` filter. |
 
-### Types
+### Stylization filters
 
 | Interface | Description |
 | ------ | ------ |
-| [FilterOptionsMap](interfaces/FilterOptionsMap.md) | Map of filter names to their corresponding option types. |
-
-## Type Aliases
-
-### Types
-
-| Type Alias | Description |
-| ------ | ------ |
-| [FilterOptions](type-aliases/FilterOptions.md) | Union type of all available filter option interfaces. |
-| [FilterName](type-aliases/FilterName.md) | Names of all available filters. |
+| [GlitchOptions](interfaces/GlitchOptions.md) | Configuration options for the `'glitch'` filter. |
+| [CrtMattiasOptions](interfaces/CrtMattiasOptions.md) | Configuration options for the `'crtMattias'` filter. |
+| [ScanlinesOptions](interfaces/ScanlinesOptions.md) | Configuration options for the `'scanlines'` filter. |
+| [VignetteOptions](interfaces/VignetteOptions.md) | Configuration options for the `'vignette'` filter. |
+| [BloomOptions](interfaces/BloomOptions.md) | Configuration options for the `'bloom'` filter. |
+| [FilmGrainOptions](interfaces/FilmGrainOptions.md) | Configuration options for the `'filmGrain'` filter. |
 
 ## Variables
 

@@ -1,6 +1,6 @@
 ---
 title: GlitchOptions
-description: Configuration options for the **glitch** filter.
+description: Configuration options for the 'glitch' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: GlitchOptions
 
-Configuration options for the **glitch** filter.
+Configuration options for the `'glitch'` filter.
 
 Digital glitch effect with RGB channel separation, scanlines, and noise.
 Creates a corrupted/broken digital signal aesthetic.

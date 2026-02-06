@@ -22,7 +22,7 @@
 // ============================================================================
 
 /**
- * Configuration options for the **brightness** filter.
+ * Configuration options for the `'brightness'` filter.
  *
  * Adjusts image brightness by multiplying pixel values.
  *
@@ -38,7 +38,7 @@
  * t.layers.base.filter('brightness', 0.7);
  * ```
  *
- * @category Color Adjustment Filters
+ * @category Color adjustment filters
  */
 export interface BrightnessOptions {
 	/**
@@ -59,7 +59,7 @@ export interface BrightnessOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **contrast** filter.
+ * Configuration options for the `'contrast'` filter.
  *
  * Adjusts image contrast by scaling pixel values around mid-gray.
  *
@@ -75,7 +75,7 @@ export interface BrightnessOptions {
  * t.layers.base.filter('contrast', 0.5);
  * ```
  *
- * @category Color Adjustment Filters
+ * @category Color adjustment filters
  */
 export interface ContrastOptions {
 	/**
@@ -96,7 +96,7 @@ export interface ContrastOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **saturation** filter.
+ * Configuration options for the `'saturation'` filter.
  *
  * Adjusts color intensity without affecting luminance.
  * Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
@@ -113,7 +113,7 @@ export interface ContrastOptions {
  * t.layers.base.filter('saturation', 0); // grayscale
  * ```
  *
- * @category Color Adjustment Filters
+ * @category Color adjustment filters
  */
 export interface SaturationOptions {
 	/**
@@ -133,7 +133,7 @@ export interface SaturationOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **hueRotate** filter.
+ * Configuration options for the `'hueRotate'` filter.
  *
  * Shifts all colors around the color wheel by a specified angle.
  * Useful for color grading or creating surreal color effects.
@@ -154,7 +154,7 @@ export interface SaturationOptions {
  * });
  * ```
  *
- * @category Color Adjustment Filters
+ * @category Color adjustment filters
  */
 export interface HueRotateOptions {
 	/**
@@ -176,7 +176,7 @@ export interface HueRotateOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **posterize** filter.
+ * Configuration options for the `'posterize'` filter.
  *
  * Reduces the color palette to a limited number of bands per channel,
  * creating a retro quantized/poster-like look.
@@ -193,7 +193,7 @@ export interface HueRotateOptions {
  * t.layers.base.filter('posterize', 2);
  * ```
  *
- * @category Color Adjustment Filters
+ * @category Color adjustment filters
  */
 export interface PosterizeOptions {
 	/**
@@ -216,7 +216,7 @@ export interface PosterizeOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **chromaticAberration** filter.
+ * Configuration options for the `'chromaticAberration'` filter.
  *
  * RGB color channel separation effect that simulates lens distortion
  * found in cheap cameras or creates stylized glitch aesthetics.
@@ -239,7 +239,7 @@ export interface PosterizeOptions {
  * t.layers.base.filter('chromaticAberration', 8);
  * ```
  *
- * @category Distortion Filters
+ * @category Distortion filters
  */
 export interface ChromaticAberrationOptions {
 	/**
@@ -270,7 +270,7 @@ export interface ChromaticAberrationOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **pixelate** filter.
+ * Configuration options for the `'pixelate'` filter.
  *
  * Reduces image resolution to create a mosaic/pixelated effect
  * reminiscent of retro video games or censored content.
@@ -287,7 +287,7 @@ export interface ChromaticAberrationOptions {
  * t.layers.base.filter('pixelate', 2);
  * ```
  *
- * @category Distortion Filters
+ * @category Distortion filters
  */
 export interface PixelateOptions {
 	/**
@@ -307,7 +307,7 @@ export interface PixelateOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **gridDistortion** filter.
+ * Configuration options for the `'gridDistortion'` filter.
  *
  * Distorts a monospaced character grid by varying the width and height
  * of individual cells. Create wave effects, perspective distortions,
@@ -340,7 +340,7 @@ export interface PixelateOptions {
  * });
  * ```
  *
- * @category Distortion Filters
+ * @category Distortion filters
  */
 export interface GridDistortionOptions {
 	/**
@@ -423,7 +423,7 @@ export interface GridDistortionOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **glitch** filter.
+ * Configuration options for the `'glitch'` filter.
  *
  * Digital glitch effect with RGB channel separation, scanlines, and noise.
  * Creates a corrupted/broken digital signal aesthetic.
@@ -443,7 +443,7 @@ export interface GridDistortionOptions {
  * });
  * ```
  *
- * @category Stylization Filters
+ * @category Stylization filters
  */
 export interface GlitchOptions {
 	/**
@@ -463,7 +463,7 @@ export interface GlitchOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **crtMattias** filter.
+ * Configuration options for the `'crtMattias'` filter.
  *
  * CRT monitor emulation effect with screen curvature, animated scanlines,
  * blur, vignette, and film grain noise. Based on Mattias Gustavsson's
@@ -488,7 +488,7 @@ export interface GlitchOptions {
  *
  * @see {@link https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl | Original shader by Mattias Gustavsson}
  *
- * @category Stylization Filters
+ * @category Stylization filters
  */
 export interface CrtMattiasOptions {
 	/**
@@ -527,7 +527,7 @@ export interface CrtMattiasOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **scanlines** filter.
+ * Configuration options for the `'scanlines'` filter.
  *
  * A standalone scanline effect that adds horizontal lines to the image
  * to simulate a CRT display or old monitor. More customizable than
@@ -558,7 +558,7 @@ export interface CrtMattiasOptions {
  * });
  * ```
  *
- * @category Stylization Filters
+ * @category Stylization filters
  */
 export interface ScanlinesOptions {
 	/**
@@ -620,7 +620,7 @@ export interface ScanlinesOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **vignette** filter.
+ * Configuration options for the `'vignette'` filter.
  *
  * Darkens the edges and corners of the image, drawing focus to the center.
  * Useful for creating a cinematic look or highlighting central content.
@@ -649,7 +649,7 @@ export interface ScanlinesOptions {
  * });
  * ```
  *
- * @category Stylization Filters
+ * @category Stylization filters
  */
 export interface VignetteOptions {
 	/**
@@ -691,7 +691,7 @@ export interface VignetteOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **bloom** filter.
+ * Configuration options for the `'bloom'` filter.
  *
  * Creates a glow effect around bright areas of the image. Pixels above
  * the brightness threshold emit a soft glow that spreads outward.
@@ -721,7 +721,7 @@ export interface VignetteOptions {
  * });
  * ```
  *
- * @category Stylization Filters
+ * @category Stylization filters
  */
 export interface BloomOptions {
 	/**
@@ -765,7 +765,7 @@ export interface BloomOptions {
 // ============================================================================
 
 /**
- * Configuration options for the **filmGrain** filter.
+ * Configuration options for the `'filmGrain'` filter.
  *
  * Adds an animated film grain/noise texture overlay to simulate vintage
  * film stock or analog video. The multi-layered noise creates an organic,
@@ -795,7 +795,7 @@ export interface BloomOptions {
  * });
  * ```
  *
- * @category Stylization Filters
+ * @category Stylization filters
  */
 export interface FilmGrainOptions {
 	/**
@@ -840,59 +840,3 @@ export interface FilmGrainOptions {
 	 */
 	time: number;
 }
-
-// ============================================================================
-// UNION TYPE FOR ALL FILTER OPTIONS
-// ============================================================================
-
-/**
- * Union type of all available filter option interfaces.
- *
- * Useful for type-safe filter handling when the filter name is dynamic.
- *
- * @category Types
- */
-export type FilterOptions =
-	| BrightnessOptions
-	| ContrastOptions
-	| SaturationOptions
-	| HueRotateOptions
-	| PosterizeOptions
-	| ChromaticAberrationOptions
-	| PixelateOptions
-	| GridDistortionOptions
-	| GlitchOptions
-	| CrtMattiasOptions
-	| ScanlinesOptions
-	| VignetteOptions
-	| BloomOptions
-	| FilmGrainOptions;
-
-/**
- * Map of filter names to their corresponding option types.
- *
- * @category Types
- */
-export interface FilterOptionsMap {
-	brightness: BrightnessOptions;
-	contrast: ContrastOptions;
-	saturation: SaturationOptions;
-	hueRotate: HueRotateOptions;
-	posterize: PosterizeOptions;
-	chromaticAberration: ChromaticAberrationOptions;
-	pixelate: PixelateOptions;
-	gridDistortion: GridDistortionOptions;
-	glitch: GlitchOptions;
-	crtMattias: CrtMattiasOptions;
-	scanlines: ScanlinesOptions;
-	vignette: VignetteOptions;
-	bloom: BloomOptions;
-	filmGrain: FilmGrainOptions;
-}
-
-/**
- * Names of all available filters.
- *
- * @category Types
- */
-export type FilterName = keyof FilterOptionsMap;

@@ -1,6 +1,6 @@
 ---
 title: BloomOptions
-description: Configuration options for the **bloom** filter.
+description: Configuration options for the 'bloom' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: BloomOptions
 
-Configuration options for the **bloom** filter.
+Configuration options for the `'bloom'` filter.
 
 Creates a glow effect around bright areas of the image. Pixels above
 the brightness threshold emit a soft glow that spreads outward.

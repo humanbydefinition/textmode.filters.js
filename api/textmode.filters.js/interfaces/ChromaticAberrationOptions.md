@@ -1,6 +1,6 @@
 ---
 title: ChromaticAberrationOptions
-description: Configuration options for the **chromaticAberration** filter.
+description: Configuration options for the 'chromaticAberration' filter.
 category: Interfaces
 api: true
 kind: Interface
@@ -12,7 +12,7 @@ isInterface: true
 
 # Interface: ChromaticAberrationOptions
 
-Configuration options for the **chromaticAberration** filter.
+Configuration options for the `'chromaticAberration'` filter.
 
 RGB color channel separation effect that simulates lens distortion
 found in cheap cameras or creates stylized glitch aesthetics.
