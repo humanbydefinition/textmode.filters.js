@@ -109,7 +109,7 @@ const defaultFactors = new Array(128).fill(0.5);
  */
 export const FiltersPlugin: TextmodePlugin = {
 	name: 'textmode.filters',
-	version: '1.0.0',
+	version: '1.1.1',
 
 	async install(textmodifier) {
 		textmodifier.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0] });
