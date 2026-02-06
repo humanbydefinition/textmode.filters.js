@@ -1,0 +1,53 @@
+{
+    "entryPoints": [
+        "src/index.ts"
+    ],
+    "out": "api/textmode.filters.js",
+    "readme": "none",
+    "excludePrivate": true,
+    "excludeProtected": true,
+    "excludeExternals": false,
+    "includeVersion": false,
+    "disableSources": true,
+    "useCodeBlocks": true,
+    "tsconfig": "tsconfig.json",
+    "exclude": [
+        "**/node_modules/**"
+    ],
+    "sort": [
+        "source-order"
+    ],
+    "logLevel": "Verbose",
+    "plugin": [
+        "typedoc-plugin-markdown",
+        "typedoc-plugin-frontmatter",
+        "typedoc-vitepress-theme",
+        "./typedoc-plugins/custom-frontmatter.js"
+    ],
+    "preserveFrontmatterCommentTags": false,
+    "frontmatterNamingConvention": "camelCase",
+    "indexFormat": "table",
+    "parametersFormat": "table",
+    "interfacePropertiesFormat": "table",
+    "enumMembersFormat": "table",
+    "propertyMembersFormat": "table",
+    "typeDeclarationFormat": "table",
+    "cleanOutputDir": true,
+    "categorizeByGroup": true,
+    "categoryOrder": [
+        "Color Adjustment Filters",
+        "Distortion Filters",
+        "Stylization Filters",
+        "Types",
+        "*"
+    ],
+    "groupOrder": [
+        "Functions",
+        "Interfaces",
+        "Type Aliases",
+        "*"
+    ],
+    "navigationLinks": {
+        "GitHub": "https://github.com/humanbydefinition/textmode.filters.js"
+    }
+}
