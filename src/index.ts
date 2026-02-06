@@ -1,33 +1,33 @@
 /**
  * @packageDocumentation
- * 
+ *
  * GPU-accelerated image filters plugin for textmode.js.
- * 
+ *
  * This plugin provides customizable visual effects that run entirely on the GPU
  * via WebGL2 fragment shaders for maximum performance.
- * 
+ *
  * ## Available filters
- * 
+ *
  * ### Color adjustment
  * - {@link BrightnessOptions | brightness} - Adjust image brightness
- * - {@link ContrastOptions | contrast} - Adjust image contrast  
+ * - {@link ContrastOptions | contrast} - Adjust image contrast
  * - {@link SaturationOptions | saturation} - Adjust color intensity
  * - {@link HueRotateOptions | hueRotate} - Rotate colors around the color wheel
  * - {@link PosterizeOptions | posterize} - Reduce color levels
- * 
+ *
  * ### Distortion
  * - {@link ChromaticAberrationOptions | chromaticAberration} - RGB channel separation
  * - {@link PixelateOptions | pixelate} - Pixelation/mosaic effect
  * - {@link GridDistortionOptions | gridDistortion} - Custom grid warping
- * 
- * ### Stylization  
+ *
+ * ### Stylization
  * - {@link GlitchOptions | glitch} - Digital glitch effect
  * - {@link CrtMattiasOptions | crtMattias} - CRT monitor emulation
  * - {@link ScanlinesOptions | scanlines} - Customizable scanlines
  * - {@link VignetteOptions | vignette} - Darkened edges effect
  * - {@link BloomOptions | bloom} - Glow around bright areas
  * - {@link FilmGrainOptions | filmGrain} - Animated film grain overlay
- * 
+ *
  * @module textmode.filters.js
  */
 
