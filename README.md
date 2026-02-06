@@ -48,12 +48,12 @@ You can also use it via CDN:
 
 ```javascript
 import { textmode } from 'textmode.js';
-import { createFiltersPlugin } from 'textmode.filters.js';
+import { FiltersPlugin } from 'textmode.filters.js';
 
 const t = textmode.create({
   width: 800,
   height: 600,
-  plugins: [createFiltersPlugin()],
+  plugins: [FiltersPlugin],
 });
 
 t.draw(() => {
@@ -73,7 +73,7 @@ t.draw(() => {
 <script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
 <script>
   const t = textmode.create({
-    plugins: [createFiltersPlugin()],
+    plugins: [FiltersPlugin],
   });
 
   t.draw(() => {
