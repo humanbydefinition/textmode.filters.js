@@ -19,14 +19,36 @@ Adjusts image brightness by multiplying pixel values.
 ## Example
 
 ```javascript
-// Increase brightness by 50%
-t.layers.base.filter('brightness', { amount: 1.5 });
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-// Shorthand: same as above
-t.layers.base.filter('brightness', 1.5);
+let video;
 
-// Darken the image
-t.layers.base.filter('brightness', 0.7);
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('brightness', {
+    amount: 1 + wobble * 0.25,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ## Properties

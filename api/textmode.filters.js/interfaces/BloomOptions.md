@@ -21,25 +21,37 @@ Perfect for creating neon, glowing text, or dreamy effects.
 ## Example
 
 ```javascript
-// Subtle bloom
-t.layers.base.filter('bloom', {
-  threshold: 0.7,
-  intensity: 0.8,
-  radius: 4
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
 });
 
-// Intense neon glow
-t.layers.base.filter('bloom', {
-  threshold: 0.3,
-  intensity: 2.0,
-  radius: 12
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
 });
 
-// Dreamy soft glow
-t.layers.base.filter('bloom', {
-  threshold: 0.5,
-  intensity: 1.5,
-  radius: 8
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('bloom', {
+    threshold: 0.5,
+    intensity: 1.2 + wobble * 0.5,
+    radius: 6 + wobble * 2,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

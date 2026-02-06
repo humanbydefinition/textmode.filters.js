@@ -24,25 +24,43 @@ you to create dynamic text distortion effects.
 ## Example
 
 ```javascript
-// Create a sine wave distortion
-const widthFactors = [];
-const heightFactors = [];
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-for (let i = 0; i < 80; i++) {
-  widthFactors.push((Math.sin(i * 0.1 + frame * 0.05) + 1) / 2);
-}
-for (let j = 0; j < 40; j++) {
-  heightFactors.push((Math.sin(j * 0.15 + frame * 0.03) + 1) / 2);
-}
+let video;
 
-t.layers.base.filter('gridDistortion', {
-  gridCellDimensions: [80, 40],
-  gridPixelDimensions: [t.grid.cols * t.grid.cellWidth, t.grid.rows * t.grid.cellHeight],
-  gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
-  widthFactors,
-  heightFactors,
-  widthVariationScale: 0.5,
-  heightVariationScale: 0.5
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  const widthFactors = Array.from({ length: t.grid.cols }, (_, i) => (Math.sin(i * 0.18 + t.frameCount * 0.04) + 1) * 0.5);
+  const heightFactors = Array.from({ length: t.grid.rows }, (_, i) => (Math.sin(i * 0.24 + t.secs * 1.5) + 1) * 0.5);
+  t.layers.base.filter('gridDistortion', {
+    gridCellDimensions: [t.grid.cols, t.grid.rows],
+    gridPixelDimensions: [t.grid.width, t.grid.height],
+    gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
+    widthFactors,
+    heightFactors,
+    widthVariationScale: 0.35 + wobble * 0.15,
+    heightVariationScale: 0.35 + wobble * 0.15,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

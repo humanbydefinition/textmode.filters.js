@@ -20,16 +20,35 @@ Creates a corrupted/broken digital signal aesthetic.
 ## Example
 
 ```javascript
-// Subtle glitch
-t.layers.base.filter('glitch', { amount: 0.5 });
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-// Intense glitch
-t.layers.base.filter('glitch', 2.0);
+let video;
 
-// Animate glitch intensity
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
 t.draw(() => {
-  const glitchAmount = Math.random() > 0.9 ? Math.random() * 3 : 0.1;
-  t.layers.base.filter('glitch', glitchAmount);
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('glitch', {
+    amount: Math.max(0, 0.2 + wobble * 0.8),
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

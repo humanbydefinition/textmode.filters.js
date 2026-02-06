@@ -20,20 +20,37 @@ found in cheap cameras or creates stylized glitch aesthetics.
 ## Example
 
 ```javascript
-// Horizontal aberration
-t.layers.base.filter('chromaticAberration', {
-  amount: 10,
-  direction: [1, 0]
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
 });
 
-// Diagonal aberration
-t.layers.base.filter('chromaticAberration', {
-  amount: 5,
-  direction: [1, 1]
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
 });
 
-// Shorthand (horizontal only)
-t.layers.base.filter('chromaticAberration', 8);
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('chromaticAberration', {
+    amount: 6 + wobble * 4,
+    direction: [Math.sin(t.secs), Math.cos(t.secs)],
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ## Properties

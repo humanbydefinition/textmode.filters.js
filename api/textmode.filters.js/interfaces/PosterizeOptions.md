@@ -20,14 +20,36 @@ creating a retro quantized/poster-like look.
 ## Example
 
 ```javascript
-// Strong posterization (4 levels)
-t.layers.base.filter('posterize', { levels: 4 });
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-// Shorthand syntax
-t.layers.base.filter('posterize', 8);
+let video;
 
-// Extreme posterization (2 levels = high contrast)
-t.layers.base.filter('posterize', 2);
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('posterize', {
+    levels: Math.max(2, Math.round(5 + wobble * 3)),
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ## Properties

@@ -22,24 +22,38 @@ real film characteristics.
 ## Example
 
 ```javascript
-// Subtle film grain
-let time = 0;
-t.draw(() => {
-  t.layers.base.filter('filmGrain', {
-    intensity: 0.15,
-    size: 1.5,
-    speed: 1.0,
-    time: time
-  });
-  time += 0.016;
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
 });
 
-// Heavy vintage film look
-t.layers.base.filter('filmGrain', {
-  intensity: 0.4,
-  size: 3.0,
-  speed: 2.0,
-  time: time
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('filmGrain', {
+    intensity: 0.2 + wobble * 0.1,
+    size: 2 + wobble * 0.5,
+    speed: 1 + wobble * 0.2,
+    time: t.secs,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

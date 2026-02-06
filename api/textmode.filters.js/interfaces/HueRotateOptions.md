@@ -20,17 +20,36 @@ Useful for color grading or creating surreal color effects.
 ## Example
 
 ```javascript
-// Rotate hue by 180 degrees (complementary colors)
-t.layers.base.filter('hueRotate', { angle: 180 });
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-// Shorthand syntax
-t.layers.base.filter('hueRotate', 90);
+let video;
 
-// Animate hue rotation
-let frame = 0;
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
 t.draw(() => {
-  t.layers.base.filter('hueRotate', frame % 360);
-  frame++;
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  const hue = (t.frameCount * 2 + wobble * 45) % 360;
+  t.layers.base.filter('hueRotate', {
+    angle: hue,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

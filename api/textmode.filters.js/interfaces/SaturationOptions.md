@@ -20,14 +20,36 @@ Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
 ## Example
 
 ```javascript
-// Convert to grayscale
-t.layers.base.filter('saturation', { amount: 0 });
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-// Vivid colors
-t.layers.base.filter('saturation', 1.5);
+let video;
 
-// Shorthand syntax
-t.layers.base.filter('saturation', 0); // grayscale
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('saturation', {
+    amount: 1 + wobble * 0.45,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ## Properties

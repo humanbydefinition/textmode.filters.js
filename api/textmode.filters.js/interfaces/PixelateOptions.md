@@ -20,14 +20,36 @@ reminiscent of retro video games or censored content.
 ## Example
 
 ```javascript
-// Large pixels
-t.layers.base.filter('pixelate', { pixelSize: 16 });
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
+});
 
-// Shorthand syntax
-t.layers.base.filter('pixelate', 8);
+let video;
 
-// Subtle pixelation
-t.layers.base.filter('pixelate', 2);
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('pixelate', {
+    pixelSize: 6 + wobble * 3,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ## Properties

@@ -21,19 +21,38 @@ classic CRT shader.
 ## Example
 
 ```javascript
-// Classic CRT look
-let time = 0;
-t.draw(() => {
-  t.layers.base.filter('crtMattias', {
-    curvature: 0.5,
-    scanSpeed: 1.0,
-    time: time
-  });
-  time += 0.016;
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
 });
 
-// Flat CRT (no curvature)
-t.layers.base.filter('crtMattias', { curvature: 0, time: time });
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('crtMattias', {
+    curvature: 0.45 + wobble * 0.1,
+    scanSpeed: 1 + wobble * 0.25,
+    time: t.secs,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
+});
 ```
 
 ## See

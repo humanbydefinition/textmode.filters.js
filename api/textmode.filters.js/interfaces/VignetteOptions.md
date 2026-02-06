@@ -20,25 +20,37 @@ Useful for creating a cinematic look or highlighting central content.
 ## Example
 
 ```javascript
-// Subtle vignette
-t.layers.base.filter('vignette', {
-  amount: 0.3,
-  softness: 0.7,
-  roundness: 0.5
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
 });
 
-// Strong circular vignette
-t.layers.base.filter('vignette', {
-  amount: 0.8,
-  softness: 0.3,
-  roundness: 1.0
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
 });
 
-// Rectangular vignette (letterbox effect)
-t.layers.base.filter('vignette', {
-  amount: 0.6,
-  softness: 0.2,
-  roundness: 0.0
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('vignette', {
+    amount: 0.5 + wobble * 0.2,
+    softness: 0.5,
+    roundness: 0.5 + wobble * 0.15,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 

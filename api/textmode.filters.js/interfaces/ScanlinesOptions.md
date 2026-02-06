@@ -21,26 +21,39 @@ the scanlines in crtMattias.
 ## Example
 
 ```javascript
-// Classic scanlines
-let time = 0;
-t.draw(() => {
-  t.layers.base.filter('scanlines', {
-    count: 300,
-    lineWidth: 0.5,
-    intensity: 0.75,
-    speed: 1.0,
-    time: time
-  });
-  time += 0.016;
+const t = textmode.create({
+  width: window.innerWidth,
+  height: window.innerHeight,
+  plugins: [FiltersPlugin],
 });
 
-// Thick, slow-moving lines
-t.layers.base.filter('scanlines', {
-  count: 50,
-  lineWidth: 0.8,
-  intensity: 0.5,
-  speed: 0.2,
-  time: time
+let video;
+
+t.setup(async () => {
+  video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+  video.play();
+  video.loop();
+  video.characters(' .:-=+*#%@');
+});
+
+t.draw(() => {
+  t.background(0);
+  if (video) {
+    t.image(video, t.grid.cols, t.grid.rows);
+  }
+
+  const wobble = Math.sin(t.secs * 2);
+  t.layers.base.filter('scanlines', {
+    count: 256,
+    lineWidth: 0.5,
+    intensity: 0.7 + wobble * 0.1,
+    speed: 1 + wobble * 0.15,
+    time: t.secs,
+  });
+});
+
+t.windowResized(() => {
+  t.resizeCanvas(window.innerWidth, window.innerHeight);
 });
 ```
 
