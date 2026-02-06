@@ -1,10 +1,10 @@
 import { textmode } from 'textmode.js';
-import { createFiltersPlugin } from 'textmode.filters.js';
+import { FiltersPlugin } from 'textmode.filters.js';
 
 const t = textmode.create({
     canvas: document.getElementById('textmode-canvas'),
     fontSize: 8,
-    plugins: [createFiltersPlugin()],
+    plugins: [FiltersPlugin],
 });
 
 let video;

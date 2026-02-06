@@ -1,4 +1,55 @@
+/**
+ * @packageDocumentation
+ *
+ * GPU-accelerated image filters plugin for textmode.js.
+ *
+ * This plugin provides customizable visual effects that run entirely on the GPU
+ * via WebGL2 fragment shaders for maximum performance.
+ *
+ * ## Available filters
+ *
+ * ### Color adjustment
+ * - {@link BrightnessOptions | brightness} - Adjust image brightness
+ * - {@link ContrastOptions | contrast} - Adjust image contrast
+ * - {@link SaturationOptions | saturation} - Adjust color intensity
+ * - {@link HueRotateOptions | hueRotate} - Rotate colors around the color wheel
+ * - {@link PosterizeOptions | posterize} - Reduce color levels
+ *
+ * ### Distortion
+ * - {@link ChromaticAberrationOptions | chromaticAberration} - RGB channel separation
+ * - {@link PixelateOptions | pixelate} - Pixelation/mosaic effect
+ * - {@link GridDistortionOptions | gridDistortion} - Custom grid warping
+ *
+ * ### Stylization
+ * - {@link GlitchOptions | glitch} - Digital glitch effect
+ * - {@link CrtMattiasOptions | crtMattias} - CRT monitor emulation
+ * - {@link ScanlinesOptions | scanlines} - Customizable scanlines
+ * - {@link VignetteOptions | vignette} - Darkened edges effect
+ * - {@link BloomOptions | bloom} - Glow around bright areas
+ * - {@link FilmGrainOptions | filmGrain} - Animated film grain overlay
+ *
+ * @module textmode.filters.js
+ */
+
 import type { TextmodePlugin } from 'textmode.js/plugins';
+
+// Re-export all filter option types for consumers
+export type {
+	BrightnessOptions,
+	ContrastOptions,
+	SaturationOptions,
+	HueRotateOptions,
+	PosterizeOptions,
+	ChromaticAberrationOptions,
+	PixelateOptions,
+	GridDistortionOptions,
+	GlitchOptions,
+	CrtMattiasOptions,
+	ScanlinesOptions,
+	VignetteOptions,
+	BloomOptions,
+	FilmGrainOptions,
+} from './types';
 
 import brightnessFragmentShader from './shaders/brightness.frag';
 import contrastFragmentShader from './shaders/contrast.frag';
@@ -15,67 +66,50 @@ import filmGrainFragmentShader from './shaders/filmGrain.frag';
 import saturationFragmentShader from './shaders/saturation.frag';
 import posterizeFragmentShader from './shaders/posterize.frag';
 
+// Default factors array for grid distortion (128 elements)
+const defaultFactors = new Array(128).fill(0.5);
+
 /**
- * Creates the `textmode.filters.js` plugin for textmode.js.
+ * GPU-accelerated image filters plugin for textmode.js.
  *
- * Included filters:
- * - `brightness` - Adjust image brightness (amount: 1.0 = normal, >1 = brighter, <1 = darker)
- * - `contrast` - Adjust image contrast (amount: 1.0 = normal, >1 = more contrast, <1 = less)
- * - `hueRotate` - Rotate colors around the hue wheel (angle: 0-360 degrees)
- * - `glitch` - Digital glitch effect (amount: 0.0 = none, higher values = more intense)
- * - `chromaticAberration` - RGB channel separation effect (amount: offset in pixels, direction: vec2 for offset direction)
- * - `pixelate` - Pixelation effect (pixelSize: size of pixels in pixels)
- * - `gridDistortion` - Distort a monospaced grid with custom patterns (widthFactors/heightFactors: arrays of values 0-1)
- * - `crtMattias` - CRT monitor emulation with curvature, scanlines, blur, and noise (by Mattias)
- * - `scanlines` - Customizable scanlines effect (count, lineWidth, intensity, speed)
- * - `vignette` - Darkened edges/corners effect (amount, softness, roundness)
- * - `bloom` - Glow effect around bright areas (threshold, intensity, radius)
- * - `filmGrain` - Animated film grain/noise overlay (intensity, size, speed)
- * - `saturation` - Adjust color intensity (amount: 0 = grayscale, 1 = normal, >1 = vivid)
- * - `posterize` - Reduce color levels (levels: number of color bands, default 4.0)
+ * Add this plugin to your textmode.js instance to enable additional customizable
+ * visual effects that run entirely on the GPU via WebGL2 fragment shaders.
  *
  * @example
  * ```javascript
  * import { textmode } from 'textmode.js';
- * import { createFiltersPlugin } from 'textmode.filters.js';
+ * import { FiltersPlugin } from 'textmode.filters.js';
  *
  * const t = textmode.create({
- *     plugins: [createFiltersPlugin()]
+ *     plugins: [FiltersPlugin]
  * });
  *
  * let frame = 0;
  * t.draw(() => {
+ *     // Simple filter with shorthand value
  *     t.layers.base.filter('brightness', 1.2);
  *
- *     // Grid distortion with custom sine wave pattern
- *     const widthFactors = [];
- *     const heightFactors = [];
- *     for (let i = 0; i < 80; i++) {
- *         widthFactors.push((Math.sin(i * 0.1 + frame * 0.05) + 1) / 2);
- *     }
- *     for (let j = 0; j < 40; j++) {
- *         heightFactors.push((Math.sin(j * 0.15 + frame * 0.03) + 1) / 2);
- *     }
- *     t.layers.base.filter('gridDistortion', {
- *       gridCellDimensions: [80, 40],
- *       gridPixelDimensions: [t.grid.cols * t.grid.cellWidth, t.grid.rows * t.grid.cellHeight],
- *       gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
- *       widthFactors,
- *       heightFactors,
- *       widthVariationScale: 0.5,
- *       heightVariationScale: 0.5
+ *     // Filter with options object
+ *     t.layers.base.filter('bloom', {
+ *         threshold: 0.5,
+ *         intensity: 1.5,
+ *         radius: 8
+ *     });
+ *
+ *     // Animated filter
+ *     t.layers.base.filter('filmGrain', {
+ *         intensity: 0.2,
+ *         time: frame * 0.016
  *     });
  *
  *     t.background(0);
  *     frame++;
  * });
  * ```
- *
- * @returns A textmode.js plugin instance.
  */
-export const createFiltersPlugin = (): TextmodePlugin => ({
+export const FiltersPlugin: TextmodePlugin = {
 	name: 'textmode.filters',
-	version: '1.0.0',
+	version: '1.1.1',
 
 	async install(textmodifier) {
 		textmodifier.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0] });
@@ -88,8 +122,6 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 		});
 		textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0] });
 
-		// Grid distortion with default empty arrays (128 elements)
-		const defaultFactors = new Array(128).fill(0.5);
 		textmodifier.filters.register('gridDistortion', gridDistortionFragmentShader, {
 			u_gridCellDimensions: ['gridCellDimensions', [80.0, 40.0]],
 			u_gridPixelDimensions: ['gridPixelDimensions', [640.0, 320.0]],
@@ -100,14 +132,12 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 			u_heightVariationScale: ['heightVariationScale', 0.5],
 		});
 
-		// CRT Mattias filter
 		textmodifier.filters.register('crtMattias', crtMattiasFragmentShader, {
 			u_curvature: ['curvature', 0.5],
 			u_scanSpeed: ['scanSpeed', 1.0],
 			u_time: ['time', 0.0],
 		});
 
-		// Scanlines filter
 		textmodifier.filters.register('scanlines', scanlinesFragmentShader, {
 			u_count: ['count', 300.0],
 			u_lineWidth: ['lineWidth', 0.5],
@@ -116,21 +146,18 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 			u_time: ['time', 0.0],
 		});
 
-		// Vignette filter
 		textmodifier.filters.register('vignette', vignetteFragmentShader, {
 			u_amount: ['amount', 0.5],
 			u_softness: ['softness', 0.5],
 			u_roundness: ['roundness', 0.5],
 		});
 
-		// Bloom filter
 		textmodifier.filters.register('bloom', bloomFragmentShader, {
 			u_threshold: ['threshold', 0.5],
 			u_intensity: ['intensity', 1.0],
 			u_radius: ['radius', 4.0],
 		});
 
-		// Film grain filter
 		textmodifier.filters.register('filmGrain', filmGrainFragmentShader, {
 			u_intensity: ['intensity', 0.2],
 			u_size: ['size', 2.0],
@@ -138,12 +165,10 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 			u_time: ['time', 0.0],
 		});
 
-		// Saturation filter
 		textmodifier.filters.register('saturation', saturationFragmentShader, {
 			u_amount: ['amount', 1.0],
 		});
 
-		// Posterize filter
 		textmodifier.filters.register('posterize', posterizeFragmentShader, {
 			u_levels: ['levels', 4.0],
 		});
@@ -165,9 +190,32 @@ export const createFiltersPlugin = (): TextmodePlugin => ({
 		textmodifier.filters.unregister('saturation');
 		textmodifier.filters.unregister('posterize');
 	},
-});
+};
+
+/**
+ * Creates the `textmode.filters.js` plugin for textmode.js.
+ *
+ * @deprecated Use {@link FiltersPlugin} directly instead.
+ * This function is provided for backwards compatibility only.
+ *
+ * @example
+ * ```javascript
+ * // Old way (deprecated)
+ * import { createFiltersPlugin } from 'textmode.filters.js';
+ * const t = textmode.create({ plugins: [createFiltersPlugin()] });
+ *
+ * // New way (recommended)
+ * import { FiltersPlugin } from 'textmode.filters.js';
+ * const t = textmode.create({ plugins: [FiltersPlugin] });
+ * ```
+ *
+ * @returns A textmode.js plugin instance.
+ */
+export const createFiltersPlugin = (): TextmodePlugin => FiltersPlugin;
 
 // UMD global export
 if (typeof window !== 'undefined') {
+	(window as any).FiltersPlugin = FiltersPlugin;
+	// Keep backwards compatibility
 	(window as any).createFiltersPlugin = createFiltersPlugin;
 }
