@@ -4,14 +4,40 @@
  * Each filter can be applied using either:
  * - A single value (shorthand for the primary parameter)
  * - An options object with named parameters
- *
  * @example
  * ```javascript
- * // Shorthand syntax
- * t.layers.base.filter('brightness', 1.5);
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Options object syntax
- * t.layers.base.filter('brightness', { amount: 1.5 });
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('bloom', {
+ *     threshold: 0.5,
+ *     intensity: 1 + wobble * 0.35,
+ *     radius: 6 + wobble * 2,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @module
@@ -25,17 +51,38 @@
  * Configuration options for the `'brightness'` filter.
  *
  * Adjusts image brightness by multiplying pixel values.
- *
  * @example
  * ```javascript
- * // Increase brightness by 50%
- * t.layers.base.filter('brightness', { amount: 1.5 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Shorthand: same as above
- * t.layers.base.filter('brightness', 1.5);
+ * let video;
  *
- * // Darken the image
- * t.layers.base.filter('brightness', 0.7);
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('brightness', {
+ *     amount: 1 + wobble * 0.25,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @category Color adjustment filters
@@ -62,17 +109,38 @@ export interface BrightnessOptions {
  * Configuration options for the `'contrast'` filter.
  *
  * Adjusts image contrast by scaling pixel values around mid-gray.
- *
  * @example
  * ```javascript
- * // Increase contrast
- * t.layers.base.filter('contrast', { amount: 1.5 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Shorthand: same as above
- * t.layers.base.filter('contrast', 1.5);
+ * let video;
  *
- * // Reduce contrast (washed out look)
- * t.layers.base.filter('contrast', 0.5);
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('contrast', {
+ *     amount: 1 + wobble * 0.35,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @category Color adjustment filters
@@ -100,17 +168,38 @@ export interface ContrastOptions {
  *
  * Adjusts color intensity without affecting luminance.
  * Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
- *
  * @example
  * ```javascript
- * // Convert to grayscale
- * t.layers.base.filter('saturation', { amount: 0 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Vivid colors
- * t.layers.base.filter('saturation', 1.5);
+ * let video;
  *
- * // Shorthand syntax
- * t.layers.base.filter('saturation', 0); // grayscale
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('saturation', {
+ *     amount: 1 + wobble * 0.45,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @category Color adjustment filters
@@ -137,20 +226,38 @@ export interface SaturationOptions {
  *
  * Shifts all colors around the color wheel by a specified angle.
  * Useful for color grading or creating surreal color effects.
- *
  * @example
  * ```javascript
- * // Rotate hue by 180 degrees (complementary colors)
- * t.layers.base.filter('hueRotate', { angle: 180 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Shorthand syntax
- * t.layers.base.filter('hueRotate', 90);
+ * let video;
  *
- * // Animate hue rotation
- * let frame = 0;
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
  * t.draw(() => {
- *   t.layers.base.filter('hueRotate', frame % 360);
- *   frame++;
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   const hue = (t.frameCount * 2 + wobble * 45) % 360;
+ *   t.layers.base.filter('hueRotate', {
+ *     angle: hue,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
@@ -180,17 +287,38 @@ export interface HueRotateOptions {
  *
  * Reduces the color palette to a limited number of bands per channel,
  * creating a retro quantized/poster-like look.
- *
  * @example
  * ```javascript
- * // Strong posterization (4 levels)
- * t.layers.base.filter('posterize', { levels: 4 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Shorthand syntax
- * t.layers.base.filter('posterize', 8);
+ * let video;
  *
- * // Extreme posterization (2 levels = high contrast)
- * t.layers.base.filter('posterize', 2);
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('posterize', {
+ *     levels: Math.max(2, Math.round(5 + wobble * 3)),
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @category Color adjustment filters
@@ -220,23 +348,39 @@ export interface PosterizeOptions {
  *
  * RGB color channel separation effect that simulates lens distortion
  * found in cheap cameras or creates stylized glitch aesthetics.
- *
  * @example
  * ```javascript
- * // Horizontal aberration
- * t.layers.base.filter('chromaticAberration', {
- *   amount: 10,
- *   direction: [1, 0]
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
  * });
  *
- * // Diagonal aberration
- * t.layers.base.filter('chromaticAberration', {
- *   amount: 5,
- *   direction: [1, 1]
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
  * });
  *
- * // Shorthand (horizontal only)
- * t.layers.base.filter('chromaticAberration', 8);
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('chromaticAberration', {
+ *     amount: 6 + wobble * 4,
+ *     direction: [Math.sin(t.secs), Math.cos(t.secs)],
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @category Distortion filters
@@ -274,17 +418,38 @@ export interface ChromaticAberrationOptions {
  *
  * Reduces image resolution to create a mosaic/pixelated effect
  * reminiscent of retro video games or censored content.
- *
  * @example
  * ```javascript
- * // Large pixels
- * t.layers.base.filter('pixelate', { pixelSize: 16 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Shorthand syntax
- * t.layers.base.filter('pixelate', 8);
+ * let video;
  *
- * // Subtle pixelation
- * t.layers.base.filter('pixelate', 2);
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('pixelate', {
+ *     pixelSize: 6 + wobble * 3,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @category Distortion filters
@@ -315,28 +480,45 @@ export interface PixelateOptions {
  *
  * This filter is designed specifically for textmode.js grids, allowing
  * you to create dynamic text distortion effects.
- *
  * @example
  * ```javascript
- * // Create a sine wave distortion
- * const widthFactors = [];
- * const heightFactors = [];
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * for (let i = 0; i < 80; i++) {
- *   widthFactors.push((Math.sin(i * 0.1 + frame * 0.05) + 1) / 2);
- * }
- * for (let j = 0; j < 40; j++) {
- *   heightFactors.push((Math.sin(j * 0.15 + frame * 0.03) + 1) / 2);
- * }
+ * let video;
  *
- * t.layers.base.filter('gridDistortion', {
- *   gridCellDimensions: [80, 40],
- *   gridPixelDimensions: [t.grid.cols * t.grid.cellWidth, t.grid.rows * t.grid.cellHeight],
- *   gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
- *   widthFactors,
- *   heightFactors,
- *   widthVariationScale: 0.5,
- *   heightVariationScale: 0.5
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   const widthFactors = Array.from({ length: t.grid.cols }, (_, i) => (Math.sin(i * 0.18 + t.frameCount * 0.04) + 1) * 0.5);
+ *   const heightFactors = Array.from({ length: t.grid.rows }, (_, i) => (Math.sin(i * 0.24 + t.secs * 1.5) + 1) * 0.5);
+ *   t.layers.base.filter('gridDistortion', {
+ *     gridCellDimensions: [t.grid.cols, t.grid.rows],
+ *     gridPixelDimensions: [t.grid.width, t.grid.height],
+ *     gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
+ *     widthFactors,
+ *     heightFactors,
+ *     widthVariationScale: 0.35 + wobble * 0.15,
+ *     heightVariationScale: 0.35 + wobble * 0.15,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
@@ -427,19 +609,37 @@ export interface GridDistortionOptions {
  *
  * Digital glitch effect with RGB channel separation, scanlines, and noise.
  * Creates a corrupted/broken digital signal aesthetic.
- *
  * @example
  * ```javascript
- * // Subtle glitch
- * t.layers.base.filter('glitch', { amount: 0.5 });
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
+ * });
  *
- * // Intense glitch
- * t.layers.base.filter('glitch', 2.0);
+ * let video;
  *
- * // Animate glitch intensity
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
  * t.draw(() => {
- *   const glitchAmount = Math.random() > 0.9 ? Math.random() * 3 : 0.1;
- *   t.layers.base.filter('glitch', glitchAmount);
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('glitch', {
+ *     amount: Math.max(0, 0.2 + wobble * 0.8),
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
@@ -468,22 +668,40 @@ export interface GlitchOptions {
  * CRT monitor emulation effect with screen curvature, animated scanlines,
  * blur, vignette, and film grain noise. Based on Mattias Gustavsson's
  * classic CRT shader.
- *
  * @example
  * ```javascript
- * // Classic CRT look
- * let time = 0;
- * t.draw(() => {
- *   t.layers.base.filter('crtMattias', {
- *     curvature: 0.5,
- *     scanSpeed: 1.0,
- *     time: time
- *   });
- *   time += 0.016;
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
  * });
  *
- * // Flat CRT (no curvature)
- * t.layers.base.filter('crtMattias', { curvature: 0, time: time });
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('crtMattias', {
+ *     curvature: 0.45 + wobble * 0.1,
+ *     scanSpeed: 1 + wobble * 0.25,
+ *     time: t.secs,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
+ * });
  * ```
  *
  * @see {@link https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl | Original shader by Mattias Gustavsson}
@@ -532,29 +750,41 @@ export interface CrtMattiasOptions {
  * A standalone scanline effect that adds horizontal lines to the image
  * to simulate a CRT display or old monitor. More customizable than
  * the scanlines in crtMattias.
- *
  * @example
  * ```javascript
- * // Classic scanlines
- * let time = 0;
- * t.draw(() => {
- *   t.layers.base.filter('scanlines', {
- *     count: 300,
- *     lineWidth: 0.5,
- *     intensity: 0.75,
- *     speed: 1.0,
- *     time: time
- *   });
- *   time += 0.016;
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
  * });
  *
- * // Thick, slow-moving lines
- * t.layers.base.filter('scanlines', {
- *   count: 50,
- *   lineWidth: 0.8,
- *   intensity: 0.5,
- *   speed: 0.2,
- *   time: time
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('scanlines', {
+ *     count: 256,
+ *     lineWidth: 0.5,
+ *     intensity: 0.7 + wobble * 0.1,
+ *     speed: 1 + wobble * 0.15,
+ *     time: t.secs,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
@@ -624,28 +854,39 @@ export interface ScanlinesOptions {
  *
  * Darkens the edges and corners of the image, drawing focus to the center.
  * Useful for creating a cinematic look or highlighting central content.
- *
  * @example
  * ```javascript
- * // Subtle vignette
- * t.layers.base.filter('vignette', {
- *   amount: 0.3,
- *   softness: 0.7,
- *   roundness: 0.5
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
  * });
  *
- * // Strong circular vignette
- * t.layers.base.filter('vignette', {
- *   amount: 0.8,
- *   softness: 0.3,
- *   roundness: 1.0
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
  * });
  *
- * // Rectangular vignette (letterbox effect)
- * t.layers.base.filter('vignette', {
- *   amount: 0.6,
- *   softness: 0.2,
- *   roundness: 0.0
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('vignette', {
+ *     amount: 0.5 + wobble * 0.2,
+ *     softness: 0.5,
+ *     roundness: 0.5 + wobble * 0.15,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
@@ -696,28 +937,39 @@ export interface VignetteOptions {
  * Creates a glow effect around bright areas of the image. Pixels above
  * the brightness threshold emit a soft glow that spreads outward.
  * Perfect for creating neon, glowing text, or dreamy effects.
- *
  * @example
  * ```javascript
- * // Subtle bloom
- * t.layers.base.filter('bloom', {
- *   threshold: 0.7,
- *   intensity: 0.8,
- *   radius: 4
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
  * });
  *
- * // Intense neon glow
- * t.layers.base.filter('bloom', {
- *   threshold: 0.3,
- *   intensity: 2.0,
- *   radius: 12
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
  * });
  *
- * // Dreamy soft glow
- * t.layers.base.filter('bloom', {
- *   threshold: 0.5,
- *   intensity: 1.5,
- *   radius: 8
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('bloom', {
+ *     threshold: 0.5,
+ *     intensity: 1.2 + wobble * 0.5,
+ *     radius: 6 + wobble * 2,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
@@ -771,27 +1023,40 @@ export interface BloomOptions {
  * film stock or analog video. The multi-layered noise creates an organic,
  * moving grain pattern that's less visible in darker areas, mimicking
  * real film characteristics.
- *
  * @example
  * ```javascript
- * // Subtle film grain
- * let time = 0;
- * t.draw(() => {
- *   t.layers.base.filter('filmGrain', {
- *     intensity: 0.15,
- *     size: 1.5,
- *     speed: 1.0,
- *     time: time
- *   });
- *   time += 0.016;
+ * const t = textmode.create({
+ *   width: window.innerWidth,
+ *   height: window.innerHeight,
+ *   plugins: [FiltersPlugin],
  * });
  *
- * // Heavy vintage film look
- * t.layers.base.filter('filmGrain', {
- *   intensity: 0.4,
- *   size: 3.0,
- *   speed: 2.0,
- *   time: time
+ * let video;
+ *
+ * t.setup(async () => {
+ *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video.play();
+ *   video.loop();
+ *   video.characters(' .:-=+*#%@');
+ * });
+ *
+ * t.draw(() => {
+ *   t.background(0);
+ *   if (video) {
+ *     t.image(video, t.grid.cols, t.grid.rows);
+ *   }
+ *
+ *   const wobble = Math.sin(t.secs * 2);
+ *   t.layers.base.filter('filmGrain', {
+ *     intensity: 0.2 + wobble * 0.1,
+ *     size: 2 + wobble * 0.5,
+ *     speed: 1 + wobble * 0.2,
+ *     time: t.secs,
+ *   });
+ * });
+ *
+ * t.windowResized(() => {
+ *   t.resizeCanvas(window.innerWidth, window.innerHeight);
  * });
  * ```
  *
