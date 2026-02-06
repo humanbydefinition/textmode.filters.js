@@ -24,10 +24,10 @@ npm install textmode.filters.js
 
 ```javascript
 import { textmode } from 'textmode.js';
-import { createFiltersPlugin } from 'textmode.filters.js';
+import { FiltersPlugin } from 'textmode.filters.js';
 
 const t = textmode.create({
-  plugins: [createFiltersPlugin()]
+  plugins: [FiltersPlugin]
 });
 
 t.draw(() => {
@@ -62,7 +62,7 @@ t.draw(() => {
 
 | Function | Description |
 | ------ | ------ |
-| [createFiltersPlugin](functions/createFiltersPlugin.md) | Creates the `textmode.filters.js` plugin for textmode.js. |
+| [~~createFiltersPlugin~~](functions/createFiltersPlugin.md) | Creates the `textmode.filters.js` plugin for textmode.js. |
 
 ## Interfaces
 
@@ -109,3 +109,9 @@ t.draw(() => {
 | ------ | ------ |
 | [FilterOptions](type-aliases/FilterOptions.md) | Union type of all available filter option interfaces. |
 | [FilterName](type-aliases/FilterName.md) | Names of all available filters. |
+
+## Variables
+
+| Variable | Description |
+| ------ | ------ |
+| [FiltersPlugin](variables/FiltersPlugin.md) | GPU-accelerated image filters plugin for textmode.js. |
