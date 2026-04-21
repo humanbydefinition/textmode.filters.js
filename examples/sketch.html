@@ -235,6 +235,22 @@
 				`;
 			}
 
+			function notifyPreviewHeight() {
+				if (!isEmbeddedPreview) {
+					return;
+				}
+
+				const nextHeight = Math.ceil(document.documentElement.scrollHeight);
+				window.parent.postMessage(
+					{
+						type: 'textmode-filters-example-height',
+						path: examplePath,
+						height: nextHeight,
+					},
+					window.location.origin
+				);
+			}
+
 			if (!examplePath || !(examplePath in EXAMPLES)) {
 				showError('Invalid example path.');
 			} else {
@@ -251,6 +267,8 @@
 					</div>
 					`
 					}
+					<div class="sketch-shell${isEmbeddedPreview ? ' is-embedded' : ''}">
+						<div class="sketch-layout">
 							<section class="canvas-panel">
 								<div class="canvas-panel-header">
 									<h1 class="canvas-panel-title">${example.title}</h1>
@@ -269,6 +287,8 @@
 									${example.controls}
 								</div>
 							</aside>
+						</div>
+					</div>
 				`;
 
 				window.textmode = textmodeModule.textmode;
@@ -278,6 +298,17 @@
 				script.src = `./${examplePath}/sketch.js`;
 				script.onerror = () => showError(`Unable to load ${examplePath}.`);
 				document.body.appendChild(script);
+
+				const resizeObserver = new ResizeObserver(() => {
+					notifyPreviewHeight();
+				});
+
+				resizeObserver.observe(document.body);
+				resizeObserver.observe(document.documentElement);
+				window.addEventListener('load', notifyPreviewHeight);
+				window.addEventListener('resize', notifyPreviewHeight);
+				requestAnimationFrame(notifyPreviewHeight);
+				setTimeout(notifyPreviewHeight, 120);
 			}
 		</script>
 	</body>

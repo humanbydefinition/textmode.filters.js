@@ -84,76 +84,17 @@
 				{
 					name: 'Color Adjustment',
 					description: 'Brightness, contrast, hue, saturation, and posterization filters.',
-					entries: [
-						{
-							path: 'brightness',
-							description: 'Adjust image brightness with a simple scalar control.',
-						},
-						{
-							path: 'contrast',
-							description: 'Boost or flatten contrast on the rendered image.',
-						},
-						{
-							path: 'saturation',
-							description: 'Dial color intensity from grayscale to oversaturated.',
-						},
-						{
-							path: 'hueRotate',
-							description: 'Rotate colors around the hue wheel.',
-						},
-						{
-							path: 'posterize',
-							description: 'Reduce the color palette to a limited number of levels.',
-						},
-					],
+					entries: ['brightness', 'contrast', 'saturation', 'hueRotate', 'posterize'],
 				},
 				{
 					name: 'Distortion',
 					description: 'Channel separation, pixelation, and grid warping effects.',
-					entries: [
-						{
-							path: 'chromaticAberration',
-							description: 'Split color channels to simulate lens distortion.',
-						},
-						{
-							path: 'pixelate',
-							description: 'Turn the input into a mosaic of larger sample blocks.',
-						},
-						{
-							path: 'gridDistortion',
-							description: 'Warp the textmode grid using animated width and height factors.',
-						},
-					],
+					entries: ['chromaticAberration', 'pixelate', 'gridDistortion'],
 				},
 				{
 					name: 'Stylization',
 					description: 'CRT, glitch, glow, grain, scanlines, and vignette treatments.',
-					entries: [
-						{
-							path: 'glitch',
-							description: 'Introduce broken digital signal artifacts and instability.',
-						},
-						{
-							path: 'crtMattias',
-							description: 'Apply a curved CRT treatment with animated scan movement.',
-						},
-						{
-							path: 'scanlines',
-							description: 'Overlay adjustable horizontal scanlines.',
-						},
-						{
-							path: 'vignette',
-							description: 'Darken the frame edges to pull attention inward.',
-						},
-						{
-							path: 'bloom',
-							description: 'Glow bright pixels with configurable threshold and radius.',
-						},
-						{
-							path: 'filmGrain',
-							description: 'Add animated grain and noise texture over the image.',
-						},
-					],
+					entries: ['glitch', 'crtMattias', 'scanlines', 'vignette', 'bloom', 'filmGrain'],
 				},
 			];
 
@@ -181,7 +122,7 @@
               ${group.entries
 					.map(
 						(entry) =>
-							`<a href="${getExampleHref(entry.path)}" class="entry-badge" data-entry="${entry.path.toLowerCase()}" data-entry-name="${entry.path}" aria-expanded="false">${entry.path}</a>`
+							`<a href="${getExampleHref(entry)}" class="entry-badge" data-entry="${entry.toLowerCase()}" data-entry-name="${entry}" aria-expanded="false">${entry}</a>`
 					)
 					.join('')}
             </div>
@@ -218,6 +159,8 @@
 
 				preview.hidden = true;
 				frame.src = 'about:blank';
+				frame.style.height = '';
+				delete frame.dataset.path;
 			}
 
 			function openPreview(section, badge) {
@@ -245,9 +188,31 @@
 				badge.setAttribute('aria-expanded', 'true');
 				title.textContent = `${groupName}.${entryName}`;
 				link.href = href;
+				frame.dataset.path = entryName;
 				frame.src = href;
 				preview.hidden = false;
 			}
+
+			window.addEventListener('message', (event) => {
+				if (event.origin !== window.location.origin) {
+					return;
+				}
+
+				if (event.data?.type !== 'textmode-filters-example-height') {
+					return;
+				}
+
+				const frame = Array.from(document.querySelectorAll('[data-preview-frame]')).find(
+					(candidate) => candidate.contentWindow === event.source
+				);
+
+				if (!frame) {
+					return;
+				}
+
+				const nextHeight = Math.max(640, Math.ceil(event.data.height || 0));
+				frame.style.height = `${nextHeight}px`;
+			});
 
 			render(GROUPS);
 
