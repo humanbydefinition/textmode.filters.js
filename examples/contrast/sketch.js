@@ -1,5 +1,7 @@
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
+/**
+ * @title FiltersPlugin.contrast
+ * @author codex
+ */
 
 const t = textmode.create({
 	canvas: document.getElementById('textmode-canvas'),

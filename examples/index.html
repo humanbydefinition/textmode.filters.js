@@ -2,86 +2,305 @@
 <html lang="en">
 	<head>
 		<meta charset="utf-8" />
-		<title>textmode.filters.js - Examples</title>
-		<link rel="stylesheet" href="style.css" />
+		<title>textmode.filters.js - examples</title>
+		<meta name="viewport" content="width=device-width, initial-scale=1.0" />
+		<script src="https://cdn.tailwindcss.com"></script>
+		<script>
+			tailwind.config = {
+				theme: {
+					extend: {
+						fontFamily: {
+							mono: ['"JetBrains Mono"', 'ui-monospace', 'monospace'],
+						},
+					},
+				},
+			};
+		</script>
+		<link rel="preconnect" href="https://fonts.googleapis.com" />
+		<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+		<link
+			href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&display=swap"
+			rel="stylesheet"
+		/>
+		<link rel="stylesheet" href="./style.css" />
 	</head>
 
-	<body>
-		<div class="directory">
-			<h1>textmode.filters.js</h1>
-			<p>GPU-accelerated image filters plugin for textmode.js</p>
+	<body class="bg-[#09090b] text-zinc-100 min-h-screen">
+		<div class="max-w-5xl mx-auto px-4 sm:px-6 py-12">
+			<header class="mb-10 pb-8 border-b border-zinc-800">
+				<div class="flex items-start justify-between flex-wrap gap-4">
+					<div>
+						<h1 class="text-xl font-semibold tracking-tight text-zinc-50">textmode.filters.js</h1>
+						<p class="text-zinc-500 text-xs mt-1">// gpu-accelerated filter examples</p>
+					</div>
+					<nav class="flex items-center gap-4 text-xs text-zinc-500">
+						<a
+							href="https://github.com/humanbydefinition"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-zinc-300 transition-colors"
+							>@humanbydefinition</a
+						>
+						<span class="text-zinc-700">·</span>
+						<a
+							href="https://github.com/humanbydefinition/textmode.filters.js"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-zinc-300 transition-colors"
+							>github</a
+						>
+						<span class="text-zinc-700">·</span>
+						<a
+							href="https://code.textmode.art"
+							target="_blank"
+							rel="noopener noreferrer"
+							class="hover:text-zinc-300 transition-colors"
+							>docs</a
+						>
+					</nav>
+				</div>
 
-			<div class="examples-grid">
-				<a href="brightness/" class="example-card">
-					<h2>brightness</h2>
-					<p>Adjust image brightness using the <code>brightness</code> filter.</p>
-				</a>
+				<div class="mt-6 relative">
+					<input
+						id="search"
+						type="text"
+						placeholder="filter examples..."
+						autocomplete="off"
+						spellcheck="false"
+						class="w-full max-w-sm bg-zinc-900 border border-zinc-800 rounded-md px-3 py-1.5 text-xs text-zinc-100 placeholder-zinc-600 focus:outline-none focus:border-zinc-600 focus:ring-1 focus:ring-zinc-700 transition-colors"
+					/>
+				</div>
+			</header>
 
-				<a href="contrast/" class="example-card">
-					<h2>contrast</h2>
-					<p>Adjust image contrast using the <code>contrast</code> filter.</p>
-				</a>
+			<main id="examples" class="space-y-3"></main>
 
-				<a href="hueRotate/" class="example-card">
-					<h2>hueRotate</h2>
-					<p>Shift colors around the color wheel using the <code>hueRotate</code> filter.</p>
-				</a>
-
-				<a href="glitch/" class="example-card">
-					<h2>glitch</h2>
-					<p>Create digital glitch effects using the <code>glitch</code> filter.</p>
-				</a>
-
-				<a href="chromaticAberration/" class="example-card">
-					<h2>chromaticAberration</h2>
-					<p>RGB color channel separation effect using the <code>chromaticAberration</code> filter.</p>
-				</a>
-
-				<a href="pixelate/" class="example-card">
-					<h2>pixelate</h2>
-					<p>Create a mosaic/pixelated effect using the <code>pixelate</code> filter.</p>
-				</a>
-
-				<a href="gridDistortion/" class="example-card">
-					<h2>gridDistortion</h2>
-					<p>Distort the textmode grid with custom patterns using the <code>gridDistortion</code> filter.</p>
-				</a>
-
-				<a href="crtMattias/" class="example-card">
-					<h2>crtMattias</h2>
-					<p>CRT monitor emulation effect using the <code>crtMattias</code> filter.</p>
-				</a>
-
-				<a href="scanlines/" class="example-card">
-					<h2>scanlines</h2>
-					<p>Customizable scanlines effect using the <code>scanlines</code> filter.</p>
-				</a>
-
-				<a href="vignette/" class="example-card">
-					<h2>vignette</h2>
-					<p>Darkened edges/corners effect using the <code>vignette</code> filter.</p>
-				</a>
-
-				<a href="bloom/" class="example-card">
-					<h2>bloom</h2>
-					<p>Glow effect around bright areas using the <code>bloom</code> filter.</p>
-				</a>
-
-				<a href="filmGrain/" class="example-card">
-					<h2>filmGrain</h2>
-					<p>Animated film grain/noise overlay using the <code>filmGrain</code> filter.</p>
-				</a>
-
-				<a href="saturation/" class="example-card">
-					<h2>saturation</h2>
-					<p>Adjust color intensity using the <code>saturation</code> filter.</p>
-				</a>
-
-				<a href="posterize/" class="example-card">
-					<h2>posterize</h2>
-					<p>Reduce color palette levels using the <code>posterize</code> filter.</p>
-				</a>
-			</div>
+			<footer class="mt-12 pt-8 border-t border-zinc-800 text-xs text-zinc-600">
+				<p>textmode.filters.js - MIT license</p>
+			</footer>
 		</div>
+
+		<script>
+			const GROUPS = [
+				{
+					name: 'Color Adjustment',
+					description: 'Brightness, contrast, hue, saturation, and posterization filters.',
+					entries: [
+						{
+							path: 'brightness',
+							description: 'Adjust image brightness with a simple scalar control.',
+						},
+						{
+							path: 'contrast',
+							description: 'Boost or flatten contrast on the rendered image.',
+						},
+						{
+							path: 'saturation',
+							description: 'Dial color intensity from grayscale to oversaturated.',
+						},
+						{
+							path: 'hueRotate',
+							description: 'Rotate colors around the hue wheel.',
+						},
+						{
+							path: 'posterize',
+							description: 'Reduce the color palette to a limited number of levels.',
+						},
+					],
+				},
+				{
+					name: 'Distortion',
+					description: 'Channel separation, pixelation, and grid warping effects.',
+					entries: [
+						{
+							path: 'chromaticAberration',
+							description: 'Split color channels to simulate lens distortion.',
+						},
+						{
+							path: 'pixelate',
+							description: 'Turn the input into a mosaic of larger sample blocks.',
+						},
+						{
+							path: 'gridDistortion',
+							description: 'Warp the textmode grid using animated width and height factors.',
+						},
+					],
+				},
+				{
+					name: 'Stylization',
+					description: 'CRT, glitch, glow, grain, scanlines, and vignette treatments.',
+					entries: [
+						{
+							path: 'glitch',
+							description: 'Introduce broken digital signal artifacts and instability.',
+						},
+						{
+							path: 'crtMattias',
+							description: 'Apply a curved CRT treatment with animated scan movement.',
+						},
+						{
+							path: 'scanlines',
+							description: 'Overlay adjustable horizontal scanlines.',
+						},
+						{
+							path: 'vignette',
+							description: 'Darken the frame edges to pull attention inward.',
+						},
+						{
+							path: 'bloom',
+							description: 'Glow bright pixels with configurable threshold and radius.',
+						},
+						{
+							path: 'filmGrain',
+							description: 'Add animated grain and noise texture over the image.',
+						},
+					],
+				},
+			];
+
+			function getExampleHref(path) {
+				return `./sketch.html?path=${encodeURIComponent(path)}`;
+			}
+
+			function render(groups) {
+				const container = document.getElementById('examples');
+				container.innerHTML = '';
+
+				groups.forEach((group) => {
+					const section = document.createElement('div');
+					section.className = 'rounded-lg border border-zinc-800 bg-zinc-900/40 overflow-hidden';
+					section.dataset.group = group.name.toLowerCase();
+					section.dataset.groupName = group.name;
+
+					section.innerHTML = `
+            <div class="flex items-center gap-3 px-4 py-3 border-b border-zinc-800 bg-zinc-900/60">
+              <h2 class="text-sm font-medium text-zinc-100 tracking-tight">${group.name}</h2>
+              <span class="text-xs text-zinc-600 hidden sm:block">${group.description}</span>
+              <span class="ml-auto text-xs text-zinc-600 tabular-nums" data-count>${group.entries.length}</span>
+            </div>
+            <div class="px-4 py-3 flex flex-wrap gap-1.5" data-entries>
+              ${group.entries
+					.map(
+						(entry) =>
+							`<a href="${getExampleHref(entry.path)}" class="entry-badge" data-entry="${entry.path.toLowerCase()}" data-entry-name="${entry.path}" aria-expanded="false">${entry.path}</a>`
+					)
+					.join('')}
+            </div>
+            <div class="example-preview" data-preview hidden>
+              <div class="example-preview-toolbar">
+                <div class="example-preview-meta">
+                  <div class="example-preview-title" data-preview-title></div>
+                  <div class="example-preview-hint">click badge to toggle, cmd/ctrl-click to open standalone</div>
+                </div>
+                <div class="example-preview-actions">
+                  <a class="example-preview-link" data-preview-link target="_blank" rel="noopener noreferrer">open page</a>
+                  <button type="button" class="example-preview-close" data-preview-close>close</button>
+                </div>
+              </div>
+              <div class="example-preview-frame-wrap">
+                <iframe class="example-preview-frame" data-preview-frame loading="lazy" title="${group.name} example preview"></iframe>
+              </div>
+            </div>
+          `;
+
+					container.appendChild(section);
+				});
+			}
+
+			function closePreview(section) {
+				const preview = section.querySelector('[data-preview]');
+				const frame = section.querySelector('[data-preview-frame]');
+				const activeBadge = section.querySelector('.entry-badge.is-active');
+
+				if (activeBadge) {
+					activeBadge.classList.remove('is-active');
+					activeBadge.setAttribute('aria-expanded', 'false');
+				}
+
+				preview.hidden = true;
+				frame.src = 'about:blank';
+			}
+
+			function openPreview(section, badge) {
+				const preview = section.querySelector('[data-preview]');
+				const frame = section.querySelector('[data-preview-frame]');
+				const title = section.querySelector('[data-preview-title]');
+				const link = section.querySelector('[data-preview-link]');
+				const currentActive = section.querySelector('.entry-badge.is-active');
+				const href = badge.getAttribute('href');
+				const groupName = section.dataset.groupName;
+				const entryName = badge.dataset.entryName;
+
+				document.querySelectorAll('#examples > div').forEach((otherSection) => {
+					if (otherSection !== section) {
+						closePreview(otherSection);
+					}
+				});
+
+				if (currentActive && currentActive !== badge) {
+					currentActive.classList.remove('is-active');
+					currentActive.setAttribute('aria-expanded', 'false');
+				}
+
+				badge.classList.add('is-active');
+				badge.setAttribute('aria-expanded', 'true');
+				title.textContent = `${groupName}.${entryName}`;
+				link.href = href;
+				frame.src = href;
+				preview.hidden = false;
+			}
+
+			render(GROUPS);
+
+			document.getElementById('examples').addEventListener('click', (event) => {
+				const closeButton = event.target.closest('[data-preview-close]');
+				if (closeButton) {
+					closePreview(closeButton.closest('[data-group]'));
+					return;
+				}
+
+				const badge = event.target.closest('.entry-badge');
+				if (!badge) {
+					return;
+				}
+
+				if (event.metaKey || event.ctrlKey || event.shiftKey || event.altKey || event.button !== 0) {
+					return;
+				}
+
+				event.preventDefault();
+				const section = badge.closest('[data-group]');
+
+				if (badge.classList.contains('is-active')) {
+					closePreview(section);
+					return;
+				}
+
+				openPreview(section, badge);
+			});
+
+			document.getElementById('search').addEventListener('input', function () {
+				const q = this.value.trim().toLowerCase();
+
+				document.querySelectorAll('#examples > div').forEach((section) => {
+					const badges = section.querySelectorAll('.entry-badge');
+					const groupName = section.dataset.group;
+					let visible = 0;
+
+					badges.forEach((badge) => {
+						const entryName = badge.dataset.entry;
+						const match = !q || entryName.includes(q) || groupName.includes(q);
+						badge.classList.toggle('hidden-entry', !match);
+						if (match) visible++;
+					});
+
+					section.querySelector('[data-count]').textContent = visible;
+					section.classList.toggle('hidden', visible === 0);
+
+					if (visible === 0) {
+						closePreview(section);
+					}
+				});
+			});
+		</script>
 	</body>
 </html>
