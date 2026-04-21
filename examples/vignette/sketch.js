@@ -38,14 +38,14 @@ t.setup(async () => {
 	video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
 	video.play();
 	video.loop();
-	video.characters(" .:-=+*#%@");
+	video.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
 	t.layers.base.filter('vignette', {
 		amount: vignetteAmount,
 		softness: vignetteSoftness,
-		roundness: vignetteRoundness
+		roundness: vignetteRoundness,
 	});
 
 	t.background(0);

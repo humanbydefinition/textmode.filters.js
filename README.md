@@ -1,12 +1,12 @@
-# textmode.filters.js 
+# textmode.filters.js
 
 <div align="center">
 
 <!-- Add your banner image here when ready -->
 <!-- <img alt="textmode_filters_banner" src="YOUR_BANNER_IMAGE_URL" /> -->
 
-| [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![WebGL](https://img.shields.io/badge/WebGL2-990000?logo=webgl&logoColor=white)](https://www.khronos.org/webgl/) [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/) | [![npm version](https://img.shields.io/npm/v/textmode.filters.js.svg)](https://www.npmjs.com/package/textmode.filters.js) [![license](https://img.shields.io/npm/l/textmode.filters.js.svg)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/LICENSE) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) [![Github-sponsors](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/humanbydefinition) |
-|:-------------|:-------------|:-------------|
+| [![TypeScript](https://img.shields.io/badge/TypeScript-3178C6?logo=typescript&logoColor=white)](https://www.typescriptlang.org/) [![WebGL](https://img.shields.io/badge/WebGL2-990000?logo=webgl&logoColor=white)](https://www.khronos.org/webgl/) [![Vite](https://img.shields.io/badge/Vite-646CFF?logo=vite&logoColor=white)](https://vitejs.dev/) | [![npm version](https://img.shields.io/npm/v/textmode.filters.js.svg)](https://www.npmjs.com/package/textmode.filters.js) [![license](https://img.shields.io/npm/l/textmode.filters.js.svg)](https://github.com/humanbydefinition/textmode.filters.js/blob/main/LICENSE) | [![Discord](https://img.shields.io/discord/1357070706181017691?color=5865F2&label=Discord&logo=discord&logoColor=white)](https://discord.gg/sjrw8QXNks) [![ko-fi](https://shields.io/badge/ko--fi-donate-ff5f5f?logo=ko-fi)](https://ko-fi.com/V7V8JG2FY) [![GitHub-sponsors](https://img.shields.io/badge/sponsor-30363D?logo=GitHub-Sponsors&logoColor=#EA4AAA)](https://github.com/sponsors/humanbydefinition) |
+| :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :----------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- | :---------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------------- |
 
 </div>
 
@@ -38,7 +38,7 @@ You can also use it via CDN:
 <script type="module" src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.esm.js"></script>
 
 <!-- UMD -->
-<script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script> 
+<script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script>
 <script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
 ```
 
@@ -51,18 +51,18 @@ import { textmode } from 'textmode.js';
 import { FiltersPlugin } from 'textmode.filters.js';
 
 const t = textmode.create({
-  width: 800,
-  height: 600,
-  plugins: [FiltersPlugin],
+	width: 800,
+	height: 600,
+	plugins: [FiltersPlugin],
 });
 
 t.draw(() => {
-  // Apply filters to layers
-  t.layers.base.filter('brightness', 1.2);
-  t.layers.base.filter('contrast', { amount: 1.5 });
+	// Apply filters to layers
+	t.layers.base.filter('brightness', 1.2);
+	t.layers.base.filter('contrast', { amount: 1.5 });
 
-  t.background(0);
-  // ... draw something ...
+	t.background(0);
+	// ... draw something ...
 });
 ```
 
@@ -72,13 +72,13 @@ t.draw(() => {
 <script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script>
 <script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
 <script>
-  const t = textmode.create({
-    plugins: [FiltersPlugin],
-  });
+	const t = textmode.create({
+		plugins: [FiltersPlugin],
+	});
 
-  t.draw(() => {
-    t.layers.base.filter('brightness', 1.3);
-  });
+	t.draw(() => {
+		t.layers.base.filter('brightness', 1.3);
+	});
 </script>
 ```
 
@@ -89,6 +89,7 @@ t.draw(() => {
 Adjust image brightness *(1.0 = normal, >1 = brighter, <1 = darker)*
 
 **Parameters:**
+
 - `amount` - Brightness multiplier  
   Default: `1.0` | Range: `0.0` - `∞`
 
@@ -101,6 +102,7 @@ Adjust image brightness *(1.0 = normal, >1 = brighter, <1 = darker)*
 Adjust image contrast *(1.0 = normal, >1 = more contrast, <1 = less)*
 
 **Parameters:**
+
 - `amount` - Contrast multiplier  
   Default: `1.0` | Range: `0.0` - `∞`
 
@@ -113,6 +115,7 @@ Adjust image contrast *(1.0 = normal, >1 = more contrast, <1 = less)*
 Shift colors around the color wheel
 
 **Parameters:**
+
 - `angle` - Rotation angle in degrees  
   Default: `0.0` | Range: `0.0` - `360.0`
 
@@ -125,6 +128,7 @@ Shift colors around the color wheel
 Digital glitch effect with RGB channel separation, scanlines, and noise
 
 **Parameters:**
+
 - `amount` - Glitch intensity  
   Default: `0.0` | Range: `0.0` - `∞`
 
@@ -137,6 +141,7 @@ Digital glitch effect with RGB channel separation, scanlines, and noise
 RGB color channel separation effect that simulates lens distortion
 
 **Parameters:**
+
 - `amount` - Offset amount in pixels  
   Default: `5.0` | Range: `0.0` - `∞`
 - `direction` - Direction of the color separation as `[x, y]`  
@@ -151,6 +156,7 @@ RGB color channel separation effect that simulates lens distortion
 Reduce image resolution to create a mosaic/pixelated effect
 
 **Parameters:**
+
 - `pixelSize` - Size of each pixel block in pixels  
   Default: `4.0` | Range: `1.0` - `∞`
 
@@ -163,6 +169,7 @@ Reduce image resolution to create a mosaic/pixelated effect
 Distort a monospaced character grid by varying the width and height of individual cells. Create wave effects, perspective distortions, or other grid warping effects by providing custom factor arrays.
 
 **Parameters:**
+
 - `gridSize` - Grid dimensions as `[columns, rows]`  
   Default: `[80, 40]` | Maximum: `[128, 128]`
 - `widthFactors` - Array of distortion values (0-1) for each column  
@@ -183,6 +190,7 @@ Distort a monospaced character grid by varying the width and height of individua
 CRT monitor emulation effect with screen curvature, animated scanlines, blur, vignette, and film grain noise.
 
 **Parameters:**
+
 - `curvature` - Amount of screen curvature/barrel distortion  
   Default: `0.5` | Range: `0.0` - `1.0`
 - `scanSpeed` - Speed of the scrolling scanline effect  
@@ -194,11 +202,13 @@ CRT monitor emulation effect with screen curvature, animated scanlines, blur, vi
 **Source:** https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl
 
 ---
+
 ### `scanlines`
 
 A standalone scanline effect that adds horizontal lines to the image to simulate a CRT display or old monitor. Adjustable density, thickness, and movement speed.
 
 **Parameters:**
+
 - `count` - Number of scanlines
   Default: `300.0` | Range: `10.0` - `∞`
 - `lineWidth` - Width of the lines relative to the spacing
@@ -219,6 +229,7 @@ A standalone scanline effect that adds horizontal lines to the image to simulate
 Darkens the edges and corners of the image, drawing focus to the center. Useful for creating a cinematic look or highlighting central content.
 
 **Parameters:**
+
 - `amount` - Intensity of the darkening effect  
   Default: `0.5` | Range: `0.0` - `1.0`
 - `softness` - Falloff gradient softness (0 = hard edge, 1 = very soft)  
@@ -235,6 +246,7 @@ Darkens the edges and corners of the image, drawing focus to the center. Useful 
 Creates a glow effect around bright areas of the image. Pixels above the brightness threshold emit a soft glow that spreads outward, perfect for creating neon, glowing text, or dreamy effects.
 
 **Parameters:**
+
 - `threshold` - Brightness level above which pixels will glow  
   Default: `0.5` | Range: `0.0` - `1.0`
 - `intensity` - Strength of the glow effect  
@@ -251,6 +263,7 @@ Creates a glow effect around bright areas of the image. Pixels above the brightn
 Adds an animated film grain/noise texture overlay to simulate vintage film stock or analog video. The multi-layered noise creates an organic, moving grain pattern that's less visible in darker areas, mimicking real film characteristics.
 
 **Parameters:**
+
 - `intensity` - Strength of the grain effect  
   Default: `0.2` | Range: `0.0` - `1.0`
 - `size` - Size of grain particles  
@@ -269,17 +282,20 @@ Adds an animated film grain/noise texture overlay to simulate vintage film stock
 Adjust color intensity without affecting luminance. Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
 
 **Parameters:**
+
 - `amount` - Saturation multiplier  
   Default: `1.0` | Range: `0.0` (grayscale) - `∞` (vivid)
 
 **Author:** [@humanbydefinition](https://github.com/humanbydefinition)
 
 ---
+
 ### `posterize`
 
 Reduces the color palette to a limited number of bands, creating a retro quantized look.
 
 **Parameters:**
+
 - `levels` - Number of color levels per channel
   Default: `4.0` | Range: `1.0` - `∞`
 
@@ -318,13 +334,13 @@ t.layers.base.filter('bloom', { threshold: 0.6, intensity: 1.5, radius: 8 });
 // Film grain with animation
 let time = 0;
 t.draw(() => {
-  t.layers.base.filter('filmGrain', { intensity: 0.3, size: 2, speed: 1.0, time: time });
-  time += 0.016;
+	t.layers.base.filter('filmGrain', { intensity: 0.3, size: 2, speed: 1.0, time: time });
+	time += 0.016;
 });
 
 // Saturation adjustments
-t.layers.base.filter('saturation', 0);    // Grayscale
-t.layers.base.filter('saturation', 1.5);  // Vivid colors
+t.layers.base.filter('saturation', 0); // Grayscale
+t.layers.base.filter('saturation', 1.5); // Vivid colors
 
 // Posterize effect (quantize colors)
 t.layers.base.filter('posterize', { levels: 4 });
@@ -349,10 +365,10 @@ out vec4 fragColor;
 
 void main() {
     vec4 color = texture(u_texture, v_uv);
-    
+
     // Your filter logic here
     vec3 result = color.rgb; // Modify this!
-    
+
     fragColor = vec4(result, color.a);
 }
 ```
@@ -362,6 +378,7 @@ void main() {
 Contributions are welcome and greatly appreciated! 🎉
 
 Whether you want to:
+
 - 🐛 Report a bug
 - 💡 Suggest a new filter
 - 🔧 Submit a pull request
@@ -381,6 +398,6 @@ Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 <br />
 
-**[↑ back to top](#-textmodefiltersjs)**
+**[↑ back to top](#textmodefiltersjs)**
 
 </div>

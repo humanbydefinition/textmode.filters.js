@@ -48,7 +48,7 @@ t.setup(async () => {
 	video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
 	video.play();
 	video.loop();
-	video.characters(" .:-=+*#%@");
+	video.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
@@ -70,7 +70,8 @@ t.draw(() => {
 	// Generate sine wave pattern for height factors
 	const heightFactors = [];
 	for (let j = 0; j < rows; j++) {
-		const sineValue = Math.sin(j * config.heightFrequency + frameCount * config.heightSpeed) * config.heightAmplitude;
+		const sineValue =
+			Math.sin(j * config.heightFrequency + frameCount * config.heightSpeed) * config.heightAmplitude;
 		// Map from [-amplitude, amplitude] to [0, 1]
 		heightFactors.push((sineValue + config.heightAmplitude) / (2 * config.heightAmplitude));
 	}
@@ -84,7 +85,7 @@ t.draw(() => {
 		widthFactors: widthFactors,
 		heightFactors: heightFactors,
 		widthVariationScale: widthVariation,
-		heightVariationScale: heightVariation
+		heightVariationScale: heightVariation,
 	});
 
 	t.image(video, t.grid.cols, t.grid.rows);
