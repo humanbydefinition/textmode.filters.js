@@ -16,7 +16,7 @@
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -64,7 +64,7 @@
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -123,7 +123,7 @@ export interface BrightnessOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -183,7 +183,7 @@ export interface ContrastOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -242,7 +242,7 @@ export interface SaturationOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -304,7 +304,7 @@ export interface HueRotateOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -366,7 +366,7 @@ export interface PosterizeOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -437,7 +437,7 @@ export interface ChromaticAberrationOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -500,7 +500,7 @@ export interface PixelateOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -630,7 +630,7 @@ export interface GridDistortionOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -690,7 +690,7 @@ export interface GlitchOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -773,7 +773,7 @@ export interface CrtMattiasOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -878,7 +878,7 @@ export interface ScanlinesOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -962,7 +962,7 @@ export interface VignetteOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -1049,7 +1049,7 @@ export interface BloomOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
