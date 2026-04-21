@@ -23,14 +23,17 @@ This project and everyone participating in it is governed by our commitment to p
 
 1. **Fork the repository** on GitHub
 2. **Clone your fork** locally:
-   ```bash
-   git clone https://github.com/YOUR_USERNAME/textmode.filters.js.git
-   cd textmode.filters.js
-   ```
+
+    ```bash
+    git clone https://github.com/YOUR_USERNAME/textmode.filters.js.git
+    cd textmode.filters.js
+    ```
+
 3. **Add the upstream remote**:
-   ```bash
-   git remote add upstream https://github.com/humanbydefinition/textmode.filters.js.git
-   ```
+
+    ```bash
+    git remote add upstream https://github.com/humanbydefinition/textmode.filters.js.git
+    ```
 
 ## Development setup
 
@@ -54,7 +57,7 @@ npm run build
 
 ### Project structure
 
-```
+```text
 textmode.filters.js/
 ├── src/
 │   ├── index.ts           # Main entry point & plugin registration
@@ -102,10 +105,10 @@ out vec4 fragColor;
 void main() {
     // Sample the input texture
     vec4 color = texture(u_texture, v_uv);
-    
+
     // Apply your filter effect
     vec3 result = color.rgb; // Modify this with your filter logic!
-    
+
     // Output the result (preserve alpha)
     fragColor = vec4(result, color.a);
 }
@@ -123,30 +126,30 @@ import contrastFragmentShader from './shaders/contrast.frag?raw';
 import yourFilterFragmentShader from './shaders/yourfilter.frag?raw'; // Add this
 
 export const createFiltersPlugin = (): TextmodePlugin => ({
-    name: 'textmode.filters',
-    version: '1.0.0',
+	name: 'textmode.filters',
+	version: '1.0.0',
 
-    async install(textmodifier) {
-        textmodifier.filters.register('brightness', brightnessFragmentShader, {
-            u_amount: ['amount', 1.0]
-        });
-        textmodifier.filters.register('contrast', contrastFragmentShader, {
-            u_amount: ['amount', 1.0]
-        });
-        
-        // Register your filter
-        // Format: register(name, shader, { uniform_name: [param_name, default_value] })
-        textmodifier.filters.register('yourfilter', yourFilterFragmentShader, {
-            u_amount: ['amount', 1.0],
-            // Add more parameters as needed
-        });
-    },
+	async install(textmodifier) {
+		textmodifier.filters.register('brightness', brightnessFragmentShader, {
+			u_amount: ['amount', 1.0],
+		});
+		textmodifier.filters.register('contrast', contrastFragmentShader, {
+			u_amount: ['amount', 1.0],
+		});
 
-    async uninstall(textmodifier) {
-        textmodifier.filters.unregister('brightness');
-        textmodifier.filters.unregister('contrast');
-        textmodifier.filters.unregister('yourfilter'); // Add this
-    },
+		// Register your filter
+		// Format: register(name, shader, { uniform_name: [param_name, default_value] })
+		textmodifier.filters.register('yourfilter', yourFilterFragmentShader, {
+			u_amount: ['amount', 1.0],
+			// Add more parameters as needed
+		});
+	},
+
+	async uninstall(textmodifier) {
+		textmodifier.filters.unregister('brightness');
+		textmodifier.filters.unregister('contrast');
+		textmodifier.filters.unregister('yourfilter'); // Add this
+	},
 });
 ```
 
@@ -160,6 +163,7 @@ Add your filter to the [Filters](README.md#filters) section in `README.md`:
 Brief description of what your filter does
 
 **Parameters:**
+
 - `amount` — Description of parameter  
   Default: `1.0` | Range: `0.0` - `∞`
 
@@ -181,7 +185,7 @@ The third parameter to `register()` maps GLSL uniforms to user-facing parameters
 
 ```typescript
 {
-    u_uniformName: ['parameterName', defaultValue]
+	u_uniformName: ['parameterName', defaultValue];
 }
 ```
 
@@ -202,35 +206,38 @@ t.layers.base.filter('yourfilter', { amount: 0.5 });
 ## Pull request process
 
 1. **Create a feature branch**:
-   ```bash
-   git checkout -b feature/your-filter-name
-   ```
+
+    ```bash
+    git checkout -b feature/your-filter-name
+    ```
 
 2. **Make your changes** following the guidelines above
 
 3. **Commit your changes** with a clear message:
-   ```bash
-   git commit -m "feat: add yourfilter filter"
-   ```
-   
-   We loosely follow [Conventional Commits](https://www.conventionalcommits.org/):
-   - `feat:` - New feature
-   - `fix:` - Bug fix
-   - `docs:` - Documentation changes
-   - `style:` - Code style changes (formatting, etc.)
-   - `refactor:` - Code refactoring
-   - `test:` - Adding tests
-   - `chore:` - Maintenance tasks
+
+    ```bash
+    git commit -m "feat: add yourfilter filter"
+    ```
+
+    We loosely follow [Conventional Commits](https://www.conventionalcommits.org/):
+    - `feat:` - New feature
+    - `fix:` - Bug fix
+    - `docs:` - Documentation changes
+    - `style:` - Code style changes (formatting, etc.)
+    - `refactor:` - Code refactoring
+    - `test:` - Adding tests
+    - `chore:` - Maintenance tasks
 
 4. **Push to your fork**:
-   ```bash
-   git push origin feature/your-filter-name
-   ```
+
+    ```bash
+    git push origin feature/your-filter-name
+    ```
 
 5. **Open a Pull Request** on GitHub with:
-   - A clear title and description
-   - Screenshots/GIFs if it's a visual filter
-   - Reference any related issues
+    - A clear title and description
+    - Screenshots/GIFs if it's a visual filter
+    - Reference any related issues
 
 6. **Wait for review** - We'll review your PR and may suggest changes
 
@@ -273,9 +280,9 @@ Have an idea for a new filter or feature? We'd love to hear it!
 1. **Check existing issues** to avoid duplicates
 2. **Open a new issue** with the `enhancement` label
 3. **Describe your idea** clearly:
-   - What filter/feature would you like?
-   - How would it be used?
-   - Any reference implementations or examples?
+    - What filter/feature would you like?
+    - How would it be used?
+    - Any reference implementations or examples?
 
 ---
 
