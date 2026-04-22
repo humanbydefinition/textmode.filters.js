@@ -213,9 +213,16 @@ export const FiltersPlugin: TextmodePlugin = {
  */
 export const createFiltersPlugin = (): TextmodePlugin => FiltersPlugin;
 
+declare global {
+	interface Window {
+		FiltersPlugin?: TextmodePlugin;
+		createFiltersPlugin?: typeof createFiltersPlugin;
+	}
+}
+
 // UMD global export
 if (typeof window !== 'undefined') {
-	(window as any).FiltersPlugin = FiltersPlugin;
+	window.FiltersPlugin = FiltersPlugin;
 	// Keep backwards compatibility
-	(window as any).createFiltersPlugin = createFiltersPlugin;
+	window.createFiltersPlugin = createFiltersPlugin;
 }
