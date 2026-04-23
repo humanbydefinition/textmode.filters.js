@@ -2,74 +2,74 @@ name: Bug Report
 description: Report broken or incorrect behavior in textmode.filters.js.
 labels: [Bug]
 body:
-  - type: checkboxes
-    id: area
-    attributes:
-      label: Most relevant area
-      description: You may select more than one.
-      options:
-        - label: Plugin installation / lifecycle
-        - label: Filter registration / uninstall
-        - label: Shader behavior / rendering output
-        - label: Filter parameters / defaults
-        - label: Animated filters / time-based effects
-        - label: Grid distortion / geometry mapping
-        - label: WebGL2 / GPU / browser compatibility
-        - label: textmode.js integration
-        - label: Build / types / packaging
-        - label: Documentation / examples
-        - label: Other
-  - type: input
-    id: version
-    attributes:
-      label: textmode.filters.js version
-      description: Example: 1.1.1
-      placeholder: 1.1.1
-  - type: input
-    id: core_version
-    attributes:
-      label: textmode.js version
-      description: Include the core library version too when the bug involves plugin installation, filter registration, or runtime integration.
-      placeholder: 0.11.0
-  - type: input
-    id: environment
-    attributes:
-      label: Browser, GPU/runtime, and OS
-      description: Include browser/version and OS. If relevant, include GPU/graphics backend, package manager, bundler, and import mode.
-      placeholder: Chrome 135, Apple M3 / WebGL2, macOS 15.4, npm + Vite, ESM import
-  - type: textarea
-    id: reproduction
-    attributes:
-      label: Steps to reproduce
-      description: Include a minimal repro. A reduced code snippet or small repo using textmode.js plus FiltersPlugin is ideal. Name the affected filter(s) and add console or WebGL errors if present.
-      value: |
-        1.
-        2.
-        3.
+    - type: checkboxes
+      id: area
+      attributes:
+          label: Most relevant area
+          description: You may select more than one.
+          options:
+              - label: Plugin installation / lifecycle
+              - label: Filter registration / uninstall
+              - label: Shader behavior / rendering output
+              - label: Filter parameters / defaults
+              - label: Animated filters / time-based effects
+              - label: Grid distortion / geometry mapping
+              - label: WebGL2 / GPU / browser compatibility
+              - label: textmode.js integration
+              - label: Build / types / packaging
+              - label: Documentation / examples
+              - label: Other
+    - type: input
+      id: version
+      attributes:
+          label: textmode.filters.js version
+          description: 'Example: 1.1.1'
+          placeholder: 1.1.1
+    - type: input
+      id: core_version
+      attributes:
+          label: textmode.js version
+          description: Include the core library version too when the bug involves plugin installation, filter registration, or runtime integration.
+          placeholder: 0.11.0
+    - type: input
+      id: environment
+      attributes:
+          label: Browser, GPU/runtime, and OS
+          description: Include browser/version and OS. If relevant, include GPU/graphics backend, package manager, bundler, and import mode.
+          placeholder: Chrome 135, Apple M3 / WebGL2, macOS 15.4, npm + Vite, ESM import
+    - type: textarea
+      id: reproduction
+      attributes:
+          label: Steps to reproduce
+          description: Include a minimal repro. A reduced code snippet or small repo using textmode.js plus FiltersPlugin is ideal. Name the affected filter(s) and add console or WebGL errors if present.
+          value: |
+              1.
+              2.
+              3.
 
-        Minimal repro:
+              Minimal repro:
 
-        ```js
-        // Paste the smallest example that still reproduces the issue.
-        ```
-    validations:
-      required: true
-  - type: textarea
-    id: expected
-    attributes:
-      label: Expected behavior
-    validations:
-      required: true
-  - type: textarea
-    id: actual
-    attributes:
-      label: Actual behavior
-    validations:
-      required: true
-  - type: textarea
-    id: notes
-    attributes:
-      label: Additional context
-      description: Screenshots, recordings, before/after renders, GPU details, stack traces, or related issues.
-    validations:
-      required: false
+              ```js
+              // Paste the smallest example that still reproduces the issue.
+              ```
+      validations:
+          required: true
+    - type: textarea
+      id: expected
+      attributes:
+          label: Expected behavior
+      validations:
+          required: true
+    - type: textarea
+      id: actual
+      attributes:
+          label: Actual behavior
+      validations:
+          required: true
+    - type: textarea
+      id: notes
+      attributes:
+          label: Additional context
+          description: Screenshots, recordings, before/after renders, GPU details, stack traces, or related issues.
+      validations:
+          required: false
