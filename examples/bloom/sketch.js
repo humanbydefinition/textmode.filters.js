@@ -1,5 +1,7 @@
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
+/**
+ * @title FiltersPlugin.bloom
+ * @author codex
+ */
 
 const t = textmode.create({
 	canvas: document.getElementById('textmode-canvas'),
@@ -35,17 +37,17 @@ radiusSlider.addEventListener('input', (e) => {
 });
 
 t.setup(async () => {
-	video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
 	video.play();
 	video.loop();
-	video.characters(" .:-=+*#%@");
+	video.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
 	t.layers.base.filter('bloom', {
 		threshold: bloomThreshold,
 		intensity: bloomIntensity,
-		radius: bloomRadius
+		radius: bloomRadius,
 	});
 
 	t.background(0);

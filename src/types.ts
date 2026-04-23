@@ -4,6 +4,7 @@
  * Each filter can be applied using either:
  * - A single value (shorthand for the primary parameter)
  * - An options object with named parameters
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -15,7 +16,7 @@
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -51,6 +52,7 @@
  * Configuration options for the `'brightness'` filter.
  *
  * Adjusts image brightness by multiplying pixel values.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -62,7 +64,7 @@
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -109,6 +111,7 @@ export interface BrightnessOptions {
  * Configuration options for the `'contrast'` filter.
  *
  * Adjusts image contrast by scaling pixel values around mid-gray.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -120,7 +123,7 @@ export interface BrightnessOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -168,6 +171,7 @@ export interface ContrastOptions {
  *
  * Adjusts color intensity without affecting luminance.
  * Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -179,7 +183,7 @@ export interface ContrastOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -226,6 +230,7 @@ export interface SaturationOptions {
  *
  * Shifts all colors around the color wheel by a specified angle.
  * Useful for color grading or creating surreal color effects.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -237,7 +242,7 @@ export interface SaturationOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -287,6 +292,7 @@ export interface HueRotateOptions {
  *
  * Reduces the color palette to a limited number of bands per channel,
  * creating a retro quantized/poster-like look.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -298,7 +304,7 @@ export interface HueRotateOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -348,6 +354,7 @@ export interface PosterizeOptions {
  *
  * RGB color channel separation effect that simulates lens distortion
  * found in cheap cameras or creates stylized glitch aesthetics.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -359,7 +366,7 @@ export interface PosterizeOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -418,6 +425,7 @@ export interface ChromaticAberrationOptions {
  *
  * Reduces image resolution to create a mosaic/pixelated effect
  * reminiscent of retro video games or censored content.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -429,7 +437,7 @@ export interface ChromaticAberrationOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -480,6 +488,7 @@ export interface PixelateOptions {
  *
  * This filter is designed specifically for textmode.js grids, allowing
  * you to create dynamic text distortion effects.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -491,7 +500,7 @@ export interface PixelateOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -609,6 +618,7 @@ export interface GridDistortionOptions {
  *
  * Digital glitch effect with RGB channel separation, scanlines, and noise.
  * Creates a corrupted/broken digital signal aesthetic.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -620,7 +630,7 @@ export interface GridDistortionOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -668,6 +678,7 @@ export interface GlitchOptions {
  * CRT monitor emulation effect with screen curvature, animated scanlines,
  * blur, vignette, and film grain noise. Based on Mattias Gustavsson's
  * classic CRT shader.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -679,7 +690,7 @@ export interface GlitchOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -750,6 +761,7 @@ export interface CrtMattiasOptions {
  * A standalone scanline effect that adds horizontal lines to the image
  * to simulate a CRT display or old monitor. More customizable than
  * the scanlines in crtMattias.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -761,7 +773,7 @@ export interface CrtMattiasOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -854,6 +866,7 @@ export interface ScanlinesOptions {
  *
  * Darkens the edges and corners of the image, drawing focus to the center.
  * Useful for creating a cinematic look or highlighting central content.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -865,7 +878,7 @@ export interface ScanlinesOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -937,6 +950,7 @@ export interface VignetteOptions {
  * Creates a glow effect around bright areas of the image. Pixels above
  * the brightness threshold emit a soft glow that spreads outward.
  * Perfect for creating neon, glowing text, or dreamy effects.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -948,7 +962,7 @@ export interface VignetteOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');
@@ -1023,6 +1037,7 @@ export interface BloomOptions {
  * film stock or analog video. The multi-layered noise creates an organic,
  * moving grain pattern that's less visible in darker areas, mimicking
  * real film characteristics.
+ *
  * @example
  * ```javascript
  * const t = textmode.create({
@@ -1034,7 +1049,7 @@ export interface BloomOptions {
  * let video;
  *
  * t.setup(async () => {
- *   video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+ *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
  *   video.play();
  *   video.loop();
  *   video.characters(' .:-=+*#%@');

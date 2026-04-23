@@ -1,0 +1,8 @@
+blank_issues_enabled: false
+contact_links:
+  - name: Documentation
+    url: https://code.textmode.art/
+    about: Start with the textmode.js docs, this package README, and the filter examples before opening a usage question.
+  - name: Discord
+    url: https://discord.gg/sjrw8QXNks
+    about: Ask usage questions, sanity-check filter ideas, or discuss rendering behavior before filing an issue.

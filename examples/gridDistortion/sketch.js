@@ -1,5 +1,7 @@
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
+/**
+ * @title FiltersPlugin.gridDistortion
+ * @author codex
+ */
 
 const t = textmode.create({
 	canvas: document.getElementById('textmode-canvas'),
@@ -45,10 +47,10 @@ heightVariationSlider.addEventListener('input', (e) => {
 });
 
 t.setup(async () => {
-	video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
 	video.play();
 	video.loop();
-	video.characters(" .:-=+*#%@");
+	video.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
@@ -70,7 +72,8 @@ t.draw(() => {
 	// Generate sine wave pattern for height factors
 	const heightFactors = [];
 	for (let j = 0; j < rows; j++) {
-		const sineValue = Math.sin(j * config.heightFrequency + frameCount * config.heightSpeed) * config.heightAmplitude;
+		const sineValue =
+			Math.sin(j * config.heightFrequency + frameCount * config.heightSpeed) * config.heightAmplitude;
 		// Map from [-amplitude, amplitude] to [0, 1]
 		heightFactors.push((sineValue + config.heightAmplitude) / (2 * config.heightAmplitude));
 	}
@@ -80,11 +83,10 @@ t.draw(() => {
 		gridCellDimensions: [cols, rows],
 		gridPixelDimensions: [t.grid.width, t.grid.height],
 		gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
-		gridCellPixelDimensions: [t.grid.cellWidth, t.grid.cellHeight],
 		widthFactors: widthFactors,
 		heightFactors: heightFactors,
 		widthVariationScale: widthVariation,
-		heightVariationScale: heightVariation
+		heightVariationScale: heightVariation,
 	});
 
 	t.image(video, t.grid.cols, t.grid.rows);

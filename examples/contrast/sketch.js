@@ -1,5 +1,7 @@
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
+/**
+ * @title FiltersPlugin.contrast
+ * @author codex
+ */
 
 const t = textmode.create({
 	canvas: document.getElementById('textmode-canvas'),
@@ -19,10 +21,10 @@ contrastSlider.addEventListener('input', (e) => {
 });
 
 t.setup(async () => {
-	video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
 	video.play();
 	video.loop();
-	video.characters(" .:-=+*#%@");
+	video.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {

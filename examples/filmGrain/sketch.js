@@ -1,5 +1,7 @@
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
+/**
+ * @title FiltersPlugin.filmGrain
+ * @author codex
+ */
 
 const t = textmode.create({
 	canvas: document.getElementById('textmode-canvas'),
@@ -36,10 +38,10 @@ speedSlider.addEventListener('input', (e) => {
 });
 
 t.setup(async () => {
-	video = await t.loadVideo('https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4');
+	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
 	video.play();
 	video.loop();
-	video.characters(" .:-=+*#%@");
+	video.characters(' .:-=+*#%@');
 });
 
 t.draw(() => {
@@ -47,11 +49,11 @@ t.draw(() => {
 		intensity: grainIntensity,
 		size: grainSize,
 		speed: grainSpeed,
-		time: time
+		time: time,
 	});
 
 	t.background(0);
 	t.image(video);
-	
+
 	time += 0.016; // Approximate frame time
 });
