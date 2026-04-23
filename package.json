@@ -19,7 +19,7 @@
 	"scripts": {
 		"dev": "vite --port 5179 --host",
 		"build:bundle": "vite build",
-		"build:types": "tsc -p tsconfig.json",
+		"build:types": "tsc",
 		"build": "npm run build:bundle && npm run build:types",
 		"check": "npm run check:format && npm run lint && npm run lint:md && npm run check:types && npm run build",
 		"dev:docs": "typedoc --watch",
@@ -27,7 +27,7 @@
 		"preview": "vite preview",
 		"format": "prettier --write .",
 		"check:format": "prettier --check .",
-		"check:types": "tsc --noEmit -p tsconfig.json",
+		"check:types": "tsc --noEmit",
 		"lint:md": "markdownlint-cli2",
 		"lint:md:fix": "markdownlint-cli2 --fix",
 		"lint": "eslint src --config eslint.config.js",
