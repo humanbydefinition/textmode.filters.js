@@ -46,16 +46,7 @@
 		[
 			"@semantic-release/github",
 			{
-				"assets": [
-					{
-						"path": "dist/textmode.filters.esm.js",
-						"label": "ESM bundle"
-					},
-					{
-						"path": "dist/textmode.filters.umd.js",
-						"label": "UMD bundle"
-					}
-				],
+				"assets": ["dist/textmode.filters.esm.js", "dist/textmode.filters.umd.js"],
 				"successComment": false,
 				"failComment": false,
 				"releasedLabels": false
