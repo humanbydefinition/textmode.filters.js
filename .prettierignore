@@ -1,5 +1,4 @@
 # Build outputs
-.github/
 api/
 dist/
 node_modules/
