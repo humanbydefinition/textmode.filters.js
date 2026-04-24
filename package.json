@@ -65,8 +65,7 @@
 	"license": "MIT",
 	"author": "humanbydefinition",
 	"lint-staged": {
-		"**/*.{ts,js,json,jsonc,html,css}": "prettier --write",
-		".*.{js,json,jsonc}": "prettier --write"
+		"*": "prettier --ignore-unknown --write"
 	},
 	"repository": {
 		"type": "git",
