@@ -43,6 +43,7 @@
 		"@mapwhit/glsl-minify": "^1.0.0",
 		"@rollup/plugin-terser": "^0.4.4",
 		"@semantic-release/exec": "^7.1.0",
+		"@semantic-release/git": "^10.0.1",
 		"@types/node": "^24.0.13",
 		"eslint": "^9.39.2",
 		"eslint-plugin-jsdoc": "^62.9.0",
