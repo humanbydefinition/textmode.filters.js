@@ -21,7 +21,7 @@
 		"typedoc-plugin-frontmatter",
 		"typedoc-vitepress-theme",
 		"./typedoc-plugins/accessor-docs-normalizer/index.js",
-		"./typedoc-plugins/all-member-pages-router/index.js",
+		//"./typedoc-plugins/all-member-pages-router/index.js",
 		"./typedoc-plugins/include-code-examples/index.js",
 		"./typedoc-plugins/api-frontmatter/index.js"
 	],
@@ -32,7 +32,7 @@
 	"frontmatterCommentTags": ["author", "since", "deprecated"],
 	"preserveFrontmatterCommentTags": false,
 	"frontmatterNamingConvention": "camelCase",
-	"router": "all-member-pages",
+	//"router": "all-member-pages",
 	"indexFormat": "table",
 	"parametersFormat": "table",
 	"interfacePropertiesFormat": "table",
