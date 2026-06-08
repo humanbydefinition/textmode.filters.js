@@ -31,7 +31,7 @@
  * @module textmode.filters.js
  */
 
-import type { TextmodePlugin } from 'textmode.js/plugins';
+import type { TextmodePlugin } from 'textmode.js';
 
 // Re-export all filter option types for consumers
 export type {
