@@ -1,19 +1,16 @@
 /**
  * @title FiltersPlugin.gridDistortion
- * @author codex
  */
 
 const t = textmode.create({
-	canvas: document.getElementById('textmode-canvas'),
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 8,
 	plugins: [FiltersPlugin],
 });
+const labelLayer = t.layers.add();
 
 let video;
-let frameCount = 0;
-let animating = true;
-let widthVariation = 0.5;
-let heightVariation = 0.5;
 
 // Sine wave parameters
 const config = {
@@ -25,26 +22,13 @@ const config = {
 	heightAmplitude: 1.0,
 };
 
-const toggleBtn = document.getElementById('toggleAnimation');
-const widthVariationSlider = document.getElementById('widthVariation');
-const heightVariationSlider = document.getElementById('heightVariation');
-const widthVariationValue = document.getElementById('widthVariation-value');
-const heightVariationValue = document.getElementById('heightVariation-value');
-
-toggleBtn.addEventListener('click', () => {
-	animating = !animating;
-	toggleBtn.textContent = animating ? 'Pause Animation' : 'Resume Animation';
-});
-
-widthVariationSlider.addEventListener('input', (e) => {
-	widthVariation = parseFloat(e.target.value);
-	widthVariationValue.textContent = widthVariation.toFixed(1);
-});
-
-heightVariationSlider.addEventListener('input', (e) => {
-	heightVariation = parseFloat(e.target.value);
-	heightVariationValue.textContent = heightVariation.toFixed(1);
-});
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
 
 t.setup(async () => {
 	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
@@ -53,19 +37,37 @@ t.setup(async () => {
 	video.characters(' .:-=+*#%@');
 });
 
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	const wVar = (0.5 + 0.3 * Math.sin(t.secs * 1.0)).toFixed(2);
+	const hVar = (0.5 + 0.3 * Math.cos(t.secs * 1.5)).toFixed(2);
+
+	drawText('FILTERSPLUGIN.GRIDDISTORTION', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: COORDINATE SPACE WARPING', x, y++, 100, 220, 255);
+	drawText('Warp grid columns and rows.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Width Var: ' + wVar, x, y++, 140, 255, 180);
+	drawText('Height Var: ' + hVar, x, y++, 140, 255, 180);
+});
+
 t.draw(() => {
-	if (animating) {
-		frameCount++;
-	}
+	if (!video) return;
 
 	const cols = t.grid.cols;
 	const rows = t.grid.rows;
+	const wVar = 0.5 + 0.3 * Math.sin(t.secs * 1.0);
+	const hVar = 0.5 + 0.3 * Math.cos(t.secs * 1.5);
 
 	// Generate sine wave pattern for width factors
 	const widthFactors = [];
 	for (let i = 0; i < cols; i++) {
-		const sineValue = Math.sin(i * config.widthFrequency + frameCount * config.widthSpeed) * config.widthAmplitude;
-		// Map from [-amplitude, amplitude] to [0, 1]
+		const sineValue = Math.sin(i * config.widthFrequency + t.secs * 60 * config.widthSpeed) * config.widthAmplitude;
 		widthFactors.push((sineValue + config.widthAmplitude) / (2 * config.widthAmplitude));
 	}
 
@@ -73,8 +75,7 @@ t.draw(() => {
 	const heightFactors = [];
 	for (let j = 0; j < rows; j++) {
 		const sineValue =
-			Math.sin(j * config.heightFrequency + frameCount * config.heightSpeed) * config.heightAmplitude;
-		// Map from [-amplitude, amplitude] to [0, 1]
+			Math.sin(j * config.heightFrequency + t.secs * 60 * config.heightSpeed) * config.heightAmplitude;
 		heightFactors.push((sineValue + config.heightAmplitude) / (2 * config.heightAmplitude));
 	}
 
@@ -85,9 +86,13 @@ t.draw(() => {
 		gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
 		widthFactors: widthFactors,
 		heightFactors: heightFactors,
-		widthVariationScale: widthVariation,
-		heightVariationScale: heightVariation,
+		widthVariationScale: wVar,
+		heightVariationScale: hVar,
 	});
 
 	t.image(video, t.grid.cols, t.grid.rows);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });

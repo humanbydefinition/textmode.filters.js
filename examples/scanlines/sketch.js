@@ -1,40 +1,24 @@
 /**
  * @title FiltersPlugin.scanlines
- * @author codex
  */
 
 const t = textmode.create({
-	canvas: document.getElementById('textmode-canvas'),
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 16,
 	plugins: [FiltersPlugin],
 });
+const labelLayer = t.layers.add();
 
 let video;
-let count = 300;
-let intensity = 0.5;
-let speed = 1.0;
 
-const countSlider = document.getElementById('count');
-const countValue = document.getElementById('count-value');
-const intensitySlider = document.getElementById('intensity');
-const intensityValue = document.getElementById('intensity-value');
-const speedSlider = document.getElementById('speed');
-const speedValue = document.getElementById('speed-value');
-
-countSlider.addEventListener('input', (e) => {
-	count = parseFloat(e.target.value);
-	countValue.textContent = count;
-});
-
-intensitySlider.addEventListener('input', (e) => {
-	intensity = parseFloat(e.target.value);
-	intensityValue.textContent = intensity.toFixed(2);
-});
-
-speedSlider.addEventListener('input', (e) => {
-	speed = parseFloat(e.target.value);
-	speedValue.textContent = speed.toFixed(1);
-});
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
 
 t.setup(async () => {
 	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
@@ -43,14 +27,39 @@ t.setup(async () => {
 	video.characters(' .:-=+*#%@');
 });
 
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	const intensity = (0.5 + 0.3 * Math.sin(t.secs * 1.5)).toFixed(2);
+
+	drawText('FILTERSPLUGIN.SCANLINES', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: DISPLAY SCAN GRID', x, y++, 100, 220, 255);
+	drawText('Overlays drifting raster lines.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Line Count: 300', x, y++, 140, 255, 180);
+	drawText('Intensity: ' + intensity, x, y++, 140, 255, 180);
+});
+
 t.draw(() => {
+	if (!video) return;
+	const intensity = 0.5 + 0.3 * Math.sin(t.secs * 1.5);
+
 	t.layers.base.filter('scanlines', {
-		count: count,
+		count: 300,
 		intensity: intensity,
-		speed: speed,
+		speed: 1.0,
 		time: t.secs,
 	});
 
 	t.background(0);
 	t.image(video);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });

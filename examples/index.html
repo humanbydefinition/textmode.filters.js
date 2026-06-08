@@ -80,30 +80,60 @@
 		</div>
 
 		<script>
-			const GROUPS = [
-				{
-					name: 'Color Adjustment',
-					description: 'Brightness, contrast, hue, saturation, and posterization filters.',
-					entries: ['brightness', 'contrast', 'saturation', 'hueRotate', 'posterize'],
-				},
-				{
-					name: 'Distortion',
-					description: 'Channel separation, pixelation, and grid warping effects.',
-					entries: ['chromaticAberration', 'pixelate', 'gridDistortion'],
-				},
-				{
-					name: 'Stylization',
-					description: 'CRT, glitch, glow, grain, scanlines, and vignette treatments.',
-					entries: ['glitch', 'crtMattias', 'scanlines', 'vignette', 'bloom', 'filmGrain'],
-				},
-			];
+			const MANIFEST_URL = './manifest.json';
+			const container = document.getElementById('examples');
+			const searchInput = document.getElementById('search');
 
-			function getExampleHref(path) {
-				return `./sketch.html?path=${encodeURIComponent(path)}`;
+			function escapeHtml(value) {
+				return String(value).replace(/[&<>"']/g, (char) => {
+					return {
+						'&': '&amp;',
+						'<': '&lt;',
+						'>': '&gt;',
+						'"': '&quot;',
+						"'": '&#39;',
+					}[char];
+				});
+			}
+
+			function getExamplePath(sourceFile) {
+				if (!sourceFile.startsWith('examples/') || !sourceFile.endsWith('/sketch.js')) {
+					throw new Error(`Invalid example source file: ${sourceFile}`);
+				}
+
+				return sourceFile.slice('examples/'.length, -'/sketch.js'.length);
+			}
+
+			function getExampleName(examplePath) {
+				const segments = examplePath.split('/');
+				return segments[segments.length - 1];
+			}
+
+			function normalizeManifest(manifest) {
+				if (!Array.isArray(manifest.groups)) {
+					throw new Error('Examples manifest is missing a groups array.');
+				}
+
+				return manifest.groups.map((group) => ({
+					name: group.name,
+					description: group.description,
+					entries: group.examples.map((example) => {
+						const path = getExamplePath(example.sourceFile);
+
+						return {
+							name: getExampleName(path),
+							path,
+							title: example.title,
+						};
+					}),
+				}));
+			}
+
+			function getExampleHref(examplePath) {
+				return `./sketch.html?path=${encodeURIComponent(examplePath)}`;
 			}
 
 			function render(groups) {
-				const container = document.getElementById('examples');
 				container.innerHTML = '';
 
 				groups.forEach((group) => {
@@ -114,16 +144,17 @@
 
 					section.innerHTML = `
             <div class="flex items-center gap-3 px-4 py-3 border-b border-zinc-800 bg-zinc-900/60">
-              <h2 class="text-sm font-medium text-zinc-100 tracking-tight">${group.name}</h2>
-              <span class="text-xs text-zinc-600 hidden sm:block">${group.description}</span>
+              <h2 class="text-sm font-medium text-zinc-100 tracking-tight">${escapeHtml(group.name)}</h2>
+              <span class="text-xs text-zinc-600 hidden sm:block">${escapeHtml(group.description)}</span>
               <span class="ml-auto text-xs text-zinc-600 tabular-nums" data-count>${group.entries.length}</span>
             </div>
             <div class="px-4 py-3 flex flex-wrap gap-1.5" data-entries>
               ${group.entries
-					.map(
-						(entry) =>
-							`<a href="${getExampleHref(entry)}" class="entry-badge" data-entry="${entry.toLowerCase()}" data-entry-name="${entry}" aria-expanded="false">${entry}</a>`
-					)
+					.map((entry) => {
+						const name = escapeHtml(entry.name);
+						const title = escapeHtml(entry.title);
+						return `<a href="${escapeHtml(getExampleHref(entry.path))}" class="entry-badge" data-entry="${escapeHtml(entry.name.toLowerCase())}" data-entry-name="${name}" data-entry-title="${escapeHtml(entry.title.toLowerCase())}" aria-expanded="false" title="${title}">${name}</a>`;
+					})
 					.join('')}
             </div>
             <div class="example-preview" data-preview hidden>
@@ -138,13 +169,19 @@
                 </div>
               </div>
               <div class="example-preview-frame-wrap">
-                <iframe class="example-preview-frame" data-preview-frame loading="lazy" title="${group.name} example preview"></iframe>
+                <iframe class="example-preview-frame" data-preview-frame loading="lazy" title="${escapeHtml(group.name)} example preview"></iframe>
               </div>
             </div>
           `;
 
 					container.appendChild(section);
 				});
+
+				filterExamples();
+			}
+
+			function showGalleryState(message) {
+				container.innerHTML = `<p class="text-xs text-zinc-600">${escapeHtml(message)}</p>`;
 			}
 
 			function closePreview(section) {
@@ -159,8 +196,6 @@
 
 				preview.hidden = true;
 				frame.src = 'about:blank';
-				frame.style.height = '';
-				delete frame.dataset.path;
 			}
 
 			function openPreview(section, badge) {
@@ -188,35 +223,33 @@
 				badge.setAttribute('aria-expanded', 'true');
 				title.textContent = `${groupName}.${entryName}`;
 				link.href = href;
-				frame.dataset.path = entryName;
 				frame.src = href;
 				preview.hidden = false;
 			}
 
-			window.addEventListener('message', (event) => {
-				if (event.origin !== window.location.origin) {
-					return;
+			async function loadManifest() {
+				const response = await fetch(MANIFEST_URL);
+
+				if (!response.ok) {
+					throw new Error(`Unable to load ${MANIFEST_URL}: ${response.status} ${response.statusText}`);
 				}
 
-				if (event.data?.type !== 'textmode-filters-example-height') {
-					return;
+				return response.json();
+			}
+
+			async function bootstrapGallery() {
+				showGalleryState('loading examples...');
+
+				try {
+					const manifest = await loadManifest();
+					render(normalizeManifest(manifest));
+				} catch (error) {
+					console.error('Unable to load examples manifest.', error);
+					showGalleryState('Unable to load examples manifest.');
 				}
+			}
 
-				const frame = Array.from(document.querySelectorAll('[data-preview-frame]')).find(
-					(candidate) => candidate.contentWindow === event.source
-				);
-
-				if (!frame) {
-					return;
-				}
-
-				const nextHeight = Math.max(640, Math.ceil(event.data.height || 0));
-				frame.style.height = `${nextHeight}px`;
-			});
-
-			render(GROUPS);
-
-			document.getElementById('examples').addEventListener('click', (event) => {
+			container.addEventListener('click', (event) => {
 				const closeButton = event.target.closest('[data-preview-close]');
 				if (closeButton) {
 					closePreview(closeButton.closest('[data-group]'));
@@ -243,8 +276,8 @@
 				openPreview(section, badge);
 			});
 
-			document.getElementById('search').addEventListener('input', function () {
-				const q = this.value.trim().toLowerCase();
+			function filterExamples() {
+				const q = searchInput.value.trim().toLowerCase();
 
 				document.querySelectorAll('#examples > div').forEach((section) => {
 					const badges = section.querySelectorAll('.entry-badge');
@@ -253,19 +286,30 @@
 
 					badges.forEach((badge) => {
 						const entryName = badge.dataset.entry;
-						const match = !q || entryName.includes(q) || groupName.includes(q);
+						const entryTitle = badge.dataset.entryTitle || '';
+						const match = !q || entryName.includes(q) || entryTitle.includes(q) || groupName.includes(q);
 						badge.classList.toggle('hidden-entry', !match);
 						if (match) visible++;
 					});
 
-					section.querySelector('[data-count]').textContent = visible;
-					section.classList.toggle('hidden', visible === 0);
+					const countEl = section.querySelector('[data-count]');
+					if (countEl) countEl.textContent = visible;
+
+					const activeBadge = section.querySelector('.entry-badge.is-active');
+					if (activeBadge && activeBadge.classList.contains('hidden-entry')) {
+						closePreview(section);
+					}
 
 					if (visible === 0) {
 						closePreview(section);
 					}
+
+					section.style.display = visible === 0 ? 'none' : '';
 				});
-			});
+			}
+
+			searchInput.addEventListener('input', filterExamples);
+			bootstrapGallery();
 		</script>
 	</body>
 </html>
