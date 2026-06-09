@@ -1,32 +1,24 @@
 /**
  * @title FiltersPlugin.crtMattias
- * @author codex
  */
 
 const t = textmode.create({
-	canvas: document.getElementById('textmode-canvas'),
+	width: window.innerWidth,
+	height: window.innerHeight,
 	fontSize: 32,
 	plugins: [FiltersPlugin],
 });
+const labelLayer = t.layers.add();
 
 let video;
-let curvature = 0.5;
-let scanSpeed = 1.0;
 
-const curvatureSlider = document.getElementById('curvature');
-const curvatureValue = document.getElementById('curvature-value');
-const scanSpeedSlider = document.getElementById('scanSpeed');
-const scanSpeedValue = document.getElementById('scanSpeed-value');
-
-curvatureSlider.addEventListener('input', (e) => {
-	curvature = parseFloat(e.target.value);
-	curvatureValue.textContent = curvature.toFixed(2);
-});
-
-scanSpeedSlider.addEventListener('input', (e) => {
-	scanSpeed = parseFloat(e.target.value);
-	scanSpeedValue.textContent = scanSpeed.toFixed(1);
-});
+function drawText(text, x, y, r = 220, g = 230, b = 255) {
+	t.push();
+	t.printAlign('left', 'top');
+	t.charColor(r, g, b);
+	t.print(text, x, y);
+	t.pop();
+}
 
 t.setup(async () => {
 	video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
@@ -35,13 +27,38 @@ t.setup(async () => {
 	video.characters(' .:-=+*#%@');
 });
 
+labelLayer.draw(() => {
+	t.clear();
+	const left = -Math.floor(t.grid.cols / 2),
+		top = -Math.floor(t.grid.rows / 2);
+	let y = top + 3,
+		x = left + 3;
+
+	const curv = (0.4 + 0.3 * Math.sin(t.secs * 1.0)).toFixed(2);
+
+	drawText('FILTERSPLUGIN.CRTMATTIAS', x, y++, 100, 255, 140);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('CONCEPT: CATHODE RAY TUBE EMULATOR', x, y++, 100, 220, 255);
+	drawText('Applies screen curvature and scanlines.', x, y++, 140, 160, 190);
+	drawText('------------------------------------', x, y++, 80, 100, 150);
+	drawText('Curvature: ' + curv, x, y++, 140, 255, 180);
+	drawText('Scan Speed: 1.5', x, y++, 140, 255, 180);
+});
+
 t.draw(() => {
+	if (!video) return;
+	const curv = 0.4 + 0.3 * Math.sin(t.secs * 1.0);
+
 	t.layers.base.filter('crtMattias', {
-		curvature: curvature,
-		scanSpeed: scanSpeed,
+		curvature: curv,
+		scanSpeed: 1.5,
 		time: t.secs,
 	});
 
 	t.background(0);
 	t.image(video);
+});
+
+t.windowResized(() => {
+	t.resizeCanvas(window.innerWidth, window.innerHeight);
 });

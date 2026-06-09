@@ -31,7 +31,7 @@
  * @module textmode.filters.js
  */
 
-import type { TextmodePlugin } from 'textmode.js/plugins';
+import type { TextmodePlugin } from 'textmode.js';
 
 // Re-export all filter option types for consumers
 export type {
@@ -76,36 +76,7 @@ const defaultFactors = new Array(128).fill(0.5);
  * visual effects that run entirely on the GPU via WebGL2 fragment shaders.
  *
  * @example
- * ```javascript
- * import { textmode } from 'textmode.js';
- * import { FiltersPlugin } from 'textmode.filters.js';
- *
- * const t = textmode.create({
- *     plugins: [FiltersPlugin]
- * });
- *
- * let frame = 0;
- * t.draw(() => {
- *     // Simple filter with shorthand value
- *     t.layers.base.filter('brightness', 1.2);
- *
- *     // Filter with options object
- *     t.layers.base.filter('bloom', {
- *         threshold: 0.5,
- *         intensity: 1.5,
- *         radius: 8
- *     });
- *
- *     // Animated filter
- *     t.layers.base.filter('filmGrain', {
- *         intensity: 0.2,
- *         time: frame * 0.016
- *     });
- *
- *     t.background(0);
- *     frame++;
- * });
- * ```
+ * {@includeCode ../examples/brightness/sketch.js}
  */
 export const FiltersPlugin: TextmodePlugin = {
 	name: 'textmode.filters',

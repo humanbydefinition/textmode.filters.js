@@ -2,17 +2,17 @@ name: Discussion
 description: Start a broader discussion about the textmode.filters.js API, architecture, or project direction.
 labels: [Discussion]
 body:
-  - type: textarea
-    id: topic
-    attributes:
-      label: Topic
-      description: What do you want to discuss?
-    validations:
-      required: true
-  - type: textarea
-    id: context
-    attributes:
-      label: Context
-      description: Include example filters, shader ideas, prior discussion, or concrete tradeoffs if relevant.
-    validations:
-      required: false
+    - type: textarea
+      id: topic
+      attributes:
+          label: Topic
+          description: What do you want to discuss?
+      validations:
+          required: true
+    - type: textarea
+      id: context
+      attributes:
+          label: Context
+          description: Include example filters, shader ideas, prior discussion, or concrete tradeoffs if relevant.
+      validations:
+          required: false

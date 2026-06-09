@@ -6,40 +6,7 @@
  * - An options object with named parameters
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('bloom', {
- *     threshold: 0.5,
- *     intensity: 1 + wobble * 0.35,
- *     radius: 6 + wobble * 2,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/bloom/sketch.js}
  *
  * @module
  */
@@ -54,38 +21,7 @@
  * Adjusts image brightness by multiplying pixel values.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('brightness', {
- *     amount: 1 + wobble * 0.25,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/brightness/sketch.js}
  *
  * @category Color adjustment filters
  */
@@ -113,38 +49,7 @@ export interface BrightnessOptions {
  * Adjusts image contrast by scaling pixel values around mid-gray.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('contrast', {
- *     amount: 1 + wobble * 0.35,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/contrast/sketch.js}
  *
  * @category Color adjustment filters
  */
@@ -173,38 +78,7 @@ export interface ContrastOptions {
  * Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('saturation', {
- *     amount: 1 + wobble * 0.45,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/saturation/sketch.js}
  *
  * @category Color adjustment filters
  */
@@ -232,39 +106,7 @@ export interface SaturationOptions {
  * Useful for color grading or creating surreal color effects.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   const hue = (t.frameCount * 2 + wobble * 45) % 360;
- *   t.layers.base.filter('hueRotate', {
- *     angle: hue,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/hueRotate/sketch.js}
  *
  * @category Color adjustment filters
  */
@@ -294,38 +136,7 @@ export interface HueRotateOptions {
  * creating a retro quantized/poster-like look.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('posterize', {
- *     levels: Math.max(2, Math.round(5 + wobble * 3)),
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/posterize/sketch.js}
  *
  * @category Color adjustment filters
  */
@@ -356,39 +167,7 @@ export interface PosterizeOptions {
  * found in cheap cameras or creates stylized glitch aesthetics.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('chromaticAberration', {
- *     amount: 6 + wobble * 4,
- *     direction: [Math.sin(t.secs), Math.cos(t.secs)],
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/chromaticAberration/sketch.js}
  *
  * @category Distortion filters
  */
@@ -427,38 +206,7 @@ export interface ChromaticAberrationOptions {
  * reminiscent of retro video games or censored content.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('pixelate', {
- *     pixelSize: 6 + wobble * 3,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/pixelate/sketch.js}
  *
  * @category Distortion filters
  */
@@ -490,46 +238,7 @@ export interface PixelateOptions {
  * you to create dynamic text distortion effects.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   const widthFactors = Array.from({ length: t.grid.cols }, (_, i) => (Math.sin(i * 0.18 + t.frameCount * 0.04) + 1) * 0.5);
- *   const heightFactors = Array.from({ length: t.grid.rows }, (_, i) => (Math.sin(i * 0.24 + t.secs * 1.5) + 1) * 0.5);
- *   t.layers.base.filter('gridDistortion', {
- *     gridCellDimensions: [t.grid.cols, t.grid.rows],
- *     gridPixelDimensions: [t.grid.width, t.grid.height],
- *     gridOffsetDimensions: [t.grid.offsetX, t.grid.offsetY],
- *     widthFactors,
- *     heightFactors,
- *     widthVariationScale: 0.35 + wobble * 0.15,
- *     heightVariationScale: 0.35 + wobble * 0.15,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/gridDistortion/sketch.js}
  *
  * @category Distortion filters
  */
@@ -620,38 +329,7 @@ export interface GridDistortionOptions {
  * Creates a corrupted/broken digital signal aesthetic.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('glitch', {
- *     amount: Math.max(0, 0.2 + wobble * 0.8),
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/glitch/sketch.js}
  *
  * @category Stylization filters
  */
@@ -680,40 +358,7 @@ export interface GlitchOptions {
  * classic CRT shader.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('crtMattias', {
- *     curvature: 0.45 + wobble * 0.1,
- *     scanSpeed: 1 + wobble * 0.25,
- *     time: t.secs,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/crtMattias/sketch.js}
  *
  * @see {@link https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl | Original shader by Mattias Gustavsson}
  *
@@ -763,42 +408,7 @@ export interface CrtMattiasOptions {
  * the scanlines in crtMattias.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('scanlines', {
- *     count: 256,
- *     lineWidth: 0.5,
- *     intensity: 0.7 + wobble * 0.1,
- *     speed: 1 + wobble * 0.15,
- *     time: t.secs,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/scanlines/sketch.js}
  *
  * @category Stylization filters
  */
@@ -868,40 +478,7 @@ export interface ScanlinesOptions {
  * Useful for creating a cinematic look or highlighting central content.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('vignette', {
- *     amount: 0.5 + wobble * 0.2,
- *     softness: 0.5,
- *     roundness: 0.5 + wobble * 0.15,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/vignette/sketch.js}
  *
  * @category Stylization filters
  */
@@ -952,40 +529,7 @@ export interface VignetteOptions {
  * Perfect for creating neon, glowing text, or dreamy effects.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('bloom', {
- *     threshold: 0.5,
- *     intensity: 1.2 + wobble * 0.5,
- *     radius: 6 + wobble * 2,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/bloom/sketch.js}
  *
  * @category Stylization filters
  */
@@ -1039,41 +583,7 @@ export interface BloomOptions {
  * real film characteristics.
  *
  * @example
- * ```javascript
- * const t = textmode.create({
- *   width: window.innerWidth,
- *   height: window.innerHeight,
- *   plugins: [FiltersPlugin],
- * });
- *
- * let video;
- *
- * t.setup(async () => {
- *   video = await t.loadVideo('https://interactive-examples.mdn.mozilla.net/media/cc0-videos/flower.mp4');
- *   video.play();
- *   video.loop();
- *   video.characters(' .:-=+*#%@');
- * });
- *
- * t.draw(() => {
- *   t.background(0);
- *   if (video) {
- *     t.image(video, t.grid.cols, t.grid.rows);
- *   }
- *
- *   const wobble = Math.sin(t.secs * 2);
- *   t.layers.base.filter('filmGrain', {
- *     intensity: 0.2 + wobble * 0.1,
- *     size: 2 + wobble * 0.5,
- *     speed: 1 + wobble * 0.2,
- *     time: t.secs,
- *   });
- * });
- *
- * t.windowResized(() => {
- *   t.resizeCanvas(window.innerWidth, window.innerHeight);
- * });
- * ```
+ * {@includeCode ../examples/filmGrain/sketch.js}
  *
  * @category Stylization filters
  */

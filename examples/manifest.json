@@ -1,0 +1,80 @@
+{
+	"version": 1,
+	"description": "Image filter plugins for textmode.js examples manifest",
+	"groups": [
+		{
+			"name": "Color Adjustment",
+			"description": "Brightness, contrast, hue, saturation, and posterization filters.",
+			"examples": [
+				{
+					"title": "FiltersPlugin.brightness",
+					"sourceFile": "examples/brightness/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.contrast",
+					"sourceFile": "examples/contrast/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.saturation",
+					"sourceFile": "examples/saturation/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.hueRotate",
+					"sourceFile": "examples/hueRotate/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.posterize",
+					"sourceFile": "examples/posterize/sketch.js"
+				}
+			]
+		},
+		{
+			"name": "Distortion",
+			"description": "Channel separation, pixelation, and grid warping effects.",
+			"examples": [
+				{
+					"title": "FiltersPlugin.chromaticAberration",
+					"sourceFile": "examples/chromaticAberration/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.pixelate",
+					"sourceFile": "examples/pixelate/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.gridDistortion",
+					"sourceFile": "examples/gridDistortion/sketch.js"
+				}
+			]
+		},
+		{
+			"name": "Stylization",
+			"description": "CRT, glitch, glow, grain, scanlines, and vignette treatments.",
+			"examples": [
+				{
+					"title": "FiltersPlugin.glitch",
+					"sourceFile": "examples/glitch/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.crtMattias",
+					"sourceFile": "examples/crtMattias/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.scanlines",
+					"sourceFile": "examples/scanlines/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.vignette",
+					"sourceFile": "examples/vignette/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.bloom",
+					"sourceFile": "examples/bloom/sketch.js"
+				},
+				{
+					"title": "FiltersPlugin.filmGrain",
+					"sourceFile": "examples/filmGrain/sketch.js"
+				}
+			]
+		}
+	]
+}
