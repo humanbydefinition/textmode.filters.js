@@ -24,6 +24,8 @@
  * {@includeCode ../examples/brightness/sketch.js}
  *
  * @category Color adjustment filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BrightnessOptions | BrightnessOptions API reference}
  */
 export interface BrightnessOptions {
 	/**
@@ -35,6 +37,8 @@ export interface BrightnessOptions {
 	 * - `0.0` = completely black
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BrightnessOptions#amount | BrightnessOptions.amount API reference}
 	 */
 	amount: number;
 }
@@ -52,6 +56,8 @@ export interface BrightnessOptions {
  * {@includeCode ../examples/contrast/sketch.js}
  *
  * @category Color adjustment filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ContrastOptions | ContrastOptions API reference}
  */
 export interface ContrastOptions {
 	/**
@@ -63,6 +69,8 @@ export interface ContrastOptions {
 	 * - `0.0` = solid gray
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ContrastOptions#amount | ContrastOptions.amount API reference}
 	 */
 	amount: number;
 }
@@ -81,6 +89,8 @@ export interface ContrastOptions {
  * {@includeCode ../examples/saturation/sketch.js}
  *
  * @category Color adjustment filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/SaturationOptions | SaturationOptions API reference}
  */
 export interface SaturationOptions {
 	/**
@@ -91,6 +101,8 @@ export interface SaturationOptions {
 	 * - `> 1.0` = vivid/oversaturated colors
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/SaturationOptions#amount | SaturationOptions.amount API reference}
 	 */
 	amount: number;
 }
@@ -109,6 +121,8 @@ export interface SaturationOptions {
  * {@includeCode ../examples/hueRotate/sketch.js}
  *
  * @category Color adjustment filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/HueRotateOptions | HueRotateOptions API reference}
  */
 export interface HueRotateOptions {
 	/**
@@ -121,6 +135,8 @@ export interface HueRotateOptions {
 	 * Values wrap around, so `370` is equivalent to `10`.
 	 *
 	 * @default 0.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/HueRotateOptions#angle | HueRotateOptions.angle API reference}
 	 */
 	angle: number;
 }
@@ -139,6 +155,8 @@ export interface HueRotateOptions {
  * {@includeCode ../examples/posterize/sketch.js}
  *
  * @category Color adjustment filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/PosterizeOptions | PosterizeOptions API reference}
  */
 export interface PosterizeOptions {
 	/**
@@ -152,6 +170,8 @@ export interface PosterizeOptions {
 	 * - `8+` = subtle posterization
 	 *
 	 * @default 4.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/PosterizeOptions#levels | PosterizeOptions.levels API reference}
 	 */
 	levels: number;
 }
@@ -170,6 +190,8 @@ export interface PosterizeOptions {
  * {@includeCode ../examples/chromaticAberration/sketch.js}
  *
  * @category Distortion filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ChromaticAberrationOptions | ChromaticAberrationOptions API reference}
  */
 export interface ChromaticAberrationOptions {
 	/**
@@ -178,6 +200,8 @@ export interface ChromaticAberrationOptions {
 	 * Controls how far the red and blue channels are separated from green.
 	 *
 	 * @default 5.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ChromaticAberrationOptions#amount | ChromaticAberrationOptions.amount API reference}
 	 */
 	amount: number;
 
@@ -191,6 +215,8 @@ export interface ChromaticAberrationOptions {
 	 * The vector is normalized internally, so `[2, 0]` is the same as `[1, 0]`.
 	 *
 	 * @default [1.0, 0.0]
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ChromaticAberrationOptions#direction | ChromaticAberrationOptions.direction API reference}
 	 */
 	direction: [number, number];
 }
@@ -209,6 +235,8 @@ export interface ChromaticAberrationOptions {
  * {@includeCode ../examples/pixelate/sketch.js}
  *
  * @category Distortion filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/PixelateOptions | PixelateOptions API reference}
  */
 export interface PixelateOptions {
 	/**
@@ -219,6 +247,8 @@ export interface PixelateOptions {
 	 * Minimum value: `1.0`
 	 *
 	 * @default 4.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/PixelateOptions#pixelsize | PixelateOptions.pixelSize API reference}
 	 */
 	pixelSize: number;
 }
@@ -241,6 +271,8 @@ export interface PixelateOptions {
  * {@includeCode ../examples/gridDistortion/sketch.js}
  *
  * @category Distortion filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions | GridDistortionOptions API reference}
  */
 export interface GridDistortionOptions {
 	/**
@@ -251,6 +283,8 @@ export interface GridDistortionOptions {
 	 * Maximum value: `[128, 128]`
 	 *
 	 * @default [80.0, 40.0]
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#gridcelldimensions | GridDistortionOptions.gridCellDimensions API reference}
 	 */
 	gridCellDimensions: [number, number];
 
@@ -261,6 +295,8 @@ export interface GridDistortionOptions {
 	 * `[t.grid.cols * t.grid.cellWidth, t.grid.rows * t.grid.cellHeight]`
 	 *
 	 * @default [640.0, 320.0]
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#gridpixeldimensions | GridDistortionOptions.gridPixelDimensions API reference}
 	 */
 	gridPixelDimensions: [number, number];
 
@@ -270,6 +306,8 @@ export interface GridDistortionOptions {
 	 * Use `[t.grid.offsetX, t.grid.offsetY]` to match your grid position.
 	 *
 	 * @default [0.0, 0.0]
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#gridoffsetdimensions | GridDistortionOptions.gridOffsetDimensions API reference}
 	 */
 	gridOffsetDimensions: [number, number];
 
@@ -283,6 +321,8 @@ export interface GridDistortionOptions {
 	 * - `1.0` = maximum width
 	 *
 	 * @default Array(128).fill(0.5)
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#widthfactors | GridDistortionOptions.widthFactors API reference}
 	 */
 	widthFactors: number[];
 
@@ -296,6 +336,8 @@ export interface GridDistortionOptions {
 	 * - `1.0` = maximum height
 	 *
 	 * @default Array(128).fill(0.5)
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#heightfactors | GridDistortionOptions.heightFactors API reference}
 	 */
 	heightFactors: number[];
 
@@ -305,6 +347,8 @@ export interface GridDistortionOptions {
 	 * Higher values create more dramatic width variations.
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#widthvariationscale | GridDistortionOptions.widthVariationScale API reference}
 	 */
 	widthVariationScale: number;
 
@@ -314,6 +358,8 @@ export interface GridDistortionOptions {
 	 * Higher values create more dramatic height variations.
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#heightvariationscale | GridDistortionOptions.heightVariationScale API reference}
 	 */
 	heightVariationScale: number;
 }
@@ -332,6 +378,8 @@ export interface GridDistortionOptions {
  * {@includeCode ../examples/glitch/sketch.js}
  *
  * @category Stylization filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GlitchOptions | GlitchOptions API reference}
  */
 export interface GlitchOptions {
 	/**
@@ -342,6 +390,8 @@ export interface GlitchOptions {
 	 * - `1.0+` = intense, chaotic glitching
 	 *
 	 * @default 0.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GlitchOptions#amount | GlitchOptions.amount API reference}
 	 */
 	amount: number;
 }
@@ -363,6 +413,8 @@ export interface GlitchOptions {
  * @see {@link https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl | Original shader by Mattias Gustavsson}
  *
  * @category Stylization filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions | CrtMattiasOptions API reference}
  */
 export interface CrtMattiasOptions {
 	/**
@@ -373,6 +425,8 @@ export interface CrtMattiasOptions {
 	 * - `1.0` = maximum curvature
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions#curvature | CrtMattiasOptions.curvature API reference}
 	 */
 	curvature: number;
 
@@ -382,6 +436,8 @@ export interface CrtMattiasOptions {
 	 * Higher values make the scanline crawl faster.
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions#scanspeed | CrtMattiasOptions.scanSpeed API reference}
 	 */
 	scanSpeed: number;
 
@@ -392,6 +448,8 @@ export interface CrtMattiasOptions {
 	 * Typically use elapsed time in seconds or frame count.
 	 *
 	 * @default 0.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions#time | CrtMattiasOptions.time API reference}
 	 */
 	time: number;
 }
@@ -411,6 +469,8 @@ export interface CrtMattiasOptions {
  * {@includeCode ../examples/scanlines/sketch.js}
  *
  * @category Stylization filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions | ScanlinesOptions API reference}
  */
 export interface ScanlinesOptions {
 	/**
@@ -421,6 +481,8 @@ export interface ScanlinesOptions {
 	 * Minimum value: `10.0`
 	 *
 	 * @default 300.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#count | ScanlinesOptions.count API reference}
 	 */
 	count: number;
 
@@ -432,6 +494,8 @@ export interface ScanlinesOptions {
 	 * - `1.0` = solid (no gaps)
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#linewidth | ScanlinesOptions.lineWidth API reference}
 	 */
 	lineWidth: number;
 
@@ -443,6 +507,8 @@ export interface ScanlinesOptions {
 	 * - `1.0` = maximum darkness (solid black lines)
 	 *
 	 * @default 0.75
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#intensity | ScanlinesOptions.intensity API reference}
 	 */
 	intensity: number;
 
@@ -454,6 +520,8 @@ export interface ScanlinesOptions {
 	 * - Higher values = faster scrolling
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#speed | ScanlinesOptions.speed API reference}
 	 */
 	speed: number;
 
@@ -463,6 +531,8 @@ export interface ScanlinesOptions {
 	 * Increment this value each frame to animate the scrolling effect.
 	 *
 	 * @default 0.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#time | ScanlinesOptions.time API reference}
 	 */
 	time: number;
 }
@@ -481,6 +551,8 @@ export interface ScanlinesOptions {
  * {@includeCode ../examples/vignette/sketch.js}
  *
  * @category Stylization filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions | VignetteOptions API reference}
  */
 export interface VignetteOptions {
 	/**
@@ -491,6 +563,8 @@ export interface VignetteOptions {
 	 * - `1.0` = very dark edges
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions#amount | VignetteOptions.amount API reference}
 	 */
 	amount: number;
 
@@ -502,6 +576,8 @@ export interface VignetteOptions {
 	 * - `1.0` = very soft, gradual falloff
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions#softness | VignetteOptions.softness API reference}
 	 */
 	softness: number;
 
@@ -513,6 +589,8 @@ export interface VignetteOptions {
 	 * - `1.0` = circular/elliptical
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions#roundness | VignetteOptions.roundness API reference}
 	 */
 	roundness: number;
 }
@@ -532,6 +610,8 @@ export interface VignetteOptions {
  * {@includeCode ../examples/bloom/sketch.js}
  *
  * @category Stylization filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions | BloomOptions API reference}
  */
 export interface BloomOptions {
 	/**
@@ -542,6 +622,8 @@ export interface BloomOptions {
 	 * - `1.0` = only the brightest pixels glow
 	 *
 	 * @default 0.5
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions#threshold | BloomOptions.threshold API reference}
 	 */
 	threshold: number;
 
@@ -553,6 +635,8 @@ export interface BloomOptions {
 	 * - `2.0+` = very bright, intense glow
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions#intensity | BloomOptions.intensity API reference}
 	 */
 	intensity: number;
 
@@ -566,6 +650,8 @@ export interface BloomOptions {
 	 * - `10.0+` = wide, diffuse glow
 	 *
 	 * @default 4.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions#radius | BloomOptions.radius API reference}
 	 */
 	radius: number;
 }
@@ -586,6 +672,8 @@ export interface BloomOptions {
  * {@includeCode ../examples/filmGrain/sketch.js}
  *
  * @category Stylization filters
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions | FilmGrainOptions API reference}
  */
 export interface FilmGrainOptions {
 	/**
@@ -596,6 +684,8 @@ export interface FilmGrainOptions {
 	 * - `0.5+` = heavy, noticeable grain
 	 *
 	 * @default 0.2
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#intensity | FilmGrainOptions.intensity API reference}
 	 */
 	intensity: number;
 
@@ -607,6 +697,8 @@ export interface FilmGrainOptions {
 	 * - `5.0+` = coarse, chunky grain
 	 *
 	 * @default 2.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#size | FilmGrainOptions.size API reference}
 	 */
 	size: number;
 
@@ -618,6 +710,8 @@ export interface FilmGrainOptions {
 	 * - `2.0+` = fast, flickering grain
 	 *
 	 * @default 1.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#speed | FilmGrainOptions.speed API reference}
 	 */
 	speed: number;
 
@@ -627,6 +721,8 @@ export interface FilmGrainOptions {
 	 * Increment this value each frame to animate the grain effect.
 	 *
 	 * @default 0.0
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#time | FilmGrainOptions.time API reference}
 	 */
 	time: number;
 }
