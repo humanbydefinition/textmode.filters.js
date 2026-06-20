@@ -77,6 +77,8 @@ const defaultFactors = new Array(128).fill(0.5);
  *
  * @example
  * {@includeCode ../examples/brightness/sketch.js}
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/variables/FiltersPlugin | FiltersPlugin API reference}
  */
 export const FiltersPlugin: TextmodePlugin = {
 	name: 'textmode.filters',
@@ -181,6 +183,8 @@ export const FiltersPlugin: TextmodePlugin = {
  * ```
  *
  * @returns A textmode.js plugin instance.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/functions/createFiltersPlugin | createFiltersPlugin API reference}
  */
 export const createFiltersPlugin = (): TextmodePlugin => FiltersPlugin;
 
