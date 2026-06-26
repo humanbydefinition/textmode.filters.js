@@ -6,7 +6,7 @@
  * - An options object with named parameters
  *
  * @example
- * {@includeCode ../examples/bloom/sketch.js}
+ * {@includeCode ../examples/Stylization/bloom/sketch.js}
  *
  * @module
  */
@@ -21,7 +21,7 @@
  * Adjusts image brightness by multiplying pixel values.
  *
  * @example
- * {@includeCode ../examples/brightness/sketch.js}
+ * {@includeCode ../examples/ColorAdjustment/brightness/sketch.js}
  *
  * @category Color adjustment filters
  *
@@ -53,7 +53,7 @@ export interface BrightnessOptions {
  * Adjusts image contrast by scaling pixel values around mid-gray.
  *
  * @example
- * {@includeCode ../examples/contrast/sketch.js}
+ * {@includeCode ../examples/ColorAdjustment/contrast/sketch.js}
  *
  * @category Color adjustment filters
  *
@@ -86,7 +86,7 @@ export interface ContrastOptions {
  * Perfect for creating vivid, oversaturated looks or desaturating to grayscale.
  *
  * @example
- * {@includeCode ../examples/saturation/sketch.js}
+ * {@includeCode ../examples/ColorAdjustment/saturation/sketch.js}
  *
  * @category Color adjustment filters
  *
@@ -118,7 +118,7 @@ export interface SaturationOptions {
  * Useful for color grading or creating surreal color effects.
  *
  * @example
- * {@includeCode ../examples/hueRotate/sketch.js}
+ * {@includeCode ../examples/ColorAdjustment/hueRotate/sketch.js}
  *
  * @category Color adjustment filters
  *
@@ -152,7 +152,7 @@ export interface HueRotateOptions {
  * creating a retro quantized/poster-like look.
  *
  * @example
- * {@includeCode ../examples/posterize/sketch.js}
+ * {@includeCode ../examples/ColorAdjustment/posterize/sketch.js}
  *
  * @category Color adjustment filters
  *
@@ -187,7 +187,7 @@ export interface PosterizeOptions {
  * found in cheap cameras or creates stylized glitch aesthetics.
  *
  * @example
- * {@includeCode ../examples/chromaticAberration/sketch.js}
+ * {@includeCode ../examples/Distortion/chromaticAberration/sketch.js}
  *
  * @category Distortion filters
  *
@@ -232,7 +232,7 @@ export interface ChromaticAberrationOptions {
  * reminiscent of retro video games or censored content.
  *
  * @example
- * {@includeCode ../examples/pixelate/sketch.js}
+ * {@includeCode ../examples/Distortion/pixelate/sketch.js}
  *
  * @category Distortion filters
  *
@@ -268,7 +268,7 @@ export interface PixelateOptions {
  * you to create dynamic text distortion effects.
  *
  * @example
- * {@includeCode ../examples/gridDistortion/sketch.js}
+ * {@includeCode ../examples/Distortion/gridDistortion/sketch.js}
  *
  * @category Distortion filters
  *
@@ -375,7 +375,7 @@ export interface GridDistortionOptions {
  * Creates a corrupted/broken digital signal aesthetic.
  *
  * @example
- * {@includeCode ../examples/glitch/sketch.js}
+ * {@includeCode ../examples/Stylization/glitch/sketch.js}
  *
  * @category Stylization filters
  *
@@ -408,7 +408,7 @@ export interface GlitchOptions {
  * classic CRT shader.
  *
  * @example
- * {@includeCode ../examples/crtMattias/sketch.js}
+ * {@includeCode ../examples/Stylization/crtMattias/sketch.js}
  *
  * @see {@link https://github.com/libretro/glsl-shaders/blob/master/crt/shaders/crt-mattias.glsl | Original shader by Mattias Gustavsson}
  *
@@ -466,7 +466,7 @@ export interface CrtMattiasOptions {
  * the scanlines in crtMattias.
  *
  * @example
- * {@includeCode ../examples/scanlines/sketch.js}
+ * {@includeCode ../examples/Stylization/scanlines/sketch.js}
  *
  * @category Stylization filters
  *
@@ -548,7 +548,7 @@ export interface ScanlinesOptions {
  * Useful for creating a cinematic look or highlighting central content.
  *
  * @example
- * {@includeCode ../examples/vignette/sketch.js}
+ * {@includeCode ../examples/Stylization/vignette/sketch.js}
  *
  * @category Stylization filters
  *
@@ -607,7 +607,7 @@ export interface VignetteOptions {
  * Perfect for creating neon, glowing text, or dreamy effects.
  *
  * @example
- * {@includeCode ../examples/bloom/sketch.js}
+ * {@includeCode ../examples/Stylization/bloom/sketch.js}
  *
  * @category Stylization filters
  *
@@ -669,7 +669,7 @@ export interface BloomOptions {
  * real film characteristics.
  *
  * @example
- * {@includeCode ../examples/filmGrain/sketch.js}
+ * {@includeCode ../examples/Stylization/filmGrain/sketch.js}
  *
  * @category Stylization filters
  *

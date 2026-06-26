@@ -76,7 +76,7 @@ const defaultFactors = new Array(128).fill(0.5);
  * visual effects that run entirely on the GPU via WebGL2 fragment shaders.
  *
  * @example
- * {@includeCode ../examples/brightness/sketch.js}
+ * {@includeCode ../examples/ColorAdjustment/brightness/sketch.js}
  *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/variables/FiltersPlugin | FiltersPlugin API reference}
  */
