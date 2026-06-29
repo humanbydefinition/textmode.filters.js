@@ -1,6 +1,6 @@
 {
 	"name": "textmode.filters.js",
-	"version": "1.2.1",
+	"version": "1.2.2",
 	"description": "Image filters plugin for textmode.js",
 	"type": "module",
 	"main": "./dist/textmode.filters.umd.js",
