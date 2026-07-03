@@ -45,10 +45,7 @@ if (!examplePath || !isValidPath(examplePath)) {
 } else {
 	window.textmode = textmodeModule.textmode;
 	window.TextmodeErrorLevel = textmodeModule.TextmodeErrorLevel;
-	window.LayerBlendMode = textmodeModule.LayerBlendMode;
 	window.FiltersPlugin = filtersModule.FiltersPlugin;
-
-	window.__TEXTMODE_FILTERS_EXAMPLE_PATH__ = examplePath;
 
 	document.title = `textmode.filters.js - ${examplePath}`;
 	const base = document.createElement('base');
