@@ -13,7 +13,7 @@ This package is a TypeScript/Vite plugin that registers WebGL2 fragment shader f
 
 ## Build, Test, and Development Commands
 
-- `npm install` installs dependencies and Husky hooks.
+- `npm install` installs dependencies and the shared native Git hooks.
 - `npm run dev` starts Vite on port `5179` and opens `/examples/index.html`.
 - `npm run build` builds the ESM/UMD bundles and declaration files.
 - `npm run check` runs formatting checks, ESLint, Markdown lint, TypeScript checks, and a production build.

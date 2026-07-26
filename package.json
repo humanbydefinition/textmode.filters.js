@@ -25,16 +25,16 @@
 		"docs:links:add": "textmode-add-api-links",
 		"check:api-docs": "textmode-check-api-docs",
 		"check:examples": "textmode-check-examples",
-		"dev:docs": "typedoc --watch",
-		"build:docs": "typedoc",
+		"dev:docs": "typedoc --options ./node_modules/@textmode/tooling-scripts/src/typedoc.base.json --watch",
+		"build:docs": "typedoc --options ./node_modules/@textmode/tooling-scripts/src/typedoc.base.json",
 		"preview": "vite preview",
-		"format": "prettier --write .",
-		"check:format": "prettier --check .",
+		"format": "prettier --write . --ignore-path node_modules/@textmode/tooling-scripts/src/prettierignore",
+		"check:format": "prettier --check . --ignore-path node_modules/@textmode/tooling-scripts/src/prettierignore",
 		"check:types": "tsc --noEmit",
-		"lint:md": "markdownlint-cli2",
-		"lint:md:fix": "markdownlint-cli2 --fix",
-		"lint": "eslint src",
-		"prepare": "husky && install-husky",
+		"lint:md": "markdownlint-cli2 --config package.json --configPointer /markdownlint-cli2",
+		"lint:md:fix": "markdownlint-cli2 --config package.json --configPointer /markdownlint-cli2 --fix",
+		"lint": "eslint --config ./node_modules/@textmode/eslint-config/index.js src",
+		"prepare": "install-git-hooks",
 		"check:deps": "check-deps",
 		"test": "vitest run --passWithNoTests",
 		"test:watch": "vitest --passWithNoTests",
@@ -45,13 +45,12 @@
 		"textmode.js": ">=0.16.0"
 	},
 	"devDependencies": {
-		"@commitlint/cli": "^20.5.0",
+		"@commitlint/cli": "^21.2.1",
 		"@mapwhit/glsl-minify": "^1.0.0",
 		"@rollup/plugin-terser": "^1.0.0",
 		"@types/node": "^26.1.1",
 		"esbuild": "^0.28.1",
 		"eslint": "^10.6.0",
-		"husky": "^9.1.7",
 		"lint-staged": "^17.0.8",
 		"markdownlint-cli2": "^0.22.1",
 		"prettier": "^3.9.4",
@@ -68,7 +67,7 @@
 		"@textmode/markdownlint-config": "^0.1.1",
 		"@textmode/prettier-config": "^0.1.0",
 		"@textmode/release-config": "^0.1.1",
-		"@textmode/tooling-scripts": "^0.3.1",
+		"@textmode/tooling-scripts": "^0.3.6",
 		"@textmode/tsconfig": "^0.1.0",
 		"vitest": "^4.1.10",
 		"@vitest/ui": "^4.1.10"
@@ -76,7 +75,7 @@
 	"license": "MIT",
 	"author": "humanbydefinition",
 	"lint-staged": {
-		"*": "prettier --ignore-unknown --write"
+		"*": "prettier --ignore-unknown --ignore-path node_modules/@textmode/tooling-scripts/src/prettierignore --write"
 	},
 	"prettier": "@textmode/prettier-config",
 	"commitlint": {
@@ -87,5 +86,38 @@
 	"repository": {
 		"type": "git",
 		"url": "https://github.com/humanbydefinition/textmode.filters.js"
+	},
+	"typedocOptions": {
+		"entryPoints": [
+			"src/index.ts"
+		],
+		"out": "api/textmode.filters.js",
+		"tsconfig": "tsconfig.json",
+		"sort": [
+			"source-order"
+		],
+		"textmodeApiBaseUrl": "https://code.textmode.art/api/textmode.filters.js",
+		"textmodeStripApiSelfLinksMode": "full"
+	},
+	"markdownlint-cli2": {
+		"globs": [
+			"**/*.md"
+		],
+		"ignores": [
+			"api/**",
+			"node_modules/**",
+			"dist/**",
+			"examples/**/*.md",
+			"**/CHANGELOG.md"
+		],
+		"fix": false,
+		"outputFormatters": [
+			[
+				"markdownlint-cli2-formatter-default"
+			]
+		],
+		"config": {
+			"extends": "@textmode/markdownlint-config"
+		}
 	}
 }
