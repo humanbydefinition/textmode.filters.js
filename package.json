@@ -46,7 +46,6 @@
 	},
 	"devDependencies": {
 		"@commitlint/cli": "^21.2.1",
-		"@mapwhit/glsl-minify": "^1.0.0",
 		"@textmode/commitlint-config": "^0.1.1",
 		"@textmode/eslint-config": "^0.2.0",
 		"@textmode/markdownlint-config": "^0.1.1",
@@ -55,6 +54,7 @@
 		"@textmode/tooling-scripts": "^0.3.6",
 		"@textmode/tsconfig": "^0.1.0",
 		"@textmode/vite-config": "^0.1.0",
+		"@textmode/vite-plugin-glsl": "file:../textmode-tooling/packages/vite-plugin-glsl",
 		"@types/node": "^26.1.1",
 		"@vitest/ui": "^4.1.10",
 		"eslint": "^10.6.0",
