@@ -25,25 +25,10 @@ textmode.filters.js is a GPU-accelerated image filters plugin for [textmode.js](
 
 ## Installation
 
-```bash
-npm install textmode.filters.js
-```
-
-You can also use it via CDN:
-
-```html
-<!-- ESM -->
-<script type="module" src="https://unpkg.com/textmode.js/dist/textmode.esm.js"></script>
-<script type="module" src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.esm.js"></script>
-
-<!-- UMD -->
-<script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script>
-<script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
-```
+Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
+`textmode.filters.js` alongside `textmode.js` with npm or browser-ready UMD bundles.
 
 ## Usage
-
-### ESM
 
 ```javascript
 import { textmode } from 'textmode.js';
@@ -63,22 +48,6 @@ t.draw(() => {
 	t.background(0);
 	// ... draw something ...
 });
-```
-
-### UMD
-
-```html
-<script src="https://unpkg.com/textmode.js/dist/textmode.umd.js"></script>
-<script src="https://unpkg.com/textmode.filters.js/dist/textmode.filters.umd.js"></script>
-<script>
-	const t = textmode.create({
-		plugins: [FiltersPlugin],
-	});
-
-	t.draw(() => {
-		t.layers.base.filter('brightness', 1.3);
-	});
-</script>
 ```
 
 ## Filters
