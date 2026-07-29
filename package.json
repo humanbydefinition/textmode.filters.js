@@ -54,7 +54,7 @@
 		"@textmode/tooling-scripts": "^0.3.6",
 		"@textmode/tsconfig": "^0.1.0",
 		"@textmode/vite-config": "^0.1.0",
-		"@textmode/vite-plugin-glsl": "file:../textmode-tooling/packages/vite-plugin-glsl",
+		"@textmode/vite-plugin-glsl": "0.1.0",
 		"@types/node": "^26.1.1",
 		"@vitest/ui": "^4.1.10",
 		"eslint": "^10.6.0",
