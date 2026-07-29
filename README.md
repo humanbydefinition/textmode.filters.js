@@ -23,6 +23,21 @@ textmode.filters.js is a GPU-accelerated image filters plugin for [textmode.js](
 - 📦 **Lightweight** - Minimal footprint, no external dependencies
 - 🤝 **Open to contributions** - Easy to add your own custom filters!
 
+## Try it online first
+
+Open [editor.textmode.art](https://editor.textmode.art/), a browser-based live-coding environment for the
+complete official `textmode.js` ecosystem. Sketches run as you edit, with no local toolchain required.
+
+The editor includes `textmode.js` and all four official add-ons: `textmode.export.js`, `textmode.filters.js`,
+`textmode.figlet.js`, and `textmode.synth.js`.
+
+- Write with Monaco-powered completions, hover documentation, and diagnostics.
+- Start with a blank sketch, an included example, or a community gallery sketch.
+- Keep code and preferences saved in the browser, then share sketches through URL-based links.
+- Use microphone or line-input analysis for audio-reactive work, and create on desktop or mobile.
+
+Use it to apply and tune GPU filters interactively while your sketch runs.
+
 ## Installation
 
 Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
@@ -358,7 +373,7 @@ Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 - **[textmode.js](https://github.com/humanbydefinition/textmode.js)** - The main textmode.js library
 - **[code.textmode.art](https://code.textmode.art/)** - Documentation & examples
-- **[editor.textmode.art](https://editor.textmode.art/)** - textmode.js web editor
+- **[editor.textmode.art](https://editor.textmode.art/)** - textmode.js live-coding editor
 
 ---
 
