@@ -24,12 +24,12 @@
 		"logo": "default",
 		"labels": {
 			"brandName": "textmode.filters.js",
-			"mainTopRight": "GPU FILTER ADD-ON",
+			"mainTopRight": "TEXTMODE.JS ADD-ON",
 			"mainHeadlinePrefix": "FILTER",
 			"mainHeadlineEmphasis": "TEXTMODE",
 			"mainHeadlineSecondLine": "AT GPU SPEED",
 			"mainBottomLeft": "WEBGL2 / SHADERS / CUSTOM EFFECTS",
-			"mainBottomRight": "TEXTMODE.JS ADD-ON"
+			"mainBottomRight": "CODE.TEXTMODE.ART"
 		}
 	}
 }
