@@ -15,10 +15,10 @@ The add-on is designed to make shader-powered image processing accessible withou
 
 ## Features
 
-- **GPU-accelerated** - All filters run on the GPU via WebGL2 fragment shaders
-- **Customizable parameters** - Fine-tune each filter to your needs
-- **Lightweight** - Minimal footprint, no external dependencies
-- **Open to contributions** - Easy to add your own custom filters!
+- **Fourteen built-in effects** - Color adjustment, distortion, CRT, glitch, bloom, scanlines, vignette, grain, and related treatments
+- **GPU-native processing** - Execute every effect as a WebGL2 fragment-shader pass over rendered textmode textures
+- **Scoped and stackable pipelines** - Apply ordered effects to individual layers, the composited scene, or the final presentation stage
+- **Typed parameter control** - Configure effects through numeric shorthand or named option objects with documented defaults
 
 ## Try it online first
 
@@ -55,7 +55,7 @@ Please read the [Contributing Guide](https://github.com/humanbydefinition/textmo
 
 <!-- TEXTMODE-CONTRIBUTORS:START -->
 <!-- prettier-ignore-start -->
-<!-- Generated from https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json. Do not edit this section directly. -->
+<!-- Generated from https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contributors.json and https://github.com/humanbydefinition/code.textmode.art/blob/main/.vitepress/data/contribution-types.json. Do not edit this section directly. -->
 ## Contributors
 
 Thanks to the people who contribute code, documentation, design, examples, ideas, infrastructure, and care
