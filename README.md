@@ -43,6 +43,13 @@ Use it to apply and tune GPU filters interactively while your sketch runs.
 Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
 `textmode.filters.js` alongside `textmode.js` with npm or browser-ready UMD bundles.
 
+## Next steps
+
+- **[Read the filters documentation](https://code.textmode.art/docs/filters)** for filter scopes, parameters, and workflows.
+- **[Browse the API reference](https://code.textmode.art/api/textmode.filters.js/)** for the complete typed API.
+- **[Explore the examples](./examples/)** to see built-in filters and shader patterns in action.
+- **[Try the live editor](https://editor.textmode.art/)** to tune filters interactively in the browser.
+
 ## Contributing
 
 Thank you for considering contributing to this project! (✿◠‿◠)
