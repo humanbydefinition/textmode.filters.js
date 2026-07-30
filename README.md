@@ -43,6 +43,12 @@ Use it to apply and tune GPU filters interactively while your sketch runs.
 Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
 `textmode.filters.js` alongside `textmode.js` with npm or browser-ready UMD bundles.
 
+## Contributing
+
+Thank you for considering contributing to this project! (✿◠‿◠)
+
+Please read the [Contributing Guide](https://github.com/humanbydefinition/textmode.js-dev/blob/dev/CONTRIBUTING.md) to get started.
+
 ## Usage
 
 ```javascript
@@ -355,19 +361,6 @@ void main() {
     fragColor = vec4(result, color.a);
 }
 ```
-
-## Contributing
-
-Contributions are welcome and greatly appreciated! 🎉
-
-Whether you want to:
-
-- 🐛 Report a bug
-- 💡 Suggest a new filter
-- 🔧 Submit a pull request
-- 📖 Improve documentation
-
-Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 
 ## Related projects
 
