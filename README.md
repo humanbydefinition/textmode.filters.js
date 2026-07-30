@@ -375,6 +375,10 @@ Please read our [Contributing Guide](CONTRIBUTING.md) to get started.
 - **[code.textmode.art](https://code.textmode.art/)** - Documentation & examples
 - **[editor.textmode.art](https://editor.textmode.art/)** - textmode.js live-coding editor
 
+## License
+
+`textmode.filters.js` is licensed under the [MIT License](./LICENSE).
+
 ---
 
 <div align="center">
