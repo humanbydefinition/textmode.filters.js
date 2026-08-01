@@ -28,12 +28,12 @@
 		"dev:docs": "textmode-docs watch",
 		"build:docs": "textmode-docs build",
 		"preview": "vite preview",
-		"format": "prettier --write . --ignore-path node_modules/@textmode/tooling-scripts/src/prettierignore",
-		"check:format": "prettier --check . --ignore-path node_modules/@textmode/tooling-scripts/src/prettierignore",
+		"format": "prettier --write . --ignore-unknown",
+		"check:format": "prettier --check . --ignore-unknown",
 		"check:types": "tsc --noEmit",
 		"lint:md": "markdownlint-cli2 --config package.json --configPointer /markdownlint-cli2",
 		"lint:md:fix": "markdownlint-cli2 --config package.json --configPointer /markdownlint-cli2 --fix",
-		"lint": "eslint --config ./node_modules/@textmode/eslint-config/index.js src",
+		"lint": "eslint src",
 		"prepare": "install-git-hooks",
 		"test": "vitest run --passWithNoTests",
 		"test:watch": "vitest --passWithNoTests",
@@ -71,7 +71,7 @@
 	"license": "MIT",
 	"author": "humanbydefinition",
 	"lint-staged": {
-		"*": "prettier --ignore-unknown --ignore-path node_modules/@textmode/tooling-scripts/src/prettierignore --write"
+		"*": "prettier --ignore-unknown --write"
 	},
 	"prettier": "@textmode/prettier-config",
 	"commitlint": {
