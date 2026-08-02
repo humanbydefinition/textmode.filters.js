@@ -9,9 +9,9 @@
 
 </div>
 
-`textmode.filters.js` is a free, lightweight GPU-accelerated image-filter add-on for [`textmode.js`](https://code.textmode.art/). It uses [`WebGL2`](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext) fragment shaders to provide a collection of customizable visual effects that run entirely on the GPU, keeping filter processing fast while integrating directly with textmode rendering workflows.
+`textmode.filters.js` is an image-filter add-on for [`textmode.js`](https://code.textmode.art/) for shaping the atmosphere and finish of a scene. Its collection of customizable effects is implemented as [`WebGL2`](https://developer.mozilla.org/en-US/docs/Web/API/WebGL2RenderingContext) fragment shaders, running on the GPU and fitting directly into textmode rendering workflows.
 
-The add-on is designed to make shader-powered image processing accessible without requiring advanced graphics experience. Whether you're refining a scene with built-in effects, tuning parameters in real time, or contributing a custom filter, `textmode.filters.js` provides a focused foundation for extending the visual language of a sketch.
+Use built-in treatments to refine a scene, tune their parameters as it runs, or contribute a custom filter when the look calls for something new. `textmode.filters.js` makes shader-powered image processing approachable without requiring advanced graphics experience, giving a sketch a focused visual-effects toolkit.
 
 ## Features
 
