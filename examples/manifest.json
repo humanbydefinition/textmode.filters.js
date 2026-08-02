@@ -8,23 +8,28 @@
 			"examples": [
 				{
 					"title": "FiltersPlugin.brightness",
-					"sourceFile": "examples/ColorAdjustment/brightness/sketch.js"
+					"sourceFile": "examples/ColorAdjustment/brightness/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.contrast",
-					"sourceFile": "examples/ColorAdjustment/contrast/sketch.js"
+					"sourceFile": "examples/ColorAdjustment/contrast/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.saturation",
-					"sourceFile": "examples/ColorAdjustment/saturation/sketch.js"
+					"sourceFile": "examples/ColorAdjustment/saturation/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.hueRotate",
-					"sourceFile": "examples/ColorAdjustment/hueRotate/sketch.js"
+					"sourceFile": "examples/ColorAdjustment/hueRotate/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.posterize",
-					"sourceFile": "examples/ColorAdjustment/posterize/sketch.js"
+					"sourceFile": "examples/ColorAdjustment/posterize/sketch.js",
+					"status": "unrated"
 				}
 			]
 		},
@@ -34,15 +39,18 @@
 			"examples": [
 				{
 					"title": "FiltersPlugin.chromaticAberration",
-					"sourceFile": "examples/Distortion/chromaticAberration/sketch.js"
+					"sourceFile": "examples/Distortion/chromaticAberration/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.pixelate",
-					"sourceFile": "examples/Distortion/pixelate/sketch.js"
+					"sourceFile": "examples/Distortion/pixelate/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.gridDistortion",
-					"sourceFile": "examples/Distortion/gridDistortion/sketch.js"
+					"sourceFile": "examples/Distortion/gridDistortion/sketch.js",
+					"status": "unrated"
 				}
 			]
 		},
@@ -52,27 +60,33 @@
 			"examples": [
 				{
 					"title": "FiltersPlugin.glitch",
-					"sourceFile": "examples/Stylization/glitch/sketch.js"
+					"sourceFile": "examples/Stylization/glitch/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.crtMattias",
-					"sourceFile": "examples/Stylization/crtMattias/sketch.js"
+					"sourceFile": "examples/Stylization/crtMattias/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.scanlines",
-					"sourceFile": "examples/Stylization/scanlines/sketch.js"
+					"sourceFile": "examples/Stylization/scanlines/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.vignette",
-					"sourceFile": "examples/Stylization/vignette/sketch.js"
+					"sourceFile": "examples/Stylization/vignette/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.bloom",
-					"sourceFile": "examples/Stylization/bloom/sketch.js"
+					"sourceFile": "examples/Stylization/bloom/sketch.js",
+					"status": "unrated"
 				},
 				{
 					"title": "FiltersPlugin.filmGrain",
-					"sourceFile": "examples/Stylization/filmGrain/sketch.js"
+					"sourceFile": "examples/Stylization/filmGrain/sketch.js",
+					"status": "unrated"
 				}
 			]
 		}
