@@ -1,8 +1,4 @@
 {
-	"extends": ["@textmode/tsconfig/base.json", "@textmode/tsconfig/build.json"],
-	"compilerOptions": {
-		"rootDir": "./src",
-		"outDir": "./dist/types"
-	},
-	"include": ["src"]
+	"extends": "@textmode/tsconfig/browser-library.json",
+	"include": ["src", "tests", "vite.config.ts", "vite-plugins"]
 }

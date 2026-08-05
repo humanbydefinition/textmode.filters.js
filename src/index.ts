@@ -1,34 +1,21 @@
 /**
  * @packageDocumentation
  *
- * GPU-accelerated image filters plugin for textmode.js.
+ * Apply GPU-accelerated image filters to finished textmode.js scenes.
  *
- * This plugin provides customizable visual effects that run entirely on the GPU
- * via WebGL2 fragment shaders for maximum performance.
+ * Add {@link FiltersPlugin} to a sketch to register the built-in WebGL2
+ * effects. Use the option interfaces below to configure a filter when adding
+ * it to a layer, the composited scene, or the final presentation stage.
  *
- * ## Available filters
+ * ## Choose a filter
  *
- * ### Color adjustment
- * - {@link BrightnessOptions | brightness} - Adjust image brightness
- * - {@link ContrastOptions | contrast} - Adjust image contrast
- * - {@link SaturationOptions | saturation} - Adjust color intensity
- * - {@link HueRotateOptions | hueRotate} - Rotate colors around the color wheel
- * - {@link PosterizeOptions | posterize} - Reduce color levels
+ * **Color adjustment** changes brightness, contrast, saturation, hue, and
+ * posterization. **Distortion** changes pixels, color channels, or grid
+ * geometry. **Stylization** adds glitch, CRT, scanlines, vignette, bloom, and
+ * film grain treatments.
  *
- * ### Distortion
- * - {@link ChromaticAberrationOptions | chromaticAberration} - RGB channel separation
- * - {@link PixelateOptions | pixelate} - Pixelation/mosaic effect
- * - {@link GridDistortionOptions | gridDistortion} - Custom grid warping
- *
- * ### Stylization
- * - {@link GlitchOptions | glitch} - Digital glitch effect
- * - {@link CrtMattiasOptions | crtMattias} - CRT monitor emulation
- * - {@link ScanlinesOptions | scanlines} - Customizable scanlines
- * - {@link VignetteOptions | vignette} - Darkened edges effect
- * - {@link BloomOptions | bloom} - Glow around bright areas
- * - {@link FilmGrainOptions | filmGrain} - Animated film grain overlay
- *
- * @module textmode.filters.js
+ * Start with {@link FiltersPlugin}, then read the
+ * [Filters guide](/docs/filters) for scopes and workflows.
  */
 
 import type { TextmodePlugin } from 'textmode.js';
@@ -74,6 +61,8 @@ const defaultFactors = new Array(128).fill(0.5);
  *
  * Add this plugin to your textmode.js instance to enable additional customizable
  * visual effects that run entirely on the GPU via WebGL2 fragment shaders.
+ *
+ * @category Workflow
  *
  * @example
  * {@includeCode ../examples/ColorAdjustment/brightness/sketch.js}
@@ -165,39 +154,13 @@ export const FiltersPlugin: TextmodePlugin = {
 	},
 };
 
-/**
- * Creates the `textmode.filters.js` plugin for textmode.js.
- *
- * @deprecated Use {@link FiltersPlugin} directly instead.
- * This function is provided for backwards compatibility only.
- *
- * @example
- * ```javascript
- * // Old way (deprecated)
- * import { createFiltersPlugin } from 'textmode.filters.js';
- * const t = textmode.create({ plugins: [createFiltersPlugin()] });
- *
- * // New way (recommended)
- * import { FiltersPlugin } from 'textmode.filters.js';
- * const t = textmode.create({ plugins: [FiltersPlugin] });
- * ```
- *
- * @returns A textmode.js plugin instance.
- *
- * @see {@link https://code.textmode.art/api/textmode.filters.js/functions/createFiltersPlugin | createFiltersPlugin API reference}
- */
-export const createFiltersPlugin = (): TextmodePlugin => FiltersPlugin;
-
 declare global {
 	interface Window {
 		FiltersPlugin?: TextmodePlugin;
-		createFiltersPlugin?: typeof createFiltersPlugin;
 	}
 }
 
 // UMD global export
 if (typeof window !== 'undefined') {
 	window.FiltersPlugin = FiltersPlugin;
-	// Keep backwards compatibility
-	window.createFiltersPlugin = createFiltersPlugin;
 }
