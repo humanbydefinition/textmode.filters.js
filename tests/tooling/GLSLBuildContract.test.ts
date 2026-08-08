@@ -1,7 +1,7 @@
 import { readdirSync, readFileSync } from 'node:fs';
 import { resolve } from 'node:path';
 
-import { textmodeGlsl } from '@textmode/vite-plugin-glsl';
+import { textmodeGlsl } from '@textmode/build';
 import { beforeEach, describe, expect, it } from 'vitest';
 
 import { publicShaderSymbols } from '../../vite-plugins/glsl-public-symbols';
