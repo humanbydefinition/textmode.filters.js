@@ -1,5 +1,4 @@
-import { defineTextmodeLibrary } from '@textmode/vite-config';
-import { textmodeGlsl } from '@textmode/vite-plugin-glsl';
+import { defineTextmodeLibrary, textmodeGlsl } from '@textmode/build';
 
 import { publicShaderSymbols } from './vite-plugins/glsl-public-symbols';
 
