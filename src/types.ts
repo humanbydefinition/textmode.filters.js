@@ -40,7 +40,7 @@ export interface BrightnessOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BrightnessOptions#amount | BrightnessOptions.amount API reference}
 	 */
-	amount: number;
+	amount?: number;
 }
 
 // ============================================================================
@@ -72,7 +72,7 @@ export interface ContrastOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ContrastOptions#amount | ContrastOptions.amount API reference}
 	 */
-	amount: number;
+	amount?: number;
 }
 
 // ============================================================================
@@ -104,7 +104,7 @@ export interface SaturationOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/SaturationOptions#amount | SaturationOptions.amount API reference}
 	 */
-	amount: number;
+	amount?: number;
 }
 
 // ============================================================================
@@ -138,7 +138,7 @@ export interface HueRotateOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/HueRotateOptions#angle | HueRotateOptions.angle API reference}
 	 */
-	angle: number;
+	angle?: number;
 }
 
 // ============================================================================
@@ -173,7 +173,7 @@ export interface PosterizeOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/PosterizeOptions#levels | PosterizeOptions.levels API reference}
 	 */
-	levels: number;
+	levels?: number;
 }
 
 // ============================================================================
@@ -203,7 +203,7 @@ export interface ChromaticAberrationOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ChromaticAberrationOptions#amount | ChromaticAberrationOptions.amount API reference}
 	 */
-	amount: number;
+	amount?: number;
 
 	/**
 	 * Direction of the color separation as `[x, y]`.
@@ -218,7 +218,7 @@ export interface ChromaticAberrationOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ChromaticAberrationOptions#direction | ChromaticAberrationOptions.direction API reference}
 	 */
-	direction: [number, number];
+	direction?: [number, number];
 }
 
 // ============================================================================
@@ -250,7 +250,7 @@ export interface PixelateOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/PixelateOptions#pixelsize | PixelateOptions.pixelSize API reference}
 	 */
-	pixelSize: number;
+	pixelSize?: number;
 }
 
 // ============================================================================
@@ -286,7 +286,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#gridcelldimensions | GridDistortionOptions.gridCellDimensions API reference}
 	 */
-	gridCellDimensions: [number, number];
+	gridCellDimensions?: [number, number];
 
 	/**
 	 * Grid size in pixels as `[width, height]`.
@@ -298,7 +298,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#gridpixeldimensions | GridDistortionOptions.gridPixelDimensions API reference}
 	 */
-	gridPixelDimensions: [number, number];
+	gridPixelDimensions?: [number, number];
 
 	/**
 	 * Grid offset in pixels as `[offsetX, offsetY]`.
@@ -309,7 +309,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#gridoffsetdimensions | GridDistortionOptions.gridOffsetDimensions API reference}
 	 */
-	gridOffsetDimensions: [number, number];
+	gridOffsetDimensions?: [number, number];
 
 	/**
 	 * Array of distortion values (0-1) for each column.
@@ -324,7 +324,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#widthfactors | GridDistortionOptions.widthFactors API reference}
 	 */
-	widthFactors: number[];
+	widthFactors?: number[];
 
 	/**
 	 * Array of distortion values (0-1) for each row.
@@ -339,7 +339,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#heightfactors | GridDistortionOptions.heightFactors API reference}
 	 */
-	heightFactors: number[];
+	heightFactors?: number[];
 
 	/**
 	 * Intensity multiplier for width distortion.
@@ -350,7 +350,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#widthvariationscale | GridDistortionOptions.widthVariationScale API reference}
 	 */
-	widthVariationScale: number;
+	widthVariationScale?: number;
 
 	/**
 	 * Intensity multiplier for height distortion.
@@ -361,7 +361,7 @@ export interface GridDistortionOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GridDistortionOptions#heightvariationscale | GridDistortionOptions.heightVariationScale API reference}
 	 */
-	heightVariationScale: number;
+	heightVariationScale?: number;
 }
 
 // ============================================================================
@@ -393,7 +393,7 @@ export interface GlitchOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GlitchOptions#amount | GlitchOptions.amount API reference}
 	 */
-	amount: number;
+	amount?: number;
 }
 
 // ============================================================================
@@ -428,7 +428,7 @@ export interface CrtMattiasOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions#curvature | CrtMattiasOptions.curvature API reference}
 	 */
-	curvature: number;
+	curvature?: number;
 
 	/**
 	 * Speed of the scrolling scanline effect.
@@ -439,7 +439,7 @@ export interface CrtMattiasOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions#scanspeed | CrtMattiasOptions.scanSpeed API reference}
 	 */
-	scanSpeed: number;
+	scanSpeed?: number;
 
 	/**
 	 * Animation time parameter.
@@ -451,7 +451,7 @@ export interface CrtMattiasOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/CrtMattiasOptions#time | CrtMattiasOptions.time API reference}
 	 */
-	time: number;
+	time?: number;
 }
 
 // ============================================================================
@@ -484,7 +484,7 @@ export interface ScanlinesOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#count | ScanlinesOptions.count API reference}
 	 */
-	count: number;
+	count?: number;
 
 	/**
 	 * Width of the lines relative to the spacing.
@@ -497,7 +497,7 @@ export interface ScanlinesOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#linewidth | ScanlinesOptions.lineWidth API reference}
 	 */
-	lineWidth: number;
+	lineWidth?: number;
 
 	/**
 	 * Opacity/darkness of the scanlines.
@@ -510,7 +510,7 @@ export interface ScanlinesOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#intensity | ScanlinesOptions.intensity API reference}
 	 */
-	intensity: number;
+	intensity?: number;
 
 	/**
 	 * Scrolling speed of the lines.
@@ -523,7 +523,7 @@ export interface ScanlinesOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#speed | ScanlinesOptions.speed API reference}
 	 */
-	speed: number;
+	speed?: number;
 
 	/**
 	 * Animation time parameter.
@@ -534,7 +534,7 @@ export interface ScanlinesOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ScanlinesOptions#time | ScanlinesOptions.time API reference}
 	 */
-	time: number;
+	time?: number;
 }
 
 // ============================================================================
@@ -566,7 +566,7 @@ export interface VignetteOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions#amount | VignetteOptions.amount API reference}
 	 */
-	amount: number;
+	amount?: number;
 
 	/**
 	 * Falloff gradient softness.
@@ -579,7 +579,7 @@ export interface VignetteOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions#softness | VignetteOptions.softness API reference}
 	 */
-	softness: number;
+	softness?: number;
 
 	/**
 	 * Shape of the vignette.
@@ -592,7 +592,7 @@ export interface VignetteOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/VignetteOptions#roundness | VignetteOptions.roundness API reference}
 	 */
-	roundness: number;
+	roundness?: number;
 }
 
 // ============================================================================
@@ -625,7 +625,7 @@ export interface BloomOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions#threshold | BloomOptions.threshold API reference}
 	 */
-	threshold: number;
+	threshold?: number;
 
 	/**
 	 * Strength of the glow effect.
@@ -638,7 +638,7 @@ export interface BloomOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions#intensity | BloomOptions.intensity API reference}
 	 */
-	intensity: number;
+	intensity?: number;
 
 	/**
 	 * Size of the glow spread in pixels.
@@ -653,7 +653,7 @@ export interface BloomOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BloomOptions#radius | BloomOptions.radius API reference}
 	 */
-	radius: number;
+	radius?: number;
 }
 
 // ============================================================================
@@ -687,7 +687,7 @@ export interface FilmGrainOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#intensity | FilmGrainOptions.intensity API reference}
 	 */
-	intensity: number;
+	intensity?: number;
 
 	/**
 	 * Size of grain particles.
@@ -700,7 +700,7 @@ export interface FilmGrainOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#size | FilmGrainOptions.size API reference}
 	 */
-	size: number;
+	size?: number;
 
 	/**
 	 * Animation speed of the grain.
@@ -713,7 +713,7 @@ export interface FilmGrainOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#speed | FilmGrainOptions.speed API reference}
 	 */
-	speed: number;
+	speed?: number;
 
 	/**
 	 * Animation time parameter.
@@ -724,5 +724,177 @@ export interface FilmGrainOptions {
 	 *
 	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/FilmGrainOptions#time | FilmGrainOptions.time API reference}
 	 */
-	time: number;
+	time?: number;
 }
+
+/**
+ * Options for the built-in grayscale effect.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GrayscaleOptions | GrayscaleOptions API reference}
+ */
+export interface GrayscaleOptions {
+	/**
+	 * Grayscale blend amount, from `0` (original color) to `1` (fully grayscale).
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GrayscaleOptions#property-amount | GrayscaleOptions.amount API reference}
+	 */
+	amount?: number;
+}
+
+/**
+ * Options for the built-in sepia effect.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/SepiaOptions | SepiaOptions API reference}
+ */
+export interface SepiaOptions {
+	/**
+	 * Sepia blend amount, from `0` (original color) to `1` (full sepia).
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/SepiaOptions#property-amount | SepiaOptions.amount API reference}
+	 */
+	amount?: number;
+}
+
+/**
+ * Options for the built-in threshold effect.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ThresholdOptions | ThresholdOptions API reference}
+ */
+export interface ThresholdOptions {
+	/**
+	 * Luminance cutoff used to choose black or white output.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ThresholdOptions#property-threshold | ThresholdOptions.threshold API reference}
+	 */
+	threshold?: number;
+}
+
+/**
+ * Parameter types for every built-in filter.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap | BuiltInFilterParameterMap API reference}
+ */
+export interface BuiltInFilterParameterMap {
+	/**
+	 * Invert has no configurable parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-invert | BuiltInFilterParameterMap.invert API reference}
+	 */
+	invert: void;
+	/**
+	 * Grayscale parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-grayscale | BuiltInFilterParameterMap.grayscale API reference}
+	 */
+	grayscale: number | GrayscaleOptions | void;
+	/**
+	 * Sepia parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-sepia | BuiltInFilterParameterMap.sepia API reference}
+	 */
+	sepia: number | SepiaOptions | void;
+	/**
+	 * Threshold parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-threshold | BuiltInFilterParameterMap.threshold API reference}
+	 */
+	threshold: number | ThresholdOptions | void;
+	/**
+	 * Brightness parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-brightness | BuiltInFilterParameterMap.brightness API reference}
+	 */
+	brightness: number | BrightnessOptions | void;
+	/**
+	 * Contrast parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-contrast | BuiltInFilterParameterMap.contrast API reference}
+	 */
+	contrast: number | ContrastOptions | void;
+	/**
+	 * Saturation parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-saturation | BuiltInFilterParameterMap.saturation API reference}
+	 */
+	saturation: number | SaturationOptions | void;
+	/**
+	 * Hue rotation parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-huerotate | BuiltInFilterParameterMap.hueRotate API reference}
+	 */
+	hueRotate: number | HueRotateOptions | void;
+	/**
+	 * Posterize parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-posterize | BuiltInFilterParameterMap.posterize API reference}
+	 */
+	posterize: number | PosterizeOptions | void;
+	/**
+	 * Chromatic aberration parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-chromaticaberration | BuiltInFilterParameterMap.chromaticAberration API reference}
+	 */
+	chromaticAberration: number | ChromaticAberrationOptions | void;
+	/**
+	 * Pixelate parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-pixelate | BuiltInFilterParameterMap.pixelate API reference}
+	 */
+	pixelate: number | PixelateOptions | void;
+	/**
+	 * Grid distortion parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-griddistortion | BuiltInFilterParameterMap.gridDistortion API reference}
+	 */
+	gridDistortion: number | GridDistortionOptions | void;
+	/**
+	 * Glitch parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-glitch | BuiltInFilterParameterMap.glitch API reference}
+	 */
+	glitch: number | GlitchOptions | void;
+	/**
+	 * CRT simulation parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-crtmattias | BuiltInFilterParameterMap.crtMattias API reference}
+	 */
+	crtMattias: number | CrtMattiasOptions | void;
+	/**
+	 * Scanline parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-scanlines | BuiltInFilterParameterMap.scanlines API reference}
+	 */
+	scanlines: number | ScanlinesOptions | void;
+	/**
+	 * Vignette parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-vignette | BuiltInFilterParameterMap.vignette API reference}
+	 */
+	vignette: number | VignetteOptions | void;
+	/**
+	 * Bloom parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-bloom | BuiltInFilterParameterMap.bloom API reference}
+	 */
+	bloom: number | BloomOptions | void;
+	/**
+	 * Film grain parameters.
+	 *
+	 * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap#property-filmgrain | BuiltInFilterParameterMap.filmGrain API reference}
+	 */
+	filmGrain: number | FilmGrainOptions | void;
+}
+
+/**
+ * Names installed synchronously by {@link FiltersPlugin}.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/type-aliases/BuiltInFilterName | BuiltInFilterName API reference}
+ */
+export type BuiltInFilterName = keyof BuiltInFilterParameterMap;
+
+/**
+ * Built-in names retain completion while arbitrary custom names remain valid.
+ *
+ * @see {@link https://code.textmode.art/api/textmode.filters.js/type-aliases/FilterName | FilterName API reference}
+ */
+export type FilterName = BuiltInFilterName | (string & {});

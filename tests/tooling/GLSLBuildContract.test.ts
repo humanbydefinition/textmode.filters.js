@@ -63,13 +63,13 @@ describe('filters GLSL build contract', () => {
 		plugin = await createFiltersPlugin();
 	});
 
-	it('preserves the textmode.js filter ABI in every emitted shader', async () => {
+	it('preserves the add-on texture/filter ABI in every emitted shader', async () => {
 		const shaderDirectory = resolve(process.cwd(), 'src/shaders');
 		const shaderFiles = readdirSync(shaderDirectory)
 			.filter((file) => file.endsWith('.frag'))
 			.map((file) => resolve(shaderDirectory, file));
 
-		expect(shaderFiles).toHaveLength(14);
+		expect(shaderFiles).toHaveLength(18);
 		for (const shaderFile of shaderFiles) {
 			const shader = parseDefaultExport(
 				await transformedCode(plugin, readFileSync(shaderFile, 'utf8'), shaderFile)
@@ -84,7 +84,7 @@ describe('filters GLSL build contract', () => {
 	});
 
 	it('renames private uniforms together with their registration keys', async () => {
-		const sourcePath = resolve(process.cwd(), 'src/index.ts');
+		const sourcePath = resolve(process.cwd(), 'src/builtins.ts');
 		const source = readFileSync(sourcePath, 'utf8');
 		const transformedHost = await transformedCode(plugin, source, sourcePath);
 		const shaderPath = resolve(process.cwd(), 'src/shaders/brightness.frag');
