@@ -194,7 +194,7 @@ export class TextmodeFilterManager {
 				state.phase = 'draw';
 			}
 		});
-		this._context.registerCompositeOutputTransform(({ output }) => this._transformComposite(output));
+		this._context.registerCompositeOutputTransform((output) => this._transformComposite(output));
 		this._context.registerPreDrawHook(() => this._beginFrame());
 		this._context.registerPostDrawHook(() => {
 			this._frameOpen = false;

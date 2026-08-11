@@ -174,7 +174,7 @@ describe('FiltersPlugin', () => {
 		runtime.preDraw();
 		filter.call(runtime.textmodifier, 'grayscale');
 		finalDraw.call(runtime.textmodifier, () => filter.call(runtime.textmodifier, 'invert'));
-		const output = runtime.compositeTransform({ output: input });
+		const output = runtime.compositeTransform(input);
 
 		expect(runtime.passes).toHaveLength(2);
 		expect(runtime.passes[0]!.source).toBe(input);
@@ -248,7 +248,7 @@ describe('FiltersPlugin', () => {
 
 		runtime.preDraw();
 		filter.call(runtime.textmodifier, 'custom', { amount: 0.75 });
-		runtime.compositeTransform({ output: framebuffer() });
+		runtime.compositeTransform(framebuffer());
 		expect(runtime.context.gpu.createFullscreenShader).toHaveBeenCalledOnce();
 		expect((runtime.context.gpu.renderFullscreen as any).mock.calls[0][0].uniforms).toEqual({ u_amount: 0.75 });
 
@@ -270,8 +270,8 @@ describe('FiltersPlugin', () => {
 		first.preDraw();
 		second.preDraw();
 		firstFilter.call(first.textmodifier, 'invert');
-		first.compositeTransform({ output: framebuffer() });
-		second.compositeTransform({ output: framebuffer() });
+		first.compositeTransform(framebuffer());
+		second.compositeTransform(framebuffer());
 
 		expect(first.passes).toHaveLength(1);
 		expect(second.passes).toHaveLength(0);
