@@ -48,7 +48,6 @@ function harness() {
 	const layers = { base, all: [] };
 	const textmodifier = { layers };
 	const extensions = new Map<string, PropertyDescriptor>();
-	let layerCreated: ((layer: object) => void) | undefined;
 	let layerDisposed: ((layer: object) => void) | undefined;
 	let layerTransform: ((value: any) => TextmodeFramebuffer | void) | undefined;
 	let compositeTransform: ((value: any) => TextmodeFramebuffer | void) | undefined;
@@ -75,29 +74,12 @@ function harness() {
 			extensions.set(`${target}:${name}`, descriptor);
 			return () => extensions.delete(`${target}:${name}`);
 		},
-		registerLayerCreatedHook: (callback: any) => {
-			layerCreated = callback;
-			callback(base);
-			return vi.fn();
-		},
-		registerLayerDisposedHook: (callback: any) => {
-			layerDisposed = callback;
-			return vi.fn();
-		},
-		registerLayerOutputTransform: (callback: any) => {
-			layerTransform = callback;
-			return vi.fn();
-		},
-		registerCompositeOutputTransform: (callback: any) => {
-			compositeTransform = callback;
-			return vi.fn();
-		},
-		registerPreDrawHook: (callback: any) => {
-			preDraw = callback;
-			return vi.fn();
-		},
-		registerPostDrawHook: (callback: any) => {
-			postDraw = callback;
+		on: (hook: string, callback: any) => {
+			if (hook === 'layerDisposed') layerDisposed = callback;
+			else if (hook === 'layerOutput') layerTransform = callback;
+			else if (hook === 'compositeOutput') compositeTransform = callback;
+			else if (hook === 'preDraw') preDraw = callback;
+			else if (hook === 'postDraw') postDraw = callback;
 			return vi.fn();
 		},
 	} as unknown as TextmodePluginContext;
@@ -110,9 +92,6 @@ function harness() {
 		buffers,
 		passes,
 		shaders,
-		get layerCreated() {
-			return layerCreated!;
-		},
 		get layerDisposed() {
 			return layerDisposed!;
 		},

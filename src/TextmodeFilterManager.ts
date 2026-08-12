@@ -49,7 +49,6 @@ interface LayerState {
 }
 
 type ScratchPool = [TextmodeFramebuffer, TextmodeFramebuffer];
-const managerByLayer = new WeakMap<TextmodeLayer, TextmodeFilterManager>();
 
 /**
  * Owns filter registration, queues, lazy GPU resources, pass execution, and cleanup.
@@ -58,7 +57,6 @@ const managerByLayer = new WeakMap<TextmodeLayer, TextmodeFilterManager>();
  */
 export class TextmodeFilterManager {
 	private readonly _textmodifier: Textmodifier;
-	private readonly _context: TextmodePluginContext;
 	private readonly _gpu: TextmodePluginGpuContext;
 	private readonly _filters = new Map<string, FilterDescriptor>();
 	private readonly _layerStates = new WeakMap<TextmodeLayer, LayerState>();
@@ -80,12 +78,11 @@ export class TextmodeFilterManager {
 	 */
 	constructor(textmodifier: Textmodifier, context: TextmodePluginContext) {
 		this._textmodifier = textmodifier;
-		this._context = context;
 		this._gpu = context.gpu;
 		for (const [name, descriptor] of Object.entries(BUILTIN_FILTERS)) {
 			this._filters.set(name, { source: descriptor.source, uniforms: descriptor.uniforms });
 		}
-		this._installAdapters();
+		this._installAdapters(context);
 	}
 
 	/**
@@ -154,7 +151,6 @@ export class TextmodeFilterManager {
 		if (this._disposed) return;
 		for (const descriptor of this._filters.values()) descriptor.cachedShader?.dispose();
 		for (const pool of [...this._pools]) this._disposePool(pool);
-		for (const layer of this._layers) managerByLayer.delete(layer);
 		this._filters.clear();
 		this._layers.clear();
 		this._globalQueue = [];
@@ -162,26 +158,26 @@ export class TextmodeFilterManager {
 		this._disposed = true;
 	}
 
-	private _installAdapters(): void {
-		this._context.defineExtension('textmodifier', 'filter', {
+	private _installAdapters(api: TextmodePluginContext): void {
+		api.defineExtension('textmodifier', 'filter', {
 			value: (_name: string, _params?: unknown) => this._queueComposite(_name, _params),
 		});
-		this._context.defineExtension('textmodifier', 'filters', { get: () => this });
-		this._context.defineExtension('textmodifier', 'finalDraw', {
+		api.defineExtension('textmodifier', 'filters', { get: () => this });
+		api.defineExtension('textmodifier', 'finalDraw', {
 			value: (callback: () => void) => {
 				this._finalDrawCallback = callback;
 			},
 		});
-		this._context.defineExtension('layerManager', 'filters', { get: () => this });
-		this._context.defineExtension('layer', 'filter', {
+		api.defineExtension('layerManager', 'filters', { get: () => this });
+		const queueLayer = this._queueLayer.bind(this);
+		api.defineExtension('layer', 'filter', {
 			value(this: TextmodeLayer, name: string, params?: unknown) {
-				managerByLayer.get(this)?._queueLayer(this, name, params);
+				queueLayer(this, name, params);
 			},
 		});
 
-		this._context.registerLayerCreatedHook((layer) => this._associateLayer(layer));
-		this._context.registerLayerDisposedHook((layer) => this._disposeLayer(layer));
-		this._context.registerLayerOutputTransform(({ layer, phase, output }) => {
+		api.on('layerDisposed', (layer) => this._disposeLayer(layer));
+		api.on('layerOutput', ({ layer, phase, output }) => {
 			const state = this._stateFor(layer);
 			if (phase === 'resolved') {
 				const transformed = this._applyQueue(output, state.drawQueue, state, false);
@@ -194,9 +190,9 @@ export class TextmodeFilterManager {
 				state.phase = 'draw';
 			}
 		});
-		this._context.registerCompositeOutputTransform((output) => this._transformComposite(output));
-		this._context.registerPreDrawHook(() => this._beginFrame());
-		this._context.registerPostDrawHook(() => {
+		api.on('compositeOutput', (output) => this._transformComposite(output));
+		api.on('preDraw', () => this._beginFrame());
+		api.on('postDraw', () => {
 			this._frameOpen = false;
 		});
 	}
@@ -309,12 +305,6 @@ export class TextmodeFilterManager {
 		return result;
 	}
 
-	private _associateLayer(layer: TextmodeLayer): void {
-		managerByLayer.set(layer, this);
-		this._layers.add(layer);
-		this._stateFor(layer);
-	}
-
 	private _stateFor(layer: TextmodeLayer): LayerState {
 		let state = this._layerStates.get(layer);
 		if (!state) {
@@ -329,7 +319,6 @@ export class TextmodeFilterManager {
 		const state = this._layerStates.get(layer);
 		if (state?.pool) this._disposePool(state.pool);
 		this._layerStates.delete(layer);
-		managerByLayer.delete(layer);
 		this._layers.delete(layer);
 	}
 
