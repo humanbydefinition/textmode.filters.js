@@ -46,7 +46,16 @@ function framebuffer(width = 80, height = 40): TextmodeFramebuffer {
 function harness() {
 	const base = {};
 	const layers = { base, all: [] };
-	const textmodifier = { layers };
+	const buffers: TextmodeFramebuffer[] = [];
+	const createFramebuffer = vi.fn(({ width, height }: { width: number; height: number }) => {
+		const result = framebuffer(width, height);
+		buffers.push(result);
+		return result;
+	});
+	const textmodifier = {
+		layers,
+		createFramebuffer,
+	};
 	const extensions = new Map<string, PropertyDescriptor>();
 	let layerDisposed: ((layer: object) => void) | undefined;
 	let layerTransform: ((value: any) => TextmodeFramebuffer | void) | undefined;
@@ -54,15 +63,9 @@ function harness() {
 	let preDraw: (() => void) | undefined;
 	let postDraw: (() => void) | undefined;
 	const shaders: Array<{ dispose: ReturnType<typeof vi.fn> }> = [];
-	const buffers: TextmodeFramebuffer[] = [];
 	const passes: Array<{ source: TextmodeFramebuffer; target: TextmodeFramebuffer; shader: unknown }> = [];
 	const context = {
 		gpu: {
-			createFramebuffer: ({ width, height }: { width: number; height: number }) => {
-				const result = framebuffer(width, height);
-				buffers.push(result);
-				return result;
-			},
 			createFullscreenShader: vi.fn(() => {
 				const shader = { dispose: vi.fn() };
 				shaders.push(shader);
@@ -88,6 +91,7 @@ function harness() {
 		base,
 		textmodifier,
 		context,
+		createFramebuffer,
 		extensions,
 		buffers,
 		passes,
@@ -141,6 +145,12 @@ describe('FiltersPlugin', () => {
 		expect(runtime.passes[1]!.source).toBe(runtime.passes[0]!.target);
 		expect(output).toBe(runtime.passes[1]!.target);
 		expect(runtime.context.gpu.createFullscreenShader).toHaveBeenCalledTimes(2);
+		expect(runtime.createFramebuffer).toHaveBeenCalledWith({
+			width: 80,
+			height: 40,
+			attachments: 1,
+			depth: false,
+		});
 	});
 
 	it('keeps global and finalDraw queues ordered and independent from layer pools', () => {

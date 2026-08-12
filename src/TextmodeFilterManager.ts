@@ -324,8 +324,8 @@ export class TextmodeFilterManager {
 
 	private _createPool(width: number, height: number): ScratchPool {
 		const pool: ScratchPool = [
-			this._gpu.createFramebuffer({ width, height }),
-			this._gpu.createFramebuffer({ width, height }),
+			this._textmodifier.createFramebuffer({ width, height, attachments: 1, depth: false }),
+			this._textmodifier.createFramebuffer({ width, height, attachments: 1, depth: false }),
 		];
 		this._pools.add(pool);
 		return pool;
