@@ -19,7 +19,6 @@ Use built-in treatments to refine a scene, tune their parameters as it runs, or 
 - **GPU-native processing** - Execute every effect as a WebGL2 fragment-shader pass over rendered textmode textures
 - **Scoped and stackable pipelines** - Apply ordered effects to individual layers, the composited scene, or the final presentation stage
 - **Typed parameter control** - Configure effects through numeric shorthand or named option objects with documented defaults
-- **Pay only when used** - Effect shaders compile lazily and scratch framebuffers are allocated only for scopes that run effects
 
 ## Try it online first
 
