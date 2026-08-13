@@ -1,6 +1,6 @@
 import 'textmode.js';
-import type { BuiltInFilterName, BuiltInFilterParameterMap } from './types';
-import type { TextmodeFilterManager } from './TextmodeFilterManager';
+import type { BuiltInFilterName, BuiltInFilterParameterMap } from '../builtins/catalog';
+import type { TextmodeFilterManager } from '../runtime/TextmodeFilterManager';
 
 type FilterArguments<TName extends string> = TName extends BuiltInFilterName
 	? [params?: BuiltInFilterParameterMap[TName]]

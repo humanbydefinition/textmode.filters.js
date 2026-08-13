@@ -1,6 +1,6 @@
 import { describe, expect, it } from 'vitest';
 import type { Textmodifier } from 'textmode.js';
-import '../src/augmentations';
+import '../../src/public/augmentations';
 
 declare const textmodifier: Textmodifier;
 

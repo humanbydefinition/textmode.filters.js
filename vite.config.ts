@@ -6,8 +6,8 @@ export default defineTextmodeLibrary({
 	globalName: 'textmodeFilters',
 	plugins: [
 		textmodeGlsl({
-			shaderRoots: ['src/shaders'],
-			includeRoots: ['src/shaders'],
+			shaderRoots: ['src/builtins', 'src/shaders'],
+			includeRoots: ['src/builtins', 'src/shaders'],
 			publicSymbols: publicShaderSymbols,
 			hostIdentifiers: {
 				sourceRoots: ['src'],

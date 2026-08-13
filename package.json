@@ -25,6 +25,9 @@
 			"require": "./dist/textmode.filters.umd.js"
 		}
 	},
+	"textmodeTypes": {
+		"stripInternal": true
+	},
 	"files": [
 		"dist"
 	],
