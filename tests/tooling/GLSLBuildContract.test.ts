@@ -63,6 +63,15 @@ describe('filters GLSL build contract', () => {
 		plugin = await createFiltersPlugin();
 	});
 
+	it('preserves the rectangle geometry attributes consumed by textmode.js', async () => {
+		const shaderPath = resolve(process.cwd(), 'src/shaders/filter.vert');
+		const shader = parseDefaultExport(await transformedCode(plugin, readFileSync(shaderPath, 'utf8'), shaderPath));
+
+		expect(shader).toMatch(/\bin vec2 a_position\b/);
+		expect(shader).toMatch(/\bin vec2 a_texCoord\b/);
+		expect(shader).toMatch(/\bv_uv\s*=\s*a_texCoord\b/);
+	});
+
 	it('preserves the add-on texture/filter ABI in every emitted shader', async () => {
 		const shaderDirectory = resolve(process.cwd(), 'src/shaders');
 		const shaderFiles = readdirSync(shaderDirectory)
