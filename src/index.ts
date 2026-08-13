@@ -1,6 +1,6 @@
 /**
  * @packageDocumentation
- * Complete optional filter system for textmode.js, including 18 lazily compiled GPU effects,
+ * Complete optional filter system for textmode.js, including 18 setup-compiled GPU effects,
  * custom registration, layer/global/final queues, and automatic resource cleanup.
  */
 

@@ -2,13 +2,13 @@ import type {
 	TextmodeFramebuffer,
 	TextmodeLayer,
 	TextmodePluginContext,
-	TextmodePluginGpuContext,
 	TextmodeShader,
 	TextmodeUniformValue,
 	Textmodifier,
 } from 'textmode.js';
 
 import { BUILTIN_FILTERS, type FilterUniformDefinitions } from './builtins';
+import filterVertexSource from './shaders/filter.vert';
 import type { FilterName } from './types';
 
 /**
@@ -31,8 +31,7 @@ export type TextmodeFilterShader = TextmodeShader | string;
 interface FilterDescriptor {
 	readonly uniforms: FilterUniformDefinitions;
 	readonly source?: string;
-	readonly shader?: TextmodeShader;
-	cachedShader?: TextmodeShader;
+	shader?: TextmodeShader;
 }
 
 interface QueuedFilter {
@@ -51,13 +50,12 @@ interface LayerState {
 type ScratchPool = [TextmodeFramebuffer, TextmodeFramebuffer];
 
 /**
- * Owns filter registration, queues, lazy GPU resources, pass execution, and cleanup.
+ * Owns filter registration, queues, GPU resources, pass execution, and cleanup.
  *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/classes/TextmodeFilterManager | TextmodeFilterManager API reference}
  */
 export class TextmodeFilterManager {
 	private readonly _textmodifier: Textmodifier;
-	private readonly _gpu: TextmodePluginGpuContext;
 	private readonly _filters = new Map<string, FilterDescriptor>();
 	private readonly _layerStates = new WeakMap<TextmodeLayer, LayerState>();
 	private readonly _layers = new Set<TextmodeLayer>();
@@ -78,7 +76,6 @@ export class TextmodeFilterManager {
 	 */
 	constructor(textmodifier: Textmodifier, context: TextmodePluginContext) {
 		this._textmodifier = textmodifier;
-		this._gpu = context.gpu;
 		for (const [name, descriptor] of Object.entries(BUILTIN_FILTERS)) {
 			this._filters.set(name, { source: descriptor.source, uniforms: descriptor.uniforms });
 		}
@@ -86,7 +83,7 @@ export class TextmodeFilterManager {
 	}
 
 	/**
-	 * Register or replace a custom filter. Inline sources compile lazily; URL/path sources are fetched now and compile lazily.
+	 * Register or replace a custom filter. String sources and URLs compile before the returned promise resolves.
 	 * Caller-provided shaders are owned by the manager and disposed on replacement, unregister, or plugin uninstall.
 	 *
 	 * @example
@@ -103,11 +100,13 @@ export class TextmodeFilterManager {
 	): Promise<void> {
 		this._assertLive();
 		if (!id.trim()) throw new TypeError('Filter id cannot be empty.');
-		const descriptor: FilterDescriptor =
-			typeof shader === 'string'
-				? { source: await resolveShaderSource(shader), uniforms }
-				: { shader, cachedShader: shader, uniforms };
-		this._replace(id, descriptor);
+		const compiled =
+			typeof shader === 'string' ? await this._textmodifier.createShader(filterVertexSource, shader) : shader;
+		if (this._disposed) {
+			if (typeof shader === 'string') compiled.dispose();
+			this._assertLive();
+		}
+		this._replace(id, { shader: compiled, uniforms });
 	}
 
 	/**
@@ -123,7 +122,7 @@ export class TextmodeFilterManager {
 	public unregister(id: FilterName): boolean {
 		const descriptor = this._filters.get(id);
 		if (!descriptor) return false;
-		descriptor.cachedShader?.dispose();
+		descriptor.shader?.dispose();
 		this._filters.delete(id);
 		return true;
 	}
@@ -149,7 +148,7 @@ export class TextmodeFilterManager {
 	 */
 	public dispose(): void {
 		if (this._disposed) return;
-		for (const descriptor of this._filters.values()) descriptor.cachedShader?.dispose();
+		for (const descriptor of this._filters.values()) descriptor.shader?.dispose();
 		for (const pool of [...this._pools]) this._disposePool(pool);
 		this._filters.clear();
 		this._layers.clear();
@@ -159,6 +158,7 @@ export class TextmodeFilterManager {
 	}
 
 	private _installAdapters(api: TextmodePluginContext): void {
+		api.on('preSetup', () => this._initializeShaders());
 		api.defineExtension('textmodifier', 'filter', {
 			value: (_name: string, _params?: unknown) => this._queueComposite(_name, _params),
 		});
@@ -272,21 +272,70 @@ export class TextmodeFilterManager {
 			const target = pool[0] === current ? pool[1] : pool[1] === current ? pool[0] : pool[0];
 			const descriptor = this._filters.get(entry.name)!;
 			const shader = this._shaderFor(descriptor);
-			this._gpu.renderFullscreen({
-				source: current,
-				target,
-				shader,
-				uniforms: this._uniformsFor(descriptor.uniforms, entry.params),
-			});
+			this._renderFilter(current, target, shader, this._uniformsFor(descriptor.uniforms, entry.params));
 			current = target;
 		}
 		return current;
 	}
 
 	private _shaderFor(descriptor: FilterDescriptor): TextmodeShader {
-		if (descriptor.cachedShader) return descriptor.cachedShader;
-		descriptor.cachedShader = descriptor.shader ?? this._gpu.createFullscreenShader(descriptor.source!);
-		return descriptor.cachedShader;
+		if (descriptor.shader) return descriptor.shader;
+		throw new Error('Filter shaders are not initialized. Wait for textmode setup to finish before drawing.');
+	}
+
+	private async _initializeShaders(): Promise<void> {
+		this._assertLive();
+		const compiled: Array<{ descriptor: FilterDescriptor; shader: TextmodeShader }> = [];
+		try {
+			for (const [id, descriptor] of this._filters) {
+				if (!descriptor.source || descriptor.shader) continue;
+				const shader = await this._textmodifier.createShader(filterVertexSource, descriptor.source);
+				if (this._disposed) {
+					shader.dispose();
+					this._assertLive();
+				}
+				if (this._filters.get(id) !== descriptor) {
+					shader.dispose();
+					continue;
+				}
+				descriptor.shader = shader;
+				compiled.push({ descriptor, shader });
+			}
+		} catch (error) {
+			for (const entry of compiled.reverse()) {
+				if (entry.descriptor.shader !== entry.shader) continue;
+				entry.descriptor.shader = undefined;
+				if (!this._disposed) entry.shader.dispose();
+			}
+			throw error;
+		}
+	}
+
+	private _renderFilter(
+		source: TextmodeFramebuffer,
+		target: TextmodeFramebuffer,
+		shader: TextmodeShader,
+		uniforms: Record<string, TextmodeUniformValue>
+	): void {
+		this._textmodifier.push();
+		let targetBegun = false;
+		try {
+			target.begin();
+			targetBegun = true;
+			this._textmodifier.shader(shader);
+			this._textmodifier.setUniforms({
+				u_texture: source.textures[0]!,
+				u_resolution: [target.width, target.height],
+				...uniforms,
+			});
+			this._textmodifier.rect(target.width, target.height);
+		} finally {
+			try {
+				if (targetBegun) target.end();
+			} finally {
+				this._textmodifier.pop();
+			}
+		}
 	}
 
 	private _uniformsFor(definitions: FilterUniformDefinitions, params: unknown): Record<string, TextmodeUniformValue> {
@@ -345,7 +394,7 @@ export class TextmodeFilterManager {
 	}
 
 	private _replace(id: string, descriptor: FilterDescriptor): void {
-		this._filters.get(id)?.cachedShader?.dispose();
+		this._filters.get(id)?.shader?.dispose();
 		this._filters.set(id, descriptor);
 	}
 
@@ -367,12 +416,4 @@ function isUniformValue(value: unknown): value is TextmodeUniformValue {
 		value instanceof Int32Array ||
 		(typeof value === 'object' && value !== null)
 	);
-}
-
-async function resolveShaderSource(sourceOrPath: string): Promise<string> {
-	const source = sourceOrPath.trim();
-	if (source.includes('\n') || source.startsWith('#version') || source.includes('void main')) return sourceOrPath;
-	const response = await fetch(sourceOrPath);
-	if (!response.ok) throw new Error(`Failed to load filter shader "${sourceOrPath}": ${response.statusText}`);
-	return response.text();
 }

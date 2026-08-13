@@ -30,31 +30,81 @@ afterEach(() => {
 });
 
 function framebuffer(width = 80, height = 40): TextmodeFramebuffer {
-	return {
+	const texture = {} as WebGLTexture & { owner?: TextmodeFramebuffer };
+	const result = {
 		width,
 		height,
 		attachmentCount: 1,
-		textures: [{}],
+		textures: [texture],
+		begin: vi.fn(),
+		end: vi.fn(),
 		resize: vi.fn(function (this: { width: number; height: number }, nextWidth: number, nextHeight: number) {
 			this.width = nextWidth;
 			this.height = nextHeight;
 		}),
 		dispose: vi.fn(),
 	} as unknown as TextmodeFramebuffer;
+	texture.owner = result;
+	return result;
 }
 
 function harness() {
 	const base = {};
 	const layers = { base, all: [] };
 	const buffers: TextmodeFramebuffer[] = [];
+	const operations: string[] = [];
+	let activeTarget: TextmodeFramebuffer | undefined;
+	let activeShader: unknown;
+	let activeUniforms: Record<string, unknown> = {};
+	const passes: Array<{
+		source: TextmodeFramebuffer;
+		target: TextmodeFramebuffer;
+		shader: unknown;
+		uniforms: Record<string, unknown>;
+	}> = [];
 	const createFramebuffer = vi.fn(({ width, height }: { width: number; height: number }) => {
 		const result = framebuffer(width, height);
+		vi.mocked(result.begin).mockImplementation(() => {
+			operations.push('begin');
+			activeTarget = result;
+		});
+		vi.mocked(result.end).mockImplementation(() => {
+			operations.push('end');
+			activeTarget = undefined;
+		});
 		buffers.push(result);
 		return result;
+	});
+	const shaders: Array<{ dispose: ReturnType<typeof vi.fn> }> = [];
+	const createShader = vi.fn(async (_vertexSource: string, _fragmentSource: string) => {
+		const shader = { dispose: vi.fn() };
+		shaders.push(shader);
+		return shader;
 	});
 	const textmodifier = {
 		layers,
 		createFramebuffer,
+		createShader,
+		push: vi.fn(() => operations.push('push')),
+		pop: vi.fn(() => operations.push('pop')),
+		shader: vi.fn((shader: unknown) => {
+			operations.push('shader');
+			activeShader = shader;
+		}),
+		setUniforms: vi.fn((uniforms: Record<string, unknown>) => {
+			operations.push('setUniforms');
+			activeUniforms = uniforms;
+		}),
+		rect: vi.fn(() => {
+			operations.push('rect');
+			const texture = activeUniforms.u_texture as { owner?: TextmodeFramebuffer } | undefined;
+			passes.push({
+				source: texture!.owner!,
+				target: activeTarget!,
+				shader: activeShader,
+				uniforms: activeUniforms,
+			});
+		}),
 	};
 	const extensions = new Map<string, PropertyDescriptor>();
 	let layerDisposed: ((layer: object) => void) | undefined;
@@ -62,17 +112,8 @@ function harness() {
 	let compositeTransform: ((value: any) => TextmodeFramebuffer | void) | undefined;
 	let preDraw: (() => void) | undefined;
 	let postDraw: (() => void) | undefined;
-	const shaders: Array<{ dispose: ReturnType<typeof vi.fn> }> = [];
-	const passes: Array<{ source: TextmodeFramebuffer; target: TextmodeFramebuffer; shader: unknown }> = [];
+	let preSetup: (() => Promise<void>) | undefined;
 	const context = {
-		gpu: {
-			createFullscreenShader: vi.fn(() => {
-				const shader = { dispose: vi.fn() };
-				shaders.push(shader);
-				return shader;
-			}),
-			renderFullscreen: vi.fn((options: any) => passes.push(options)),
-		},
 		defineExtension: (target: string, name: string, descriptor: PropertyDescriptor) => {
 			extensions.set(`${target}:${name}`, descriptor);
 			return () => extensions.delete(`${target}:${name}`);
@@ -83,6 +124,7 @@ function harness() {
 			else if (hook === 'compositeOutput') compositeTransform = callback;
 			else if (hook === 'preDraw') preDraw = callback;
 			else if (hook === 'postDraw') postDraw = callback;
+			else if (hook === 'preSetup') preSetup = callback;
 			return vi.fn();
 		},
 	} as unknown as TextmodePluginContext;
@@ -92,10 +134,12 @@ function harness() {
 		textmodifier,
 		context,
 		createFramebuffer,
+		createShader,
 		extensions,
 		buffers,
 		passes,
 		shaders,
+		operations,
 		get layerDisposed() {
 			return layerDisposed!;
 		},
@@ -111,25 +155,34 @@ function harness() {
 		get postDraw() {
 			return postDraw!;
 		},
+		get preSetup() {
+			return preSetup!;
+		},
 	};
 }
 
 describe('FiltersPlugin', () => {
-	it('installs all 18 descriptors synchronously without compiling or allocating', () => {
+	it('installs all 18 descriptors synchronously and compiles them during preSetup', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
 		const manager = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
 
 		expect(manager).toBeInstanceOf(TextmodeFilterManager);
 		expect(filterNames.filter((name) => manager.has(name))).toEqual(filterNames);
-		expect(runtime.context.gpu.createFullscreenShader).not.toHaveBeenCalled();
+		expect(runtime.createShader).not.toHaveBeenCalled();
 		expect(runtime.buffers).toHaveLength(0);
+
+		await runtime.preSetup();
+
+		expect(runtime.createShader).toHaveBeenCalledTimes(18);
+		expect(new Set(runtime.createShader.mock.calls.map(([vertex]) => vertex)).size).toBe(1);
 		expect(FiltersPlugin.version).toBe('2.0.0');
 	});
 
-	it('runs an N-filter layer chain in N passes with lazy per-layer scratch buffers', () => {
+	it('runs an N-filter layer chain in N passes with lazy per-layer scratch buffers', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 		const input = framebuffer();
 
@@ -144,7 +197,23 @@ describe('FiltersPlugin', () => {
 		expect(runtime.passes[0]!.source).toBe(input);
 		expect(runtime.passes[1]!.source).toBe(runtime.passes[0]!.target);
 		expect(output).toBe(runtime.passes[1]!.target);
-		expect(runtime.context.gpu.createFullscreenShader).toHaveBeenCalledTimes(2);
+		expect(runtime.createShader).toHaveBeenCalledTimes(18);
+		expect(runtime.operations).toEqual([
+			'push',
+			'begin',
+			'shader',
+			'setUniforms',
+			'rect',
+			'end',
+			'pop',
+			'push',
+			'begin',
+			'shader',
+			'setUniforms',
+			'rect',
+			'end',
+			'pop',
+		]);
 		expect(runtime.createFramebuffer).toHaveBeenCalledWith({
 			width: 80,
 			height: 40,
@@ -153,9 +222,10 @@ describe('FiltersPlugin', () => {
 		});
 	});
 
-	it('keeps global and finalDraw queues ordered and independent from layer pools', () => {
+	it('keeps global and finalDraw queues ordered and independent from layer pools', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const filter = runtime.extensions.get('textmodifier:filter')!.value! as Function;
 		const finalDraw = runtime.extensions.get('textmodifier:finalDraw')!.value! as Function;
 		const input = framebuffer(640, 360);
@@ -171,9 +241,10 @@ describe('FiltersPlugin', () => {
 		expect(output).toBe(runtime.passes[1]!.target);
 	});
 
-	it('routes draw and postDraw filters through the two layer phases', () => {
+	it('routes draw and postDraw filters through the two layer phases', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 		const input = framebuffer();
 
@@ -187,9 +258,10 @@ describe('FiltersPlugin', () => {
 		expect(finalized).toBe(runtime.passes[1]!.target);
 	});
 
-	it('preserves between-frame queues for the next frame and drops queues from an interrupted frame', () => {
+	it('preserves between-frame queues for the next frame and drops queues from an interrupted frame', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 
 		filter.call(runtime.base, 'invert');
@@ -203,9 +275,10 @@ describe('FiltersPlugin', () => {
 		expect(runtime.passes).toHaveLength(1);
 	});
 
-	it('reuses and resizes one scratch pair per layer', () => {
+	it('reuses and resizes one scratch pair per layer', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 
 		runtime.preDraw();
@@ -224,24 +297,27 @@ describe('FiltersPlugin', () => {
 		}
 	});
 
-	it('registers custom sources lazily and owns replacement and unregister disposal', async () => {
+	it('compiles custom sources before registration resolves and owns their disposal', async () => {
 		const runtime = harness();
 		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const manager = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
 		const filter = runtime.extensions.get('textmodifier:filter')!.value! as Function;
 		const source = '#version 300 es\nvoid main() {}';
 
 		await manager.register('custom', source, { u_amount: ['amount', 0.25] });
 		expect(manager.has('custom')).toBe(true);
-		expect(runtime.context.gpu.createFullscreenShader).not.toHaveBeenCalled();
+		expect(runtime.createShader).toHaveBeenCalledTimes(19);
 
 		runtime.preDraw();
 		filter.call(runtime.textmodifier, 'custom', { amount: 0.75 });
 		runtime.compositeTransform(framebuffer());
-		expect(runtime.context.gpu.createFullscreenShader).toHaveBeenCalledOnce();
-		expect((runtime.context.gpu.renderFullscreen as any).mock.calls[0][0].uniforms).toEqual({ u_amount: 0.75 });
+		expect(runtime.createShader).toHaveBeenCalledTimes(19);
+		expect(runtime.passes[0]!.uniforms).toEqual(
+			expect.objectContaining({ u_amount: 0.75, u_resolution: [80, 40] })
+		);
 
-		const firstShader = runtime.shaders[0]!;
+		const firstShader = runtime.shaders.at(-1)!;
 		await manager.register('custom', source);
 		expect(firstShader.dispose).toHaveBeenCalledOnce();
 		expect(manager.unregister('custom')).toBe(true);
@@ -249,11 +325,89 @@ describe('FiltersPlugin', () => {
 		expect(manager.unregister('custom')).toBe(false);
 	});
 
-	it('keeps simultaneous plugin instances independent', () => {
+	it('keeps the previous registration when replacement compilation fails', async () => {
+		const runtime = harness();
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
+		const manager = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
+		const source = '#version 300 es\nvoid main() {}';
+
+		await manager.register('custom', source);
+		const previousShader = runtime.shaders.at(-1)!;
+		runtime.createShader.mockRejectedValueOnce(new Error('compile failed'));
+
+		await expect(manager.register('custom', source)).rejects.toThrow('compile failed');
+		expect(manager.has('custom')).toBe(true);
+		expect(previousShader.dispose).not.toHaveBeenCalled();
+	});
+
+	it('accepts precompiled shaders without invoking createShader', async () => {
+		const runtime = harness();
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
+		const manager = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
+		const shader = { dispose: vi.fn() };
+
+		await manager.register('custom', shader);
+
+		expect(runtime.createShader).toHaveBeenCalledTimes(18);
+		expect(manager.unregister('custom')).toBe(true);
+		expect(shader.dispose).toHaveBeenCalledOnce();
+	});
+
+	it('disposes partially compiled built-ins when preSetup fails', async () => {
+		const runtime = harness();
+		const shader = { dispose: vi.fn() };
+		runtime.shaders.push(shader);
+		runtime.createShader.mockResolvedValueOnce(shader).mockRejectedValueOnce(new Error('compile failed'));
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+
+		await expect(runtime.preSetup()).rejects.toThrow('compile failed');
+		expect(shader.dispose).toHaveBeenCalledOnce();
+	});
+
+	it('disposes a shader that finishes compiling after uninstall', async () => {
+		const runtime = harness();
+		const shader = { dispose: vi.fn() };
+		let finishCompilation!: (value: typeof shader) => void;
+		runtime.createShader.mockImplementationOnce(
+			() => new Promise<typeof shader>((resolve) => (finishCompilation = resolve))
+		);
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		const setup = runtime.preSetup();
+
+		FiltersPlugin.uninstall!(runtime.textmodifier as never, runtime.context);
+		finishCompilation(shader);
+
+		await expect(setup).rejects.toThrow('disposed');
+		expect(shader.dispose).toHaveBeenCalledOnce();
+	});
+
+	it('ends the target and restores drawing state when a pass throws', async () => {
+		const runtime = harness();
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
+		const filter = runtime.extensions.get('textmodifier:filter')!.value! as Function;
+		vi.mocked(runtime.textmodifier.rect).mockImplementationOnce(() => {
+			runtime.operations.push('rect');
+			throw new Error('draw failed');
+		});
+
+		runtime.preDraw();
+		filter.call(runtime.textmodifier, 'invert');
+
+		expect(() => runtime.compositeTransform(framebuffer())).toThrow('draw failed');
+		expect(runtime.operations.slice(-2)).toEqual(['end', 'pop']);
+		expect(runtime.buffers[0]!.end).toHaveBeenCalledOnce();
+	});
+
+	it('keeps simultaneous plugin instances independent', async () => {
 		const first = harness();
 		const second = harness();
 		FiltersPlugin.install(first.textmodifier as never, first.context);
 		FiltersPlugin.install(second.textmodifier as never, second.context);
+		await first.preSetup();
+		await second.preSetup();
 		const firstFilter = first.extensions.get('textmodifier:filter')!.value! as Function;
 
 		first.preDraw();
@@ -270,7 +424,8 @@ describe('FiltersPlugin', () => {
 
 	it('disposes layer scratch resources on removal and all remaining resources on uninstall', async () => {
 		const runtime = harness();
-		await FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 		filter.call(runtime.base, 'invert');
 		runtime.layerTransform({ layer: runtime.base, phase: 'resolved', output: framebuffer() });
