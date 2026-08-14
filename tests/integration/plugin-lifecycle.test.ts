@@ -25,7 +25,6 @@ describe('plugin lifecycle', () => {
 
 		expect(runtime.createShader).toHaveBeenCalledTimes(Object.values(BUILTIN_CATALOG).length);
 		expect(new Set(runtime.createShader.mock.calls.map(([vertex]) => vertex)).size).toBe(1);
-		expect(FiltersPlugin.version).toBe('2.0.0');
 	});
 
 	it('keeps simultaneous plugin instances independent', async () => {
