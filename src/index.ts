@@ -1,166 +1,31 @@
 /**
  * @packageDocumentation
- *
- * Apply GPU-accelerated image filters to finished textmode.js scenes.
- *
- * Add {@link FiltersPlugin} to a sketch to register the built-in WebGL2
- * effects. Use the option interfaces below to configure a filter when adding
- * it to a layer, the composited scene, or the final presentation stage.
- *
- * ## Choose a filter
- *
- * **Color adjustment** changes brightness, contrast, saturation, hue, and
- * posterization. **Distortion** changes pixels, color channels, or grid
- * geometry. **Stylization** adds glitch, CRT, scanlines, vignette, bloom, and
- * film grain treatments.
- *
- * Start with {@link FiltersPlugin}, then read the
- * [Filters guide](/docs/filters) for scopes and workflows.
+ * Complete optional filter system for textmode.js, including 18 setup-compiled GPU effects,
+ * custom registration, layer/global/final queues, and automatic resource cleanup.
  */
 
-import type { TextmodePlugin } from 'textmode.js';
+import './public/augmentations';
+import './global';
 
-// Re-export all filter option types for consumers
-export type {
-	BrightnessOptions,
-	ContrastOptions,
-	SaturationOptions,
-	HueRotateOptions,
-	PosterizeOptions,
-	ChromaticAberrationOptions,
-	PixelateOptions,
-	GridDistortionOptions,
-	GlitchOptions,
-	CrtMattiasOptions,
-	ScanlinesOptions,
-	VignetteOptions,
-	BloomOptions,
-	FilmGrainOptions,
-} from './types';
-
-import brightnessFragmentShader from './shaders/brightness.frag';
-import contrastFragmentShader from './shaders/contrast.frag';
-import hueRotateFragmentShader from './shaders/hueRotate.frag';
-import glitchFragmentShader from './shaders/glitch.frag';
-import chromaticAberrationFragmentShader from './shaders/chromaticAberration.frag';
-import pixelateFragmentShader from './shaders/pixelate.frag';
-import gridDistortionFragmentShader from './shaders/gridDistortion.frag';
-import crtMattiasFragmentShader from './shaders/crtMattias.frag';
-import scanlinesFragmentShader from './shaders/scanlines.frag';
-import vignetteFragmentShader from './shaders/vignette.frag';
-import bloomFragmentShader from './shaders/bloom.frag';
-import filmGrainFragmentShader from './shaders/filmGrain.frag';
-import saturationFragmentShader from './shaders/saturation.frag';
-import posterizeFragmentShader from './shaders/posterize.frag';
-
-// Default factors array for grid distortion (128 elements)
-const defaultFactors = new Array(128).fill(0.5);
-
-/**
- * GPU-accelerated image filters plugin for textmode.js.
- *
- * Add this plugin to your textmode.js instance to enable additional customizable
- * visual effects that run entirely on the GPU via WebGL2 fragment shaders.
- *
- * @category Workflow
- *
- * @example
- * {@includeCode ../examples/ColorAdjustment/brightness/sketch.js}
- *
- * @see {@link https://code.textmode.art/api/textmode.filters.js/variables/FiltersPlugin | FiltersPlugin API reference}
- */
-export const FiltersPlugin: TextmodePlugin = {
-	name: 'textmode.filters',
-	version: '1.1.1',
-
-	async install(textmodifier) {
-		textmodifier.filters.register('brightness', brightnessFragmentShader, { u_amount: ['amount', 1.0] });
-		textmodifier.filters.register('contrast', contrastFragmentShader, { u_amount: ['amount', 1.0] });
-		textmodifier.filters.register('hueRotate', hueRotateFragmentShader, { u_angle: ['angle', 0.0] });
-		textmodifier.filters.register('glitch', glitchFragmentShader, { u_amount: ['amount', 0.0] });
-		textmodifier.filters.register('chromaticAberration', chromaticAberrationFragmentShader, {
-			u_amount: ['amount', 5.0],
-			u_direction: ['direction', [1.0, 0.0]],
-		});
-		textmodifier.filters.register('pixelate', pixelateFragmentShader, { u_pixelSize: ['pixelSize', 4.0] });
-
-		textmodifier.filters.register('gridDistortion', gridDistortionFragmentShader, {
-			u_gridCellDimensions: ['gridCellDimensions', [80.0, 40.0]],
-			u_gridPixelDimensions: ['gridPixelDimensions', [640.0, 320.0]],
-			u_gridOffsetDimensions: ['gridOffsetDimensions', [0.0, 0.0]],
-			u_widthFactors: ['widthFactors', defaultFactors],
-			u_heightFactors: ['heightFactors', defaultFactors],
-			u_widthVariationScale: ['widthVariationScale', 0.5],
-			u_heightVariationScale: ['heightVariationScale', 0.5],
-		});
-
-		textmodifier.filters.register('crtMattias', crtMattiasFragmentShader, {
-			u_curvature: ['curvature', 0.5],
-			u_scanSpeed: ['scanSpeed', 1.0],
-			u_time: ['time', 0.0],
-		});
-
-		textmodifier.filters.register('scanlines', scanlinesFragmentShader, {
-			u_count: ['count', 300.0],
-			u_lineWidth: ['lineWidth', 0.5],
-			u_intensity: ['intensity', 0.75],
-			u_speed: ['speed', 1.0],
-			u_time: ['time', 0.0],
-		});
-
-		textmodifier.filters.register('vignette', vignetteFragmentShader, {
-			u_amount: ['amount', 0.5],
-			u_softness: ['softness', 0.5],
-			u_roundness: ['roundness', 0.5],
-		});
-
-		textmodifier.filters.register('bloom', bloomFragmentShader, {
-			u_threshold: ['threshold', 0.5],
-			u_intensity: ['intensity', 1.0],
-			u_radius: ['radius', 4.0],
-		});
-
-		textmodifier.filters.register('filmGrain', filmGrainFragmentShader, {
-			u_intensity: ['intensity', 0.2],
-			u_size: ['size', 2.0],
-			u_speed: ['speed', 1.0],
-			u_time: ['time', 0.0],
-		});
-
-		textmodifier.filters.register('saturation', saturationFragmentShader, {
-			u_amount: ['amount', 1.0],
-		});
-
-		textmodifier.filters.register('posterize', posterizeFragmentShader, {
-			u_levels: ['levels', 4.0],
-		});
-	},
-
-	async uninstall(textmodifier) {
-		textmodifier.filters.unregister('brightness');
-		textmodifier.filters.unregister('contrast');
-		textmodifier.filters.unregister('hueRotate');
-		textmodifier.filters.unregister('glitch');
-		textmodifier.filters.unregister('chromaticAberration');
-		textmodifier.filters.unregister('pixelate');
-		textmodifier.filters.unregister('gridDistortion');
-		textmodifier.filters.unregister('crtMattias');
-		textmodifier.filters.unregister('scanlines');
-		textmodifier.filters.unregister('vignette');
-		textmodifier.filters.unregister('bloom');
-		textmodifier.filters.unregister('filmGrain');
-		textmodifier.filters.unregister('saturation');
-		textmodifier.filters.unregister('posterize');
-	},
-};
-
-declare global {
-	interface Window {
-		FiltersPlugin?: TextmodePlugin;
-	}
-}
-
-// UMD global export
-if (typeof window !== 'undefined') {
-	window.FiltersPlugin = FiltersPlugin;
-}
+export { FiltersPlugin } from './plugin/FiltersPlugin';
+export { TextmodeFilterManager } from './runtime/TextmodeFilterManager';
+export type { TextmodeFilterShader, TextmodeFilterUniformDefinitions } from './public/filter-types';
+export type { FilterName } from './public/filter-types';
+export type { BuiltInFilterName, BuiltInFilterParameterMap } from './builtins/catalog';
+export type { BloomOptions } from './builtins/stylization/bloom';
+export type { BrightnessOptions } from './builtins/color-adjustment/brightness';
+export type { ChromaticAberrationOptions } from './builtins/distortion/chromaticAberration';
+export type { ContrastOptions } from './builtins/color-adjustment/contrast';
+export type { CrtMattiasOptions } from './builtins/stylization/crtMattias';
+export type { FilmGrainOptions } from './builtins/stylization/filmGrain';
+export type { GlitchOptions } from './builtins/stylization/glitch';
+export type { GrayscaleOptions } from './builtins/color-adjustment/grayscale';
+export type { GridDistortionOptions } from './builtins/distortion/gridDistortion';
+export type { HueRotateOptions } from './builtins/color-adjustment/hueRotate';
+export type { PixelateOptions } from './builtins/distortion/pixelate';
+export type { PosterizeOptions } from './builtins/color-adjustment/posterize';
+export type { SaturationOptions } from './builtins/color-adjustment/saturation';
+export type { ScanlinesOptions } from './builtins/stylization/scanlines';
+export type { SepiaOptions } from './builtins/color-adjustment/sepia';
+export type { ThresholdOptions } from './builtins/color-adjustment/threshold';
+export type { VignetteOptions } from './builtins/stylization/vignette';
