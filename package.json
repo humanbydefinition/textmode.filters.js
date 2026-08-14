@@ -57,7 +57,7 @@
 		"test:watch": "textmode-build test:watch"
 	},
 	"peerDependencies": {
-		"textmode.js": ">=0.18.0 <0.20.0"
+		"textmode.js": ">=0.17.2-beta.1 <0.20.0"
 	},
 	"devDependencies": {
 		"@textmode/build": "^0.1.0",
