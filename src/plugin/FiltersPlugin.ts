@@ -12,7 +12,7 @@ const managers = new WeakMap<Textmodifier, TextmodeFilterManager>();
  * @see {@link https://code.textmode.art/api/textmode.filters.js/variables/FiltersPlugin | FiltersPlugin API reference}
  */
 export const FiltersPlugin: TextmodePlugin = {
-	name: 'textmode.filters',
+	name: packageMetadata.name,
 	version: packageMetadata.version,
 
 	install(textmodifier, context) {
