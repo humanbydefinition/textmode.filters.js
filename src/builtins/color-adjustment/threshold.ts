@@ -4,6 +4,8 @@ import thresholdSource from './threshold.frag';
 /**
  * Options for the built-in threshold effect.
  *
+ * @category Color adjustment filters
+ *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/ThresholdOptions | ThresholdOptions API reference}
  */
 export interface ThresholdOptions {

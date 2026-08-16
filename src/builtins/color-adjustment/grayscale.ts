@@ -4,6 +4,8 @@ import grayscaleSource from './grayscale.frag';
 /**
  * Options for the built-in grayscale effect.
  *
+ * @category Color adjustment filters
+ *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/GrayscaleOptions | GrayscaleOptions API reference}
  */
 export interface GrayscaleOptions {
