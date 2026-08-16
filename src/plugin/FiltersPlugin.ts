@@ -7,6 +7,8 @@ const managers = new WeakMap<Textmodifier, TextmodeFilterManager>();
 /**
  * GPU-accelerated filters plugin. Installing it adds the complete 18-filter workflow to one Textmodifier.
  *
+ * @category Workflow
+ *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/variables/FiltersPlugin | FiltersPlugin API reference}
  */
 export const FiltersPlugin: TextmodePlugin = {

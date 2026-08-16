@@ -16,6 +16,8 @@ import type { NormalizedFilterDescriptor, ResolvedFilterPass } from './types';
 /**
  * Owns filter registration, queues, GPU resources, pass execution, and cleanup.
  *
+ * @category Filter management
+ *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/classes/TextmodeFilterManager | TextmodeFilterManager API reference}
  */
 export class TextmodeFilterManager {
