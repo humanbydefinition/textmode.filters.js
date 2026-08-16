@@ -21,6 +21,8 @@ import { vignetteFilter, type VignetteOptions } from './stylization/vignette';
 /**
  * Parameter types for every built-in filter.
  *
+ * @category Built-in filters
+ *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/BuiltInFilterParameterMap | BuiltInFilterParameterMap API reference}
  */
 export interface BuiltInFilterParameterMap {
@@ -136,6 +138,8 @@ export interface BuiltInFilterParameterMap {
 
 /**
  * Names installed synchronously by {@link FiltersPlugin}.
+ *
+ * @category Built-in filters
  *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/type-aliases/BuiltInFilterName | BuiltInFilterName API reference}
  */
