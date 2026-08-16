@@ -28,7 +28,6 @@
  */
 
 import './public/augmentations';
-import './global';
 
 export { FiltersPlugin } from './plugin/FiltersPlugin';
 export { TextmodeFilterManager } from './runtime/TextmodeFilterManager';
@@ -52,3 +51,14 @@ export type { ScanlinesOptions } from './builtins/stylization/scanlines';
 export type { SepiaOptions } from './builtins/color-adjustment/sepia';
 export type { ThresholdOptions } from './builtins/color-adjustment/threshold';
 export type { VignetteOptions } from './builtins/stylization/vignette';
+
+import type { TextmodePlugin } from 'textmode.js';
+import { FiltersPlugin } from './plugin/FiltersPlugin';
+
+declare global {
+	interface Window {
+		FiltersPlugin?: TextmodePlugin;
+	}
+}
+
+if (typeof window !== 'undefined') window.FiltersPlugin = FiltersPlugin;
