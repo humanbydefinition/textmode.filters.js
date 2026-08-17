@@ -1,8 +1,6 @@
-import type { TextmodeLayer, TextmodePlugin, TextmodePluginContext, Textmodifier } from 'textmode.js';
+import type { TextmodeLayer, TextmodePlugin, TextmodePluginContext } from 'textmode.js';
 import { TextmodeFilterManager } from '../runtime/TextmodeFilterManager';
 import packageMetadata from '../../package.json';
-
-const managers = new WeakMap<Textmodifier, TextmodeFilterManager>();
 
 /**
  * GPU-accelerated filters plugin. Installing it adds the complete 18-filter workflow to one Textmodifier.
@@ -13,19 +11,16 @@ const managers = new WeakMap<Textmodifier, TextmodeFilterManager>();
  */
 export const FiltersPlugin: TextmodePlugin = {
 	name: packageMetadata.name,
-	version: packageMetadata.version,
 
 	install(textmodifier, context) {
-		const previous = managers.get(textmodifier);
-		if (previous) previous.dispose();
 		const manager = new TextmodeFilterManager(textmodifier);
-		managers.set(textmodifier, manager);
-		installAdapters(context, manager);
-	},
-
-	uninstall(textmodifier) {
-		managers.get(textmodifier)?.dispose();
-		managers.delete(textmodifier);
+		try {
+			installAdapters(context, manager);
+		} catch (error) {
+			manager.dispose();
+			throw error;
+		}
+		return () => manager.dispose();
 	},
 };
 

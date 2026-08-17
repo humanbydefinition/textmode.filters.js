@@ -102,9 +102,9 @@ describe('queue scopes and ordering', () => {
 
 	it('throws when queueing after disposal', async () => {
 		const runtime = filterRuntime();
-		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
-		await FiltersPlugin.uninstall!(runtime.textmodifier as never, runtime.context);
+		const cleanup = FiltersPlugin.install(runtime.textmodifier as never, runtime.context) as unknown as () => void;
 		const filter = runtime.extensions.get('textmodifier:filter')!.value! as Function;
+		cleanup();
 
 		expect(() => filter.call(runtime.textmodifier, 'invert')).toThrow('disposed');
 	});

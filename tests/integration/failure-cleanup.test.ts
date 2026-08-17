@@ -28,10 +28,10 @@ describe('failure and cleanup', () => {
 		runtime.createShader.mockImplementationOnce(
 			() => new Promise<typeof shader>((resolve) => (finishCompilation = resolve))
 		);
-		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		const cleanup = FiltersPlugin.install(runtime.textmodifier as never, runtime.context) as unknown as () => void;
 		const setup = runtime.preSetup();
 
-		FiltersPlugin.uninstall!(runtime.textmodifier as never, runtime.context);
+		cleanup();
 		finishCompilation(shader);
 
 		await expect(setup).rejects.toThrow('disposed');
