@@ -16,10 +16,6 @@ declare module 'textmode.js' {
 	interface TextmodeLayer {
 		filter<TName extends string>(name: TName, ...args: FilterArguments<TName>): void;
 	}
-
-	interface TextmodeLayerManager {
-		readonly filters: TextmodeFilterManager;
-	}
 }
 
 export {};

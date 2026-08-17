@@ -35,7 +35,6 @@ function installAdapters(context: TextmodePluginContext, manager: TextmodeFilter
 			manager.setFinalDrawCallback(callback);
 		},
 	});
-	context.defineExtension('layerManager', 'filters', { get: () => manager });
 
 	const queueLayer = manager.queueLayer.bind(manager);
 	context.defineExtension('layer', 'filter', {
