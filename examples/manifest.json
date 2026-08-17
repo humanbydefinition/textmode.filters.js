@@ -4,8 +4,28 @@
 	"groups": [
 		{
 			"name": "Color Adjustment",
-			"description": "Brightness, contrast, hue, saturation, and posterization filters.",
+			"description": "Core color transforms, brightness, contrast, hue, saturation, and posterization.",
 			"examples": [
+				{
+					"title": "FiltersPlugin.invert",
+					"sourceFile": "examples/ColorAdjustment/invert/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.grayscale",
+					"sourceFile": "examples/ColorAdjustment/grayscale/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.sepia",
+					"sourceFile": "examples/ColorAdjustment/sepia/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.threshold",
+					"sourceFile": "examples/ColorAdjustment/threshold/sketch.js",
+					"status": "unrated"
+				},
 				{
 					"title": "FiltersPlugin.brightness",
 					"sourceFile": "examples/ColorAdjustment/brightness/sketch.js",
@@ -86,6 +106,52 @@
 				{
 					"title": "FiltersPlugin.filmGrain",
 					"sourceFile": "examples/Stylization/filmGrain/sketch.js",
+					"status": "unrated"
+				}
+			]
+		},
+		{
+			"name": "Workflow",
+			"description": "Registration, queue scopes, chaining, and independent plugin instances.",
+			"examples": [
+				{
+					"title": "FiltersPlugin.customRegistration",
+					"sourceFile": "examples/Workflow/customRegistration/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.unregisterHas",
+					"sourceFile": "examples/Workflow/unregisterHas/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.layerScope",
+					"sourceFile": "examples/Workflow/layerScope/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.globalScope",
+					"sourceFile": "examples/Workflow/globalScope/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.postDrawScope",
+					"sourceFile": "examples/Workflow/postDrawScope/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.finalDrawScope",
+					"sourceFile": "examples/Workflow/finalDrawScope/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.chainedFilters",
+					"sourceFile": "examples/Workflow/chainedFilters/sketch.js",
+					"status": "unrated"
+				},
+				{
+					"title": "FiltersPlugin.twoInstances",
+					"sourceFile": "examples/Workflow/twoInstances/sketch.js",
 					"status": "unrated"
 				}
 			]

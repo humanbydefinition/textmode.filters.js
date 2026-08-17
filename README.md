@@ -15,7 +15,7 @@ Use built-in treatments to refine a scene, tune their parameters as it runs, or 
 
 ## Features
 
-- **Fourteen built-in effects** - Color adjustment, distortion, CRT, glitch, bloom, scanlines, vignette, grain, and related treatments
+- **Eighteen built-in effects** - Invert, grayscale, sepia, threshold, color adjustment, distortion, CRT, glitch, bloom, scanlines, vignette, and grain
 - **GPU-native processing** - Execute every effect as a WebGL2 fragment-shader pass over rendered textmode textures
 - **Scoped and stackable pipelines** - Apply ordered effects to individual layers, the composited scene, or the final presentation stage
 - **Typed parameter control** - Configure effects through numeric shorthand or named option objects with documented defaults
@@ -39,6 +39,26 @@ Use it to apply and tune GPU filters interactively while your sketch runs.
 
 Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
 `textmode.filters.js` alongside `textmode.js` with npm or browser-ready UMD bundles.
+
+```js
+import { textmode } from 'textmode.js';
+import { FiltersPlugin } from 'textmode.filters.js';
+
+const t = textmode.create({ plugins: [FiltersPlugin] });
+t.draw(() => {
+	t.background(0);
+	t.filter('grayscale', 0.8);
+});
+```
+
+### Migration from 1.x
+
+| Before | After |
+| --- | --- |
+| Core effects available without a plugin | Install `FiltersPlugin` |
+| Filter types imported from `textmode.js` | Import them from `textmode.filters.js` |
+| `TextmodeFilterManager` from `textmode.js` | Import it from `textmode.filters.js` |
+| `t.filter()` without an installed plugin | Create the instance with `plugins: [FiltersPlugin]` |
 
 ## Next steps
 
