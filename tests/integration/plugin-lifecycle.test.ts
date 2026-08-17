@@ -50,7 +50,7 @@ describe('plugin lifecycle', () => {
 
 	it('releases all owned shaders, pools, and queues through the returned cleanup and stays idempotent', async () => {
 		const runtime = filterRuntime();
-		const cleanup = FiltersPlugin.install(runtime.textmodifier as never, runtime.context) as unknown as () => void;
+		const cleanup = FiltersPlugin.install(runtime.textmodifier as never, runtime.context)!;
 		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 
