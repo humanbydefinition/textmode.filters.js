@@ -40,9 +40,6 @@ Use it to apply and tune GPU filters interactively while your sketch runs.
 Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
 `textmode.filters.js` alongside `textmode.js` with npm or browser-ready UMD bundles.
 
-Version 2 requires `textmode.js` 0.18.x. Install `FiltersPlugin` before using `t.filter()`,
-`layer.filter()`, `t.filters`, `t.layers.filters`, or `t.finalDraw()`:
-
 ```js
 import { textmode } from 'textmode.js';
 import { FiltersPlugin } from 'textmode.filters.js';

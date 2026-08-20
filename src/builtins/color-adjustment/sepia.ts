@@ -4,6 +4,8 @@ import sepiaSource from './sepia.frag';
 /**
  * Options for the built-in sepia effect.
  *
+ * @category Color adjustment filters
+ *
  * @see {@link https://code.textmode.art/api/textmode.filters.js/interfaces/SepiaOptions | SepiaOptions API reference}
  */
 export interface SepiaOptions {

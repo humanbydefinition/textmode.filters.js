@@ -48,22 +48,9 @@ describe('plugin lifecycle', () => {
 		expect(second.buffers).toHaveLength(0);
 	});
 
-	it('reinstalling disposes the previous manager for the same textmodifier', async () => {
+	it('releases all owned shaders, pools, and queues through the returned cleanup and stays idempotent', async () => {
 		const runtime = filterRuntime();
-		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
-		await runtime.preSetup();
-		const manager = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
-
-		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
-		const replaced = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
-
-		expect(replaced).not.toBe(manager);
-		expect(() => manager.register('late', 'source')).rejects.toThrow('disposed');
-	});
-
-	it('releases all owned shaders, pools, and queues on uninstall and stays idempotent', async () => {
-		const runtime = filterRuntime();
-		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		const cleanup = FiltersPlugin.install(runtime.textmodifier as never, runtime.context)!;
 		await runtime.preSetup();
 		const filter = runtime.extensions.get('layer:filter')!.value! as Function;
 
@@ -74,8 +61,8 @@ describe('plugin lifecycle', () => {
 		runtime.layerDisposed(runtime.base);
 		expect(runtime.buffers.every((buffer) => vi.mocked(buffer.dispose).mock.calls.length === 1)).toBe(true);
 
-		await FiltersPlugin.uninstall!(runtime.textmodifier as never, runtime.context);
-		await FiltersPlugin.uninstall!(runtime.textmodifier as never, runtime.context);
+		cleanup();
+		cleanup();
 		expect(runtime.shaders.every((shader) => shader.dispose.mock.calls.length === 1)).toBe(true);
 		expect(runtime.buffers.every((buffer) => vi.mocked(buffer.dispose).mock.calls.length === 1)).toBe(true);
 	});

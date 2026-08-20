@@ -93,9 +93,9 @@ describe('filter registration', () => {
 
 	it('throws when registering after disposal', async () => {
 		const runtime = filterRuntime();
-		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		const cleanup = FiltersPlugin.install(runtime.textmodifier as never, runtime.context) as unknown as () => void;
 		const manager = runtime.extensions.get('textmodifier:filters')!.get!.call(runtime.textmodifier);
-		await FiltersPlugin.uninstall!(runtime.textmodifier as never, runtime.context);
+		cleanup();
 
 		await expect(manager.register('custom', 'source')).rejects.toThrow('disposed');
 		expect(manager.has('custom')).toBe(false);

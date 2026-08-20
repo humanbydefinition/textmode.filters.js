@@ -2,10 +2,32 @@
  * @packageDocumentation
  * Complete optional filter system for textmode.js, including 18 setup-compiled GPU effects,
  * custom registration, layer/global/final queues, and automatic resource cleanup.
+ *
+ * @categoryDescription Workflow
+ * The plugin that installs the filter system on a textmode.js sketch.
+ *
+ * @categoryDescription Filter management
+ * The runtime that owns filter registration, queues, GPU resources, and cleanup.
+ *
+ * @categoryDescription Built-in filters
+ * The shipped filter names and their parameter types.
+ *
+ * @categoryDescription Custom filters
+ * Types used when registering bespoke GPU filters on the manager.
+ *
+ * @categoryDescription Color adjustment filters
+ * Configuration options for the bundled color-adjustment effects.
+ *
+ * @categoryDescription Distortion filters
+ * Configuration options for the bundled distortion effects.
+ *
+ * @categoryDescription Stylization filters
+ * Configuration options for the bundled stylization effects.
+ *
+ * @showCategories
  */
 
 import './public/augmentations';
-import './global';
 
 export { FiltersPlugin } from './plugin/FiltersPlugin';
 export { TextmodeFilterManager } from './runtime/TextmodeFilterManager';
@@ -29,3 +51,14 @@ export type { ScanlinesOptions } from './builtins/stylization/scanlines';
 export type { SepiaOptions } from './builtins/color-adjustment/sepia';
 export type { ThresholdOptions } from './builtins/color-adjustment/threshold';
 export type { VignetteOptions } from './builtins/stylization/vignette';
+
+import type { TextmodePlugin } from 'textmode.js';
+import { FiltersPlugin } from './plugin/FiltersPlugin';
+
+declare global {
+	interface Window {
+		FiltersPlugin?: TextmodePlugin;
+	}
+}
+
+if (typeof window !== 'undefined') window.FiltersPlugin = FiltersPlugin;
