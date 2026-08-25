@@ -22,5 +22,4 @@ Read the [Code of Conduct](CODE_OF_CONDUCT.md). Report vulnerabilities privately
 [SECURITY.md](SECURITY.md), not through a public issue.
 
 Need help? [Open an issue](https://github.com/humanbydefinition/textmode.filters.js/issues), read the
-[filters guide](https://code.textmode.art/docs/filters) or [API reference](https://code.textmode.art/api/textmode.filters.js/),
-or [join Discord](https://discord.gg/sjrw8QXNks).
+[filters guide](https://code.textmode.art/docs/filters) or [API reference](https://code.textmode.art/api/textmode.filters.js/).
