@@ -1,12 +1,12 @@
 {
 	"name": "textmode.filters.js",
-	"version": "1.2.4-beta.2",
+	"version": "1.2.5",
 	"description": "Image filters plugin for textmode.js",
 	"type": "module",
 	"devEngines": {
 		"runtime": {
 			"name": "node",
-			"version": "^24.0.0",
+			"version": ">=24.0.0",
 			"onFail": "error"
 		},
 		"packageManager": {
@@ -59,21 +59,21 @@
 		"test:watch": "textmode-build test:watch"
 	},
 	"peerDependencies": {
-		"textmode.js": "^0.18.0-beta.2"
+		"textmode.js": "^0.18.0"
 	},
 	"devDependencies": {
-		"@textmode/build": "^0.1.0",
+		"@textmode/build": "^0.1.1",
 		"@textmode/docs": "^0.3.0",
-		"@textmode/lint": "^0.1.0",
+		"@textmode/lint": "^0.1.2",
 		"@textmode/release": "^0.2.0",
-		"@textmode/tsconfig": "^0.2.1",
-		"@types/node": "^24.0.0",
-		"textmode.js": "^0.18.0-beta.2",
+		"@textmode/tsconfig": "^0.2.2",
+		"@types/node": "^26.4.1",
+		"textmode.js": "^0.18.0",
 		"typescript": "^6.0.3",
-		"vitest": "^4.1.10"
+		"vitest": "^5.0.0"
 	},
 	"license": "MIT",
-	"author": "humanbydefinition",
+	"author": "humanbydefinition <hello@textmode.art> (https://code.textmode.art)",
 	"prettier": "@textmode/lint/prettier",
 	"repository": {
 		"type": "git",

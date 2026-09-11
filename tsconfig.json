@@ -1,4 +1,4 @@
 {
 	"extends": "@textmode/tsconfig/browser-library.json",
-	"include": ["src", "tests", "vite.config.ts", "vite-plugins"]
+	"include": ["src", "tests", "vite.config.ts", "vitest.config.ts", "vite-plugins"]
 }
