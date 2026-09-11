@@ -58,4 +58,14 @@ describe('built-in descriptor to GLSL uniform contract', () => {
 			}
 		}
 	});
+
+	it('binds Scanlines lineWidth to a declared shader uniform with its documented default', () => {
+		const binding = BUILTIN_CATALOG.scanlines.uniforms.find(([, parameter]) => parameter === 'lineWidth');
+		const rawSource = readFileSync(resolve(process.cwd(), 'src/builtins/stylization/scanlines.frag'), 'utf8');
+		expect(binding?.slice(1)).toEqual(['lineWidth', 0.5]);
+		expect(collectUniformNames(shaderById.get('scanlines')!)).toContain(binding?.[0]);
+		expect(shaderById.get('scanlines')).toContain('smoothstep');
+		expect(rawSource).toMatch(/dutyCycle\s*<=\s*0\.0/);
+		expect(rawSource).toMatch(/dutyCycle\s*>=\s*1\.0/);
+	});
 });

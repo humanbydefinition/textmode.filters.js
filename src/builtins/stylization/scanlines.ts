@@ -86,6 +86,7 @@ export const scanlinesFilter = defineBuiltinFilter<ScanlinesOptions>({
 	primary: 'count',
 	uniforms: {
 		u_count: ['count', 300],
+		u_lineWidth: ['lineWidth', 0.5],
 		u_intensity: ['intensity', 0.75],
 		u_speed: ['speed', 1],
 		u_time: ['time', 0],
