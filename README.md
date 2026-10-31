@@ -40,26 +40,6 @@ Use it to apply and tune GPU filters interactively while your sketch runs.
 Follow the [official installation guide](https://code.textmode.art/docs/installation) to install
 `textmode.filters.js` alongside `textmode.js` with npm or browser-ready UMD bundles.
 
-```js
-import { textmode } from 'textmode.js';
-import { FiltersPlugin } from 'textmode.filters.js';
-
-const t = textmode.create({ plugins: [FiltersPlugin] });
-t.draw(() => {
-	t.background(0);
-	t.filter('grayscale', 0.8);
-});
-```
-
-### Migration from 1.x
-
-| Before | After |
-| --- | --- |
-| Core effects available without a plugin | Install `FiltersPlugin` |
-| Filter types imported from `textmode.js` | Import them from `textmode.filters.js` |
-| `TextmodeFilterManager` from `textmode.js` | Import it from `textmode.filters.js` |
-| `t.filter()` without an installed plugin | Create the instance with `plugins: [FiltersPlugin]` |
-
 ## Next steps
 
 - **[Read the filters documentation](https://code.textmode.art/docs/filters)** for filter scopes, parameters, and workflows.

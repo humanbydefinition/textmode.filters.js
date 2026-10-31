@@ -1,6 +1,7 @@
 import { afterEach, describe, expect, it, vi } from 'vitest';
 
 import { FiltersPlugin } from '../../src/index';
+import { BUILTIN_CATALOG } from '../../src/builtins/catalog';
 import { filterRuntime } from '../harness/filterRuntime';
 import { framebuffer } from '../harness/framebuffer';
 
@@ -139,5 +140,21 @@ describe('rendering and scratch pools', () => {
 		runtime.compositeTransform(framebuffer());
 
 		expect(runtime.passes[0]!.uniforms).toEqual(expect.objectContaining({ u_amount: 0.9, u_softness: 0.5 }));
+	});
+
+	it.each([0, 0.5, 1])('passes scanline width %s to the shader uniform', async (lineWidth) => {
+		const runtime = filterRuntime();
+		FiltersPlugin.install(runtime.textmodifier as never, runtime.context);
+		await runtime.preSetup();
+		const filter = runtime.extensions.get('textmodifier:filter')!.value! as Function;
+		const lineWidthUniform = BUILTIN_CATALOG.scanlines.uniforms.find(
+			([, parameter]) => parameter === 'lineWidth'
+		)![0];
+
+		runtime.preDraw();
+		filter.call(runtime.textmodifier, 'scanlines', { lineWidth });
+		runtime.compositeTransform(framebuffer());
+
+		expect(runtime.passes[0]!.uniforms[lineWidthUniform]).toBe(lineWidth);
 	});
 });
