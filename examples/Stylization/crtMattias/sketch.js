@@ -5,19 +5,29 @@
 const t = textmode.create({
 	width: window.innerWidth,
 	height: window.innerHeight,
-	fontSize: 32,
+	fontSize: window.innerWidth < 700 ? 8 : 16,
 	plugins: [FiltersPlugin],
 });
-const labelLayer = t.layers.add();
+const labelLayer = t.layers.add({ fontSize: window.innerWidth < 700 ? 8 : 16 });
 
 let video;
 
-function drawText(text, x, y, r = 220, g = 230, b = 255) {
+function drawLabel(lines) {
+	const { cols, rows } = labelLayer.grid;
+	const [left, top] = [-Math.floor(cols / 2), -Math.floor(rows / 2)];
+	const width = Math.max(...lines.map(([text]) => [...text].length)) + 2;
 	t.push();
-	t.printAlign('left', 'top');
-	t.charColor(r, g, b);
-	t.print(text, x, y);
+	t.translate(left + (width + 4) / 2, top + (lines.length + 5) / 2);
+	t.char(' ');
+	t.charColor(6, 10, 22);
+	t.cellColor(6, 10, 22);
+	t.rect(width, lines.length + 2);
 	t.pop();
+	t.printAlign('left', 'top');
+	lines.forEach(([text, color], i) => {
+		t.charColor(color[0], color[1], color[2]);
+		t.print(text, left + 3, top + 3 + i);
+	});
 }
 
 t.setup(async () => {
@@ -29,20 +39,16 @@ t.setup(async () => {
 
 labelLayer.draw(() => {
 	t.clear();
-	const left = -Math.floor(t.grid.cols / 2),
-		top = -Math.floor(t.grid.rows / 2);
-	let y = top + 3,
-		x = left + 3;
-
 	const curv = (0.4 + 0.3 * Math.sin(t.secs * 1.0)).toFixed(2);
-
-	drawText('FILTERSPLUGIN.CRTMATTIAS', x, y++, 100, 255, 140);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('CONCEPT: CATHODE RAY TUBE EMULATOR', x, y++, 100, 220, 255);
-	drawText('Applies screen curvature and scanlines.', x, y++, 140, 160, 190);
-	drawText('------------------------------------', x, y++, 80, 100, 150);
-	drawText('Curvature: ' + curv, x, y++, 140, 255, 180);
-	drawText('Scan Speed: 1.5', x, y++, 140, 255, 180);
+	drawLabel([
+		['FILTERSPLUGIN.CRTMATTIAS', [120, 240, 180]],
+		['------------------------------------', [70, 100, 140]],
+		['CONCEPT: CATHODE RAY TUBE EMULATOR', [140, 210, 255]],
+		['Applies screen curvature and scanlines.', [140, 160, 190]],
+		['------------------------------------', [70, 100, 140]],
+		[`CURVATURE: ${curv}`, [140, 255, 200]],
+		['SCAN SPEED: 1.5', [140, 255, 200]],
+	]);
 });
 
 t.draw(() => {
@@ -61,4 +67,7 @@ t.draw(() => {
 
 t.windowResized(() => {
 	t.resizeCanvas(window.innerWidth, window.innerHeight);
+	const size = window.innerWidth < 700 ? 8 : 16;
+	t.fontSize(size);
+	for (const layer of t.layers.all) layer.fontSize(size);
 });
