@@ -148,11 +148,6 @@
 					"title": "FiltersPlugin.chainedFilters",
 					"sourceFile": "examples/Workflow/chainedFilters/sketch.js",
 					"status": "unrated"
-				},
-				{
-					"title": "FiltersPlugin.twoInstances",
-					"sourceFile": "examples/Workflow/twoInstances/sketch.js",
-					"status": "unrated"
 				}
 			]
 		}
