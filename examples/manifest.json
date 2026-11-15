@@ -9,47 +9,47 @@
 				{
 					"title": "FiltersPlugin.invert",
 					"sourceFile": "examples/ColorAdjustment/invert/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.grayscale",
 					"sourceFile": "examples/ColorAdjustment/grayscale/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.sepia",
 					"sourceFile": "examples/ColorAdjustment/sepia/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.threshold",
 					"sourceFile": "examples/ColorAdjustment/threshold/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.brightness",
 					"sourceFile": "examples/ColorAdjustment/brightness/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.contrast",
 					"sourceFile": "examples/ColorAdjustment/contrast/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.saturation",
 					"sourceFile": "examples/ColorAdjustment/saturation/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.hueRotate",
 					"sourceFile": "examples/ColorAdjustment/hueRotate/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.posterize",
 					"sourceFile": "examples/ColorAdjustment/posterize/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				}
 			]
 		},
@@ -60,17 +60,17 @@
 				{
 					"title": "FiltersPlugin.chromaticAberration",
 					"sourceFile": "examples/Distortion/chromaticAberration/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.pixelate",
 					"sourceFile": "examples/Distortion/pixelate/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.gridDistortion",
 					"sourceFile": "examples/Distortion/gridDistortion/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				}
 			]
 		},
@@ -81,32 +81,32 @@
 				{
 					"title": "FiltersPlugin.glitch",
 					"sourceFile": "examples/Stylization/glitch/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.crtMattias",
 					"sourceFile": "examples/Stylization/crtMattias/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.scanlines",
 					"sourceFile": "examples/Stylization/scanlines/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.vignette",
 					"sourceFile": "examples/Stylization/vignette/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.bloom",
 					"sourceFile": "examples/Stylization/bloom/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.filmGrain",
 					"sourceFile": "examples/Stylization/filmGrain/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				}
 			]
 		},
@@ -117,42 +117,37 @@
 				{
 					"title": "FiltersPlugin.customRegistration",
 					"sourceFile": "examples/Workflow/customRegistration/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.unregisterHas",
 					"sourceFile": "examples/Workflow/unregisterHas/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.layerScope",
 					"sourceFile": "examples/Workflow/layerScope/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.globalScope",
 					"sourceFile": "examples/Workflow/globalScope/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.postDrawScope",
 					"sourceFile": "examples/Workflow/postDrawScope/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.finalDrawScope",
 					"sourceFile": "examples/Workflow/finalDrawScope/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				},
 				{
 					"title": "FiltersPlugin.chainedFilters",
 					"sourceFile": "examples/Workflow/chainedFilters/sketch.js",
-					"status": "unrated"
-				},
-				{
-					"title": "FiltersPlugin.twoInstances",
-					"sourceFile": "examples/Workflow/twoInstances/sketch.js",
-					"status": "unrated"
+					"status": "good"
 				}
 			]
 		}
