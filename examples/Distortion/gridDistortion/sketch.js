@@ -21,10 +21,10 @@ function drawLabel() {
 		['------------------------------------', [70, 100, 140]],
 		['CONCEPT: COORDINATE SPACE WARPING', [140, 210, 255]],
 	];
-	const [left, top] = [-Math.floor(labelLayer.grid.cols / 2), -Math.floor(labelLayer.grid.rows / 2)];
+	const [left, top] = [-Math.floor((labelLayer.grid.cols - 1) / 2), -Math.floor(labelLayer.grid.rows / 2)];
 	const width = Math.max(...rows.map(([text]) => text.length)) + 2;
 	t.clear();
-	t.translate(left + 2 + width / 2, top + 2 + (rows.length + 2) / 2);
+	t.translate(left + 2 + (width - 1) / 2, top + 2 + (rows.length + 1) / 2);
 	t.cellColor(6, 10, 22);
 	t.rect(width, rows.length + 2);
 	t.resetMatrix();
@@ -37,9 +37,9 @@ function drawControls() {
 	t.clear();
 	const width = Math.min(34, controlLayer.grid.cols - 4);
 	const height = controls.length * 3 + 2;
-	const left = Math.floor(controlLayer.grid.cols / 2) - width - 2;
-	const top = Math.floor(controlLayer.grid.rows / 2) - height - 2;
-	t.translate(left + width / 2, top + height / 2);
+	const left = Math.floor(controlLayer.grid.cols / 2) - width - 1;
+	const top = Math.floor((controlLayer.grid.rows - 1) / 2) - height - 1;
+	t.translate(left + (width - 1) / 2, top + (height - 1) / 2);
 	t.cellColor(6, 10, 22);
 	t.rect(width, height);
 	t.resetMatrix();

@@ -15,12 +15,12 @@ let layout = null,
 	activeSlider = -1,
 	video;
 function drawLabel(lines) {
-	const [left, top] = [-Math.floor(labelLayer.grid.cols / 2), -Math.floor(labelLayer.grid.rows / 2)];
+	const [left, top] = [-Math.floor((labelLayer.grid.cols - 1) / 2), -Math.floor(labelLayer.grid.rows / 2)];
 	const width = Math.max(...lines.map(([text]) => text.length)) + 2;
 	t.clear();
-	t.push();
-	t.translate(left + 2 + width / 2, top + 2 + (lines.length + 2) / 2);
 	t.cellColor(6, 10, 22);
+	t.push();
+	t.translate(left + 2 + (width - 1) / 2, top + 2 + (lines.length + 1) / 2);
 	t.rect(width, lines.length + 2);
 	t.pop();
 	lines.forEach(([text, color], index) => {
@@ -32,11 +32,11 @@ function drawControls() {
 	t.clear();
 	const width = Math.min(34, controlLayer.grid.cols - 4);
 	const height = controls.length * 3 + 2;
-	const left = Math.floor(controlLayer.grid.cols / 2) - width - 2;
-	const top = Math.floor(controlLayer.grid.rows / 2) - height - 2;
-	t.push();
-	t.translate(left + width / 2, top + height / 2);
+	const left = Math.floor(controlLayer.grid.cols / 2) - width - 1;
+	const top = Math.floor((controlLayer.grid.rows - 1) / 2) - height - 1;
 	t.cellColor(6, 10, 22);
+	t.push();
+	t.translate(left + (width - 1) / 2, top + (height - 1) / 2);
 	t.rect(width, height);
 	t.pop();
 	const track = width - 6;
